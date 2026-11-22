@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.crystalist.shared.generated.resources.*
 import com.crystalist.shared.settings.Settings
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun OpenRouterAuthSetting() {
@@ -70,13 +71,13 @@ internal fun OpenRouterAuthSetting() {
                 TextButton(
                     onClick = { controller.exchange(code) },
                     enabled = !controller.busy && code.isNotBlank(),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.complete_sign_in))
                 }
                 TextButton(onClick = {
                     controller.cancel()
-                }, enabled = !controller.busy, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                }, enabled = !controller.busy, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             }
         } else {
             Row(

@@ -58,6 +58,7 @@ import com.crystalist.shared.ui.menu.ExpressiveSelectionMenu
 import com.crystalist.shared.ui.navigation.navigationPopupSource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun SelectionToolbarLayout(
@@ -112,7 +113,7 @@ fun SelectionToolbar(
     Surface(color = MaterialTheme.colorScheme.surfaceContainer) {
         Column {
             Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onClose, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = onClose, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Filled.Close, stringResource(Res.string.close))
                 }
                 Text(
@@ -141,7 +142,7 @@ fun SelectionToolbar(
                             onClick = action.onClick,
                             enabled = count > 0 && action.enabled,
                             modifier = Modifier.size(48.dp).navigationPopupSource(),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Icon(action.icon, action.title) }
                     }
                     if (actions.overflow.isNotEmpty()) {
@@ -150,7 +151,7 @@ fun SelectionToolbar(
                                 onClick = { menuOpen = true },
                                 enabled = count > 0,
                                 modifier = Modifier.size(48.dp).navigationPopupSource(),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_actions)) }
                             ExpressiveSelectionMenu(
                                 expanded = menuOpen,

@@ -170,7 +170,7 @@ private fun TvQueueMenuAction(
     TextButton(
         onClick = onClick,
         enabled = enabled,
-        shapes = ButtonDefaults.shapes(),
+        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         colors =
             ButtonDefaults.textButtonColors(
                 contentColor = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,

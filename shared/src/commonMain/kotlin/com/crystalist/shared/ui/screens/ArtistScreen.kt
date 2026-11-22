@@ -326,14 +326,14 @@ private fun ArtistScreenLayout(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(errorMessage, color = MaterialTheme.colorScheme.error, modifier = Modifier.weight(1f))
-                TextButton(onClick = onRefresh, enabled = !isLoading, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = onRefresh, enabled = !isLoading, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.retry))
                 }
             }
         }
         if (!hasContent && !isLoading && onBackClick != null) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                 }
             }
@@ -348,7 +348,7 @@ private fun ArtistScreenLayout(
                     ) {
                         Text(stringResource(Res.string.error_occurred), color = MaterialTheme.colorScheme.error)
                         Text(errorMessage?.takeIf(String::isNotBlank) ?: stringResource(Res.string.error_unknown))
-                        Button(onClick = onRefresh, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                        Button(onClick = onRefresh, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                     }
                 }
 
@@ -611,14 +611,14 @@ private fun ArtistScreenContent(
                 },
                 navigationIcon = {
                     if (onBackClick != null) {
-                        IconButton(onClick = onBackClick, modifier = buttonModifier, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = onBackClick, modifier = buttonModifier, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back), tint = iconColor)
                         }
                     }
                 },
                 actions = {
                     if (onRefreshClick != null) {
-                        IconButton(onClick = onRefreshClick, modifier = buttonModifier, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = onRefreshClick, modifier = buttonModifier, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.Outlined.Refresh, stringResource(Res.string.artist_refresh), tint = iconColor)
                         }
                     }
@@ -626,7 +626,7 @@ private fun ArtistScreenContent(
                         IconButton(
                             onClick = barMenuClick,
                             modifier = buttonModifier.navigationPopupSource(),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.artist_actions), tint = iconColor)
                         }
@@ -1250,7 +1250,7 @@ private fun ArtistActionRow(
                 FilledTonalIconButton(
                     onClick = onMenuClick,
                     modifier = Modifier.size(rowHeight).navigationPopupSource(),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.artist_actions), modifier = Modifier.size(24.dp))
                 }
@@ -1271,7 +1271,7 @@ private fun ArtistUnblockButton(
         onClick = onClick,
         modifier = Modifier.height(48.dp),
         contentPadding = PaddingValues(horizontal = horizontalPadding),
-        shapes = ButtonDefaults.shapes(),
+        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
     ) {
         Icon(CrystaListIcons.Filled.Remove, null, modifier = Modifier.size(20.dp))
         Spacer(Modifier.width(8.dp))
@@ -1370,7 +1370,7 @@ private fun ArtistSectionContent(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (onPlayItem != null) {
-                            Button(onClick = { onPlayItem(release) }, shapes = ButtonDefaults.shapes()) {
+                            Button(onClick = { onPlayItem(release) }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Icon(CrystaListIcons.Filled.PlayArrow, null, modifier = Modifier.size(20.dp))
                                 Spacer(Modifier.width(6.dp))
                                 Text(stringResource(Res.string.play))
@@ -1715,7 +1715,7 @@ private fun ArtistSongListItem(
             overflow = TextOverflow.Ellipsis,
         )
         if (onLikeClick != null) {
-            IconButton(onClick = onLikeClick, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = onLikeClick, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     imageVector = if (isLiked) CrystaListIcons.Filled.Favorite else CrystaListIcons.Outlined.FavoriteBorder,
                     contentDescription = stringResource(if (isLiked) Res.string.unlike else Res.string.action_like),
@@ -1731,7 +1731,7 @@ private fun ArtistSongListItem(
                 )
             }
         }
-        IconButton(onClick = onMenuClick, modifier = Modifier.size(48.dp).navigationPopupSource(), shapes = IconButtonDefaults.shapes()) {
+        IconButton(onClick = onMenuClick, modifier = Modifier.size(48.dp).navigationPopupSource(), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Icon(
                 CrystaListIcons.Default.MoreVert,
                 stringResource(Res.string.artist_actions),

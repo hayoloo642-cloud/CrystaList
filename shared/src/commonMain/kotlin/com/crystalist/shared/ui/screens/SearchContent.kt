@@ -522,7 +522,7 @@ private fun SearchEmptyState(
                                     )
                                     IconButton(
                                         onClick = { onHistoryItemInsert(historyItem) },
-                                        shapes = IconButtonDefaults.shapes(),
+                                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Icon(
                                             imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,
@@ -578,7 +578,7 @@ private fun RecentSectionTitle(
                 label = stringResource(Res.string.clearing_search_history),
             )
         } else {
-            IconButton(onClick = onClearClick, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = onClearClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     imageVector = CrystaListIcons.Default.Close,
                     contentDescription = text.clearSection(title),
@@ -602,12 +602,12 @@ private fun ConfirmDeleteDialog(
         title = { Text(title) },
         text = { Text(text) },
         confirmButton = {
-            TextButton(onClick = onConfirm, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onConfirm, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(textData.delete)
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismiss, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(textData.cancel)
             }
         },
@@ -836,7 +836,7 @@ private fun SearchSuggestionRow(
             )
             IconButton(
                 onClick = onInsertClick,
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,
@@ -1072,7 +1072,7 @@ private fun SearchResultsList(
             item(key = "search_failed") {
                 Column(Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(stringResource(Res.string.search_online_failed))
-                    TextButton(onClick = { onFilterSelected(selectedFilter) }, shapes = ButtonDefaults.shapes()) {
+                    TextButton(onClick = { onFilterSelected(selectedFilter) }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(stringResource(Res.string.retry))
                     }
                 }
@@ -1128,7 +1128,7 @@ private fun SearchResultsList(
                 item(key = "filtered_results_retry") {
                     Column(Modifier.fillMaxWidth().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(stringResource(Res.string.search_load_more_failed))
-                        TextButton(onClick = onRetryLoadMore, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = onRetryLoadMore, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.retry))
                         }
                     }
@@ -1468,7 +1468,7 @@ private fun TopResultCard(
                                 IconButton(
                                     modifier = Modifier.navigationPopupSource(),
                                     onClick = { onItemLongClick(mainItem) },
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(CrystaListIcons.Default.MoreVert, contentDescription = stringResource(Res.string.more_options))
                                 }
@@ -1676,7 +1676,7 @@ private fun TopResultCard(
                                     IconButton(
                                         modifier = Modifier.navigationPopupSource(),
                                         onClick = { onItemLongClick(mainItem) },
-                                        shapes = IconButtonDefaults.shapes(),
+                                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Icon(CrystaListIcons.Default.MoreVert, contentDescription = stringResource(Res.string.more_options))
                                     }
@@ -1859,7 +1859,7 @@ private fun TopResultItem(
             }
         }
 
-        IconButton(modifier = Modifier.navigationPopupSource(), onClick = onMenuClick, shapes = IconButtonDefaults.shapes()) {
+        IconButton(modifier = Modifier.navigationPopupSource(), onClick = onMenuClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Icon(
                 imageVector = CrystaListIcons.Default.MoreVert,
                 contentDescription = stringResource(Res.string.more_options),

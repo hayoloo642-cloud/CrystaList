@@ -31,6 +31,7 @@ import com.crystalist.shared.settings.Settings
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.mp.KoinPlatform
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun AiLyricsConnectionTestSetting(
@@ -106,7 +107,7 @@ private fun ProviderConnectionTest(
                 }
             },
             enabled = !busy,
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(if (busy) Res.string.ai_test_connection_running else Res.string.ai_test_connection))
         }

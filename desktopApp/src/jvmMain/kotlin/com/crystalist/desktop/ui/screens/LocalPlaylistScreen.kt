@@ -129,6 +129,7 @@ import org.koin.core.context.GlobalContext
 import java.io.File
 import javax.swing.JFileChooser
 import javax.swing.filechooser.FileNameExtensionFilter
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun LocalPlaylistScreen(type: String) {
@@ -534,7 +535,7 @@ private fun LocalPlaylistLayout(
             headerAction =
                 if (headerActionLabel != null && headerActionIcon != null && onHeaderAction != null) {
                     {
-                        TextButton(onClick = onHeaderAction, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = onHeaderAction, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(headerActionIcon, contentDescription = null, modifier = Modifier.size(18.dp))
                             Spacer(Modifier.width(6.dp))
                             Text(headerActionLabel)
@@ -669,7 +670,7 @@ private fun EmptyState(
         Spacer(Modifier.height(6.dp))
         if (hint.isNotEmpty()) Text(hint, style = MaterialTheme.typography.bodySmall, textAlign = TextAlign.Center)
         if (onRetry != null) {
-            TextButton(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.try_again)) }
+            TextButton(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.try_again)) }
         }
     }
 }

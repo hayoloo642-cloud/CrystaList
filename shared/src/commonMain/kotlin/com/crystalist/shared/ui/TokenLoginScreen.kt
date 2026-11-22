@@ -405,7 +405,7 @@ fun TokenLoginScreen(
             LargeTopAppBar(
                 title = { Text(stringResource(Res.string.token_login_title)) },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack, enabled = !isSaving, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onNavigateBack, enabled = !isSaving, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                     }
                 },

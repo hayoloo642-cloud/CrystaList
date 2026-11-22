@@ -148,7 +148,7 @@ internal fun CanvasContentOrderSetting(
                         move(source, availableSources[index - 1])
                     },
                     enabled = sourceEnabled && index > 0,
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Outlined.KeyboardArrowUp, stringResource(Res.string.move_up))
                 }
@@ -157,7 +157,7 @@ internal fun CanvasContentOrderSetting(
                         move(source, availableSources[index + 1])
                     },
                     enabled = sourceEnabled && index < availableSources.lastIndex,
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Outlined.KeyboardArrowDown, stringResource(Res.string.move_down))
                 }
@@ -522,7 +522,7 @@ internal fun ThemeSeedColorSetting(
                             focusManager.clearFocus()
                             keyboardController?.hide()
                         },
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Filled.Check,

@@ -112,7 +112,7 @@ fun ConnectedDevicesContent(
                         heading()
                     },
             )
-            FilledTonalIconButton(onClick = onClose, modifier = closeButtonModifier, shapes = IconButtonDefaults.shapes()) {
+            FilledTonalIconButton(onClick = onClose, modifier = closeButtonModifier, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Outlined.Close, stringResource(Res.string.close))
             }
         }
@@ -226,7 +226,7 @@ fun ConnectedDevicesContent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Box {
-                    TextButton(onClick = { showDefaults = true }, shapes = ButtonDefaults.shapes()) {
+                    TextButton(onClick = { showDefaults = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(pairedDevices.firstOrNull { it.deviceId == defaultDeviceId }?.deviceName ?: stringResource(Res.string.none))
                     }
                     DropdownMenu(expanded = showDefaults, onDismissRequest = { showDefaults = false }) {
@@ -250,7 +250,7 @@ fun ConnectedDevicesContent(
                 }
             }
             if (!deviceState.enabled && onEnableDeviceConnect != null) {
-                Button(onClick = onEnableDeviceConnect, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes()) {
+                Button(onClick = onEnableDeviceConnect, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(
                         stringResource(
                             if (permissionRequired) Res.string.device_connect_grant_permission else Res.string.device_connect_enable,
@@ -359,7 +359,7 @@ private fun ConnectedDeviceRow(
             }
             if (connecting) LoadingIndicator(Modifier.size(20.dp))
             if (connected) {
-                IconButton(onClick = onClick, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = onClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Outlined.Close, stringResource(Res.string.disconnect_cast))
                 }
             }

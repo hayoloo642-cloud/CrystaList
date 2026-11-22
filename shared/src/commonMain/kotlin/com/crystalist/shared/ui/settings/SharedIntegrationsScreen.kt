@@ -810,11 +810,11 @@ private fun DiscordErrorPanel(
             Icon(CrystaListIcons.Outlined.Warning, null, tint = MaterialTheme.colorScheme.error)
             Spacer(Modifier.width(12.dp))
             Text(message, modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.error)
-            IconButton(onClick = DiscordRpcManager::clearLastError, enabled = enabled, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = DiscordRpcManager::clearLastError, enabled = enabled, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Default.Close, stringResource(Res.string.dismiss))
             }
         }
-        TextButton(onClick = { host.onCopyText(errorTitle, message) }, enabled = enabled, shapes = ButtonDefaults.shapes()) {
+        TextButton(onClick = { host.onCopyText(errorTitle, message) }, enabled = enabled, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Icon(CrystaListIcons.Outlined.ContentCopy, null)
             Spacer(Modifier.width(8.dp))
             Text(stringResource(Res.string.copy))
@@ -904,7 +904,7 @@ private fun DiscordPresencePreview(
         buttons.forEach { (label, url) ->
             Button(onClick = {
                 onOpenUrl(url)
-            }, enabled = enabled, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes()) { Text(label) }
+            }, enabled = enabled, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(label) }
         }
         if (buttons != configuredButtons) {
             Text(stringResource(Res.string.discord_preview_buttons_adjusted), style = MaterialTheme.typography.bodySmall)
@@ -969,7 +969,7 @@ private fun ScrobbleLoginDialog(
                     textObfuscationMode = TextObfuscationMode.Hidden,
                 )
                 if (!isLastFm) {
-                    TextButton(onClick = { onOpenUrl("https://listenbrainz.org/settings/") }, shapes = ButtonDefaults.shapes()) {
+                    TextButton(onClick = { onOpenUrl("https://listenbrainz.org/settings/") }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(stringResource(Res.string.listenbrainz_user_token))
                         Spacer(Modifier.width(8.dp))
                         Icon(CrystaListIcons.AutoMirrored.Filled.OpenInNew, stringResource(Res.string.open_website))
@@ -985,7 +985,7 @@ private fun ScrobbleLoginDialog(
                             },
                         )
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.scrobble_create_account))
                     Spacer(Modifier.width(8.dp))
@@ -1033,7 +1033,7 @@ private fun ScrobbleLoginDialog(
                         connecting = false
                     }
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 if (connecting) {
                     LoadingIndicator(Modifier.size(18.dp))
@@ -1046,7 +1046,7 @@ private fun ScrobbleLoginDialog(
             TextButton(
                 onClick = onDismiss,
                 enabled = !connecting,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.cancel)) }
         },
     )

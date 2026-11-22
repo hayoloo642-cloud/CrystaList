@@ -44,6 +44,7 @@ import io.github.kdroidfilter.webview.web.rememberWebViewNavigator
 import io.github.kdroidfilter.webview.web.rememberWebViewState
 import kotlinx.coroutines.CancellationException
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 @Suppress("FunctionName")
@@ -131,7 +132,7 @@ private fun <T : Any> ProviderLoginContent(
                     modifier = Modifier.weight(1f),
                     color = if (extractionFailed) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             }
         }
     }

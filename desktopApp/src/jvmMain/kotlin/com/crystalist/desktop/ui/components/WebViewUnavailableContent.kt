@@ -38,6 +38,7 @@ import com.crystalist.shared.utils.OsUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun rememberLinuxWebKitAvailable(): Boolean? {
@@ -80,6 +81,6 @@ internal fun WebViewUnavailableContent(
             modifier = Modifier.fillMaxWidth(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.close)) }
+        Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.close)) }
     }
 }

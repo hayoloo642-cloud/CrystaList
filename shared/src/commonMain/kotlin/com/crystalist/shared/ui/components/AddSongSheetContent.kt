@@ -60,6 +60,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun AddSongSheetContent(
@@ -160,7 +161,7 @@ fun AddSongSheetContent(
                         },
                         trailingIcon = {
                             if (query.isNotEmpty()) {
-                                IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         imageVector = CrystaListIcons.Default.Clear,
                                         contentDescription = stringResource(Res.string.clear_search),
@@ -178,7 +179,7 @@ fun AddSongSheetContent(
             )
             Button(
                 onClick = { search(query) },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.search))
             }
@@ -224,11 +225,11 @@ fun AddSongSheetContent(
                         duplicateSong = null
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.add_anyway)) }
             },
             dismissButton = {
-                TextButton(onClick = { duplicateSong = null }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.skip)) }
+                TextButton(onClick = { duplicateSong = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.skip)) }
             },
         )
     }

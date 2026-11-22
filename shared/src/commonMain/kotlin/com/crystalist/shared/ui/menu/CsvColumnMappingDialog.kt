@@ -48,6 +48,7 @@ import com.crystalist.shared.ui.components.ExpressiveFilterChip
 import com.crystalist.shared.ui.utils.carouselScroll
 import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun CsvColumnMappingDialog(
@@ -129,14 +130,14 @@ fun CsvColumnMappingDialog(
                     submitting = true
                     onConfirm(mapping)
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.continue_action)) }
         },
         dismissButton = {
             TextButton(
                 enabled = !submitting,
                 onClick = onDismiss,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.cancel)) }
         },
     )

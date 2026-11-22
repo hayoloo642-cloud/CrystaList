@@ -41,67 +41,69 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
 
     return Typography(
         fontFamily = font,
+        // Apple Music hierarchy: Large Title 34, Title 1 28, Title 2 22, Title 3 20,
+        // Headline/Body 17, Subheadline 15, Footnote 13, Caption 12/11.
         displayLarge =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.Bold,
                 localeList = localeList,
-                fontSize = 56.sp,
-                lineHeight = 60.sp,
-                letterSpacing = (-0.6).sp,
+                fontSize = 34.sp,
+                lineHeight = 38.sp,
+                letterSpacing = 0.37.sp,
             ),
         displayMedium =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.Bold,
                 localeList = localeList,
-                fontSize = 44.sp,
-                lineHeight = 48.sp,
-                letterSpacing = (-0.5).sp,
+                fontSize = 28.sp,
+                lineHeight = 32.sp,
+                letterSpacing = 0.36.sp,
             ),
         displaySmall =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.Bold,
                 localeList = localeList,
-                fontSize = 36.sp,
-                lineHeight = 40.sp,
-                letterSpacing = (-0.4).sp,
+                fontSize = 24.sp,
+                lineHeight = 29.sp,
+                letterSpacing = (-0.2).sp,
             ),
         headlineLarge =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.Bold,
                 localeList = localeList,
-                fontSize = 32.sp,
-                lineHeight = 36.sp,
-                letterSpacing = (-0.4).sp,
+                fontSize = 28.sp,
+                lineHeight = 32.sp,
+                letterSpacing = 0.36.sp,
             ),
         headlineMedium =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.Bold,
                 localeList = localeList,
-                fontSize = 28.sp,
-                lineHeight = 32.sp,
-                letterSpacing = (-0.3).sp,
+                fontSize = 22.sp,
+                lineHeight = 26.sp,
+                letterSpacing = (-0.26).sp,
             ),
         headlineSmall =
             TextStyle(
                 fontFamily = font,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.SemiBold,
                 localeList = localeList,
-                fontSize = 24.sp,
-                lineHeight = 28.sp,
-                letterSpacing = (-0.2).sp,
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                letterSpacing = (-0.15).sp,
             ),
         titleLarge =
             TextStyle(
                 fontFamily = font,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.SemiBold,
                 localeList = localeList,
-                fontSize = 22.sp,
-                lineHeight = 26.sp,
+                fontSize = 18.sp,
+                lineHeight = 23.sp,
                 letterSpacing = (-0.1).sp,
             ),
         titleMedium =
@@ -110,8 +112,8 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 fontWeight = FontWeight.SemiBold,
                 localeList = localeList,
                 fontSize = 17.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 0.sp,
+                lineHeight = 21.sp,
+                letterSpacing = (-0.43).sp,
             ),
         titleSmall =
             TextStyle(
@@ -120,7 +122,7 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 localeList = localeList,
                 fontSize = 15.sp,
                 lineHeight = 20.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.24).sp,
             ),
         bodyLarge =
             TextStyle(
@@ -128,8 +130,8 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 fontWeight = FontWeight.Normal,
                 localeList = localeList,
                 fontSize = 17.sp,
-                lineHeight = 24.sp,
-                letterSpacing = (-0.1).sp,
+                lineHeight = 25.sp,
+                letterSpacing = (-0.43).sp,
             ),
         bodyMedium =
             TextStyle(
@@ -138,7 +140,7 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 localeList = localeList,
                 fontSize = 15.sp,
                 lineHeight = 20.sp,
-                letterSpacing = 0.sp,
+                letterSpacing = (-0.24).sp,
             ),
         bodySmall =
             TextStyle(
@@ -146,26 +148,26 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 fontWeight = FontWeight.Normal,
                 localeList = localeList,
                 fontSize = 13.sp,
-                lineHeight = 18.sp,
-                letterSpacing = 0.sp,
+                lineHeight = 17.sp,
+                letterSpacing = (-0.08).sp,
             ),
         labelLarge =
             TextStyle(
                 fontFamily = font,
                 fontWeight = FontWeight.SemiBold,
                 localeList = localeList,
-                fontSize = 15.sp,
-                lineHeight = 20.sp,
-                letterSpacing = 0.sp,
+                fontSize = 17.sp,
+                lineHeight = 17.sp,
+                letterSpacing = (-0.43).sp,
             ),
         labelMedium =
             TextStyle(
                 fontFamily = font,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Medium,
                 localeList = localeList,
-                fontSize = 13.sp,
+                fontSize = 12.sp,
                 lineHeight = 16.sp,
-                letterSpacing = 0.1.sp,
+                letterSpacing = 0.sp,
             ),
         labelSmall =
             TextStyle(
@@ -173,8 +175,8 @@ fun CrystaListTypography(localeList: LocaleList = currentAppLocaleList()): Typog
                 fontWeight = FontWeight.Medium,
                 localeList = localeList,
                 fontSize = 11.sp,
-                lineHeight = 14.sp,
-                letterSpacing = 0.2.sp,
+                lineHeight = 13.sp,
+                letterSpacing = 0.07.sp,
             ),
     )
 }

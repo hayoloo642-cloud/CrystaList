@@ -270,7 +270,7 @@ fun HomeContent(
             if (!uiState.isLoading && uiState.error.isNullOrBlank() && uiState.loadMoreError && onLoadMore != null) {
                 item(key = "home_load_more_retry") {
                     Box(Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
-                        TextButton(onClick = onLoadMore, shapes = ButtonDefaults.shapes()) { Text(text.tryAgain) }
+                        TextButton(onClick = onLoadMore, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(text.tryAgain) }
                     }
                 }
             }

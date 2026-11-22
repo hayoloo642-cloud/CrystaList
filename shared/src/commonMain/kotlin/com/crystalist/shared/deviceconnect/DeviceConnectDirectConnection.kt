@@ -23,6 +23,7 @@ import com.crystalist.shared.generated.resources.device_connect_direct_failed
 import com.crystalist.shared.generated.resources.device_connect_direct_hint
 import com.crystalist.shared.generated.resources.device_connect_direct_title
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -39,7 +40,7 @@ fun DeviceConnectDirectConnection(
             it.state == DeviceConnectManager.PeerState.CONNECTING || it.state == DeviceConnectManager.PeerState.HANDSHAKING
         }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        TextButton(onClick = { expanded = !expanded }, shapes = ButtonDefaults.shapes()) {
+        TextButton(onClick = { expanded = !expanded }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Text(stringResource(Res.string.device_connect_direct_title))
         }
         if (expanded) {
@@ -58,7 +59,7 @@ fun DeviceConnectDirectConnection(
             TextButton(
                 onClick = { onConnect(address) },
                 enabled = endpoint != null && !connecting && state.pairingRequests.isEmpty(),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.connect))
             }

@@ -61,6 +61,7 @@ import org.koin.mp.KoinPlatform
 import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun AiPickerRow(
@@ -218,7 +219,7 @@ internal fun AiModelPicker(
         Column(Modifier.padding(top = 24.dp)) {
             Row(Modifier.padding(horizontal = 24.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(title, style = MaterialTheme.typography.headlineSmall, modifier = Modifier.weight(1f))
-                TextButton({ reload++ }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.refresh)) }
+                TextButton({ reload++ }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.refresh)) }
             }
             OutlinedTextField(
                 value = query,
@@ -262,7 +263,7 @@ internal fun AiModelPicker(
                                     ),
                                     color = MaterialTheme.colorScheme.error,
                                 )
-                                TextButton({ reload++ }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                                TextButton({ reload++ }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                             }
                         }
                     }
@@ -294,7 +295,7 @@ internal fun AiModelPicker(
                 }
             }
             Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), horizontalArrangement = Arrangement.End) {
-                TextButton({ open = false }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton({ open = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             }
         }
     }

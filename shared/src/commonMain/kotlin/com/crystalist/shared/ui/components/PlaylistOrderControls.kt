@@ -177,7 +177,7 @@ fun PlaylistOrderControls(
                                 MaterialTheme.colorScheme.onSecondaryContainer
                             },
                     ),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(if (reorderMode) text.lock else text.reorder, maxLines = 1, softWrap = false)
             }

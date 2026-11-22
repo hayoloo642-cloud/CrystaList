@@ -57,6 +57,7 @@ import com.crystalist.shared.ui.settings.ClientAccessLabel
 import com.crystalist.shared.ui.settings.ClientCapabilityChips
 import com.crystalist.shared.ui.utils.DragScrollableColumn
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun DevtoolsSettingsScreen(colorScheme: ColorScheme) {
@@ -131,7 +132,7 @@ fun DevtoolsSettingsScreen(colorScheme: ColorScheme) {
             )
         }
         item {
-            TextButton(onClick = { showCrashLogs = true }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.crash_logs)) }
+            TextButton(onClick = { showCrashLogs = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.crash_logs)) }
         }
         item {
             Text(
@@ -228,7 +229,7 @@ private fun RenderBackendSettings(colorScheme: ColorScheme) {
                 Material3SettingsItem(
                     title = { Text(stringResource(Res.string.devtools_render_backend_description)) },
                     trailingContent = {
-                        TextButton(onClick = { UiState.restartRequested = true }, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = { UiState.restartRequested = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.crash_restart))
                         }
                     },

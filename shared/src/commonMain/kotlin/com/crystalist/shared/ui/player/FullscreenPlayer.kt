@@ -473,7 +473,7 @@ private fun FullscreenControlsOverlay(
                     IconButton(
                         onClick = onToggleFullscreen,
                         modifier = Modifier.size(48.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Rounded.KeyboardArrowDown,
@@ -550,7 +550,7 @@ private fun FullscreenControlsOverlay(
                                 IconButton(
                                     onClick = { platform.enterPictureInPicture(isPlaying = isPlaying, hasVideo = showVideoSurface) },
                                     modifier = Modifier.size(40.dp, 32.dp),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         imageVector = CrystaListIcons.Filled.PictureInPicture,
@@ -564,7 +564,7 @@ private fun FullscreenControlsOverlay(
                             IconButton(
                                 onClick = onToggleFullscreen,
                                 modifier = Modifier.size(40.dp, 32.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     imageVector = CrystaListIcons.Default.FullscreenExit,
@@ -641,7 +641,7 @@ private fun FullscreenControlsOverlay(
                         IconButton(
                             onClick = onShowPlayerMenu,
                             modifier = Modifier.size(40.dp).navigationPopupSource(),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Default.MoreVert,

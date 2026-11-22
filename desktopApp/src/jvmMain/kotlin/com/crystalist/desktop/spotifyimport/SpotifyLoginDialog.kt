@@ -64,6 +64,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.jetbrains.compose.resources.stringResource
 import java.io.File
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun SpotifyLoginDialog(
@@ -104,7 +105,7 @@ private fun SpotifyWebViewContent(
         ) {
             Text(stringResource(Res.string.spotify_webview_not_writable))
             Text(webViewDataDirectory.exceptionOrNull()?.message.orEmpty(), color = MaterialTheme.colorScheme.error)
-            Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.close)) }
+            Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.close)) }
         }
         return
     }
@@ -169,12 +170,12 @@ private fun SpotifyWebViewContent(
                     modifier = Modifier.weight(1f),
                     color = if (extractionError == null) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error,
                 )
-                TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                 if (authenticationFailed) {
                     Button(
                         enabled = !isAuthenticating && !isReadingCredentials,
                         onClick = { credentialAttempt++ },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.retry)) }
                 }
             }
@@ -222,11 +223,11 @@ private fun SpotifyWindowsHelperContent(
                         }
                     }
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(if (isRunning) Res.string.spotify_login_open else Res.string.spotify_login_button))
             }
-            TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+            TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
         }
     }
 }

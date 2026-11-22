@@ -394,7 +394,7 @@ fun FloatingSearchOverlay(
                                     queryState.setTextAndPlaceCursorAtEnd("")
                                 },
                                 modifier = Modifier.size(40.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     CrystaListIcons.Default.Close,
@@ -467,7 +467,7 @@ fun FloatingSearchOverlay(
                                         IconButton(
                                             onClick = { SearchState.removeSearchQuery(entry) },
                                             modifier = Modifier.size(40.dp),
-                                            shapes = IconButtonDefaults.shapes(),
+                                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                         ) {
                                             Icon(
                                                 CrystaListIcons.Default.Close,

@@ -56,6 +56,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.mp.KoinPlatform
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 internal fun lyricsSetupLanguage(
     configured: String,
@@ -141,11 +142,11 @@ internal fun AiTranslationSetup(
                         Text(stringResource(Res.string.ai_setup_limits, 20, 50, 10, 1000))
                         Button(
                             onClick = { tryOpenUrl("https://openrouter.ai/sign-up") { browserFailed = !it } },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.ai_setup_create_account)) }
                         TextButton(
                             onClick = { tryOpenUrl("https://openrouter.ai/docs/api_reference/limits") { browserFailed = !it } },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.ai_setup_view_limits)) }
                         if (browserFailed) Text(stringResource(Res.string.ai_setup_browser_failed), color = MaterialTheme.colorScheme.error)
                     }
@@ -187,7 +188,7 @@ internal fun AiTranslationSetup(
                                 LyricsTranslationFailure.DATA_POLICY -> {
                                     TextButton(
                                         onClick = { tryOpenUrl("https://openrouter.ai/settings/privacy") { browserFailed = !it } },
-                                        shapes = ButtonDefaults.shapes(),
+                                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) { Text(stringResource(Res.string.ai_setup_privacy_settings)) }
                                 }
 
@@ -197,14 +198,14 @@ internal fun AiTranslationSetup(
                                             settings.lyricsOpenRouterOAuthKey = ""
                                             step = 1
                                         },
-                                        shapes = ButtonDefaults.shapes(),
+                                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) { Text(stringResource(Res.string.ai_setup_sign_in_again)) }
                                 }
 
                                 LyricsTranslationFailure.CREDIT_LIMIT -> {
                                     TextButton(
                                         onClick = { tryOpenUrl("https://openrouter.ai/settings/keys") { browserFailed = !it } },
-                                        shapes = ButtonDefaults.shapes(),
+                                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) { Text(stringResource(Res.string.ai_setup_key_limits)) }
                                 }
 
@@ -219,7 +220,7 @@ internal fun AiTranslationSetup(
         }
         if (step != 0 && browserFailed) Text(stringResource(Res.string.ai_setup_browser_failed), color = MaterialTheme.colorScheme.error)
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            TextButton(onClick = { if (step > 0) step-- else onDone() }, enabled = !verifying, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = { if (step > 0) step-- else onDone() }, enabled = !verifying, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(if (step > 0) Res.string.back else Res.string.cancel))
             }
             Button(
@@ -257,7 +258,7 @@ internal fun AiTranslationSetup(
                                 true
                             }
                         },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(
                     stringResource(

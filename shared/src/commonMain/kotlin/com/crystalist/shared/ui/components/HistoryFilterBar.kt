@@ -127,7 +127,7 @@ fun HistoryFilterBar(
                         },
                         trailingIcon = {
                             if (query.isNotEmpty()) {
-                                IconButton(onClick = { onQueryChange("") }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { onQueryChange("") }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         imageVector = CrystaListIcons.Default.Clear,
                                         contentDescription = stringResource(Res.string.clear_search),

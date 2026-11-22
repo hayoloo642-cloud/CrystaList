@@ -41,6 +41,7 @@ import com.crystalist.shared.ui.components.PopupVisibility
 import com.crystalist.shared.ui.components.images.AsyncImage
 import org.jetbrains.compose.resources.stringResource
 import kotlin.random.Random
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 private val SupportedDeveloperHandles = listOf("nyxiereal", "mostafaalagamy", "adrielGGmotion", "l6t9")
 private val SupportPromptLaunchRange = 8..20
@@ -129,7 +130,7 @@ fun SupportPrompt() {
                         Settings.shared.supportPromptDismissed = true
                         visible = false
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.support_prompt_never_show))
                 }

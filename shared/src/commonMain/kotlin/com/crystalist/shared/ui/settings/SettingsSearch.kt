@@ -81,6 +81,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.utils.DragScrollableColumn
 import com.crystalist.shared.ui.utils.desktopArrowScroll
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun SettingsSearchField(
@@ -162,7 +163,7 @@ internal fun SettingsSearchField(
                 )
             }
             if (query.isNotEmpty()) {
-                IconButton(onClick = { onQueryChange("") }, modifier = Modifier.size(36.dp), shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = { onQueryChange("") }, modifier = Modifier.size(36.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close), modifier = Modifier.size(20.dp))
                 }
             }

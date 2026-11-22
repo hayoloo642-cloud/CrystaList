@@ -1,12 +1,20 @@
 package com.crystalist.shared.ui.settings
 
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.luminance
+import com.crystalist.shared.ui.theme.AppleMusic
 
+/**
+ * iOS grouped-list rows: white cards on the light grey canvas, `#1C1C1E`
+ * cards on the true-black canvas. Pressed rows step up one surface.
+ */
 fun ColorScheme.settingsRowContainerColor(pressed: Boolean = false): Color {
-    val container = if (pressed) surfaceContainerHighest else surfaceContainerHigh
-    // Pure black collapses container tokens; tonal elevation retains the theme's surface tint.
-    return if (container == background) surfaceColorAtElevation(if (pressed) 12.dp else 6.dp) else container
+    val dark = background.luminance() < 0.5f
+    return when {
+        pressed && dark -> AppleMusic.DarkSurface3
+        pressed -> AppleMusic.LightSurface3
+        dark -> AppleMusic.DarkSurface1
+        else -> AppleMusic.LightCanvas
+    }
 }

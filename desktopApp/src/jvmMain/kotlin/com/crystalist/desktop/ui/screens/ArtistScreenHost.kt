@@ -56,6 +56,7 @@ import com.crystalist.shared.viewmodels.artistCatalogTitles
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun ArtistScreenHost() {
@@ -143,7 +144,7 @@ fun ArtistScreenHost() {
                 if (title !in ArtistState.artistTracksState.failedSections) ArtistState.loadSection(title)
             }
             if (title in ArtistState.artistTracksState.failedSections) {
-                TextButton(onClick = { ArtistState.loadSection(title) }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { ArtistState.loadSection(title) }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.retry))
                 }
             } else {

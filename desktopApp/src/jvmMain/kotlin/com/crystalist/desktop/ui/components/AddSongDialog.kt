@@ -66,6 +66,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun AddSongDialog(
@@ -102,7 +103,7 @@ fun AddSongDialog(
                         },
                         trailingIcon = {
                             if (query.isNotEmpty()) {
-                                IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         imageVector = CrystaListIcons.Default.Clear,
                                         contentDescription = stringResource(Res.string.clear_search),
@@ -133,7 +134,7 @@ fun AddSongDialog(
                                     isSearching = false
                                 }
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(Res.string.search))
                     }
@@ -173,7 +174,7 @@ fun AddSongDialog(
         },
         confirmButton = {},
         dismissButton = {
-            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.cancel))
             }
         },
@@ -191,11 +192,11 @@ fun AddSongDialog(
                         duplicateSong = null
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.add_anyway)) }
             },
             dismissButton = {
-                TextButton(onClick = { duplicateSong = null }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { duplicateSong = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },

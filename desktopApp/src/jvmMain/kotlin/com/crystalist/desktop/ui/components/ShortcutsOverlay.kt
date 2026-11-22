@@ -180,9 +180,9 @@ fun ShortcutsOverlay(
                     .widthIn(max = 680.dp)
                     .fillMaxWidth(0.92f)
                     .heightIn(max = 700.dp)
-                    .clip(RoundedCornerShape(24.dp))
+                    .clip(RoundedCornerShape(16.dp))
                     .semantics { paneTitle = paneTitleText },
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(16.dp),
             color = colorScheme.surfaceContainer,
             tonalElevation = 6.dp,
             border = BorderStroke(1.dp, colorScheme.outlineVariant.copy(alpha = 0.5f)),
@@ -210,7 +210,7 @@ fun ShortcutsOverlay(
                             color = colorScheme.onSurfaceVariant,
                         )
                     }
-                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(
                             imageVector = CrystaListIcons.Default.Close,
                             contentDescription = stringResource(Res.string.close),

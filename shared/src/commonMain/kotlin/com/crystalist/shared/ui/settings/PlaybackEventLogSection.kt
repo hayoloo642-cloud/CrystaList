@@ -131,7 +131,7 @@ fun PlaybackEventLogSection(
                         containerColor = MaterialTheme.colorScheme.errorContainer,
                         contentColor = MaterialTheme.colorScheme.onErrorContainer,
                     ),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.Delete, contentDescription = stringResource(Res.string.clear))
             }

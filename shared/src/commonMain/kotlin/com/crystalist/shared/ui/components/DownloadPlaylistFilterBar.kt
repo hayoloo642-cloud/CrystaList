@@ -43,6 +43,7 @@ import com.crystalist.shared.viewmodels.DownloadPlaylistFilter
 import com.crystalist.shared.viewmodels.supportsDownloadPlaylistFilter
 import kotlinx.coroutines.flow.map
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun rememberDownloadPlaylistFilter(database: MusicDatabase): DownloadPlaylistFilter {
@@ -114,7 +115,7 @@ fun DownloadPlaylistFilterBar(
                     onClick = { filter.setExcluded(true) },
                     label = { Text(stringResource(Res.string.download_filter_not_in_playlist)) },
                 )
-                IconButton(onClick = filter::refresh, enabled = !state.loading, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = filter::refresh, enabled = !state.loading, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Outlined.Refresh, stringResource(if (state.failed) Res.string.retry else Res.string.refresh))
                 }
             }

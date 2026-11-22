@@ -34,6 +34,7 @@ import com.crystalist.shared.generated.resources.equalizer
 import com.crystalist.shared.ui.components.BasicAlertDialog
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun MetroEqDialog(
@@ -62,7 +63,7 @@ fun MetroEqDialog(
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier.weight(1f),
                     )
-                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                     }
                 }

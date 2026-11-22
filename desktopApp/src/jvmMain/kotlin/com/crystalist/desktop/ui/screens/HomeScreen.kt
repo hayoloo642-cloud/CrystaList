@@ -73,6 +73,7 @@ import com.crystalist.shared.ui.screens.pageKey
 import com.crystalist.shared.ui.screens.toHomeSection
 import com.crystalist.shared.ui.theme.MdSpacing
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun HomeScreen() {
@@ -178,7 +179,7 @@ fun HomeScreen() {
                     item(key = "home_error") {
                         Column(Modifier.fillMaxWidth().padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(homeContentText().homeUnavailable)
-                            TextButton(onClick = HomeState::refresh, shapes = ButtonDefaults.shapes()) {
+                            TextButton(onClick = HomeState::refresh, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Text(homeContentText().tryAgain)
                             }
                         }

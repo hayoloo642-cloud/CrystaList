@@ -172,14 +172,14 @@ fun PlayerCoreContent(
                     Modifier
                         .fillMaxSize()
                         .alpha(if (hasAnimatedFrame) 0f else 1f)
-                        .clip(RoundedCornerShape(28.dp))
-                        .shadow(24.dp, RoundedCornerShape(28.dp)),
+                        .clip(RoundedCornerShape(16.dp))
+                        .shadow(20.dp, RoundedCornerShape(16.dp)),
                 contentScale = if (Settings.shared.cropAlbumArt) ContentScale.Crop else ContentScale.Fit,
             )
             AnimatedCover(
                 url = PlayerState.animatedCoverUrl,
                 active = PlayerState.isPlaying && !UiState.videoFullscreenObscuresPlayer,
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(28.dp)),
+                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop,
                 onFrameAvailabilityChanged = { hasAnimatedFrame = it },
             )

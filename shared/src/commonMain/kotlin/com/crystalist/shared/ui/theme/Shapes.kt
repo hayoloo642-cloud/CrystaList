@@ -12,25 +12,26 @@ import androidx.compose.ui.unit.dp
 import com.crystalist.shared.constants.ThumbnailCornerRadius
 import com.crystalist.shared.settings.Settings
 
+// Apple Music corner scale: 8dp small controls, 10dp search, 12dp artwork, 16dp hero.
 val CrystaListShapes =
     Shapes(
-        extraSmall = RoundedCornerShape(8.dp),
-        small = RoundedCornerShape(12.dp),
-        medium = RoundedCornerShape(16.dp),
-        large = RoundedCornerShape(20.dp),
-        extraLarge = RoundedCornerShape(26.dp),
+        extraSmall = RoundedCornerShape(6.dp),
+        small = RoundedCornerShape(8.dp),
+        medium = RoundedCornerShape(10.dp),
+        large = RoundedCornerShape(12.dp),
+        extraLarge = RoundedCornerShape(16.dp),
     )
 
 object ComponentShapes {
     val CardShape = RoundedCornerShape(12.dp)
-    val BottomSheetShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
-    val SmallThumbnailShape get() = RoundedCornerShape(uiEnhanced(4.dp, 6.dp))
-    val ThumbnailShape get() = RoundedCornerShape(uiEnhanced(6.dp, 10.dp))
-    val AlbumArtShape get() = RoundedCornerShape(uiEnhanced(10.dp, 16.dp))
-    val MenuExteriorShape = RoundedCornerShape(16.dp)
-    val MenuGroupShape = RoundedCornerShape(12.dp)
+    val BottomSheetShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+    val SmallThumbnailShape get() = RoundedCornerShape(8.dp)
+    val ThumbnailShape get() = RoundedCornerShape(12.dp)
+    val AlbumArtShape get() = RoundedCornerShape(12.dp)
+    val MenuExteriorShape = RoundedCornerShape(12.dp)
+    val MenuGroupShape = RoundedCornerShape(10.dp)
     val MenuItemShape = RoundedCornerShape(8.dp)
-    val SearchExteriorCornerRadius = 12.dp
+    val SearchExteriorCornerRadius = 10.dp
     val SearchItemCornerRadius = 8.dp
 }
 

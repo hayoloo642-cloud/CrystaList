@@ -76,6 +76,7 @@ import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.abs
 import kotlin.math.roundToInt
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 private const val OFFSET_STEP_MS = 50
 private const val OFFSET_SLIDER_LIMIT_MS = 3_000
@@ -134,7 +135,7 @@ fun LyricsOffsetEditor(
                 color = contentColor,
                 modifier = Modifier.weight(1f),
             )
-            IconButton(onClick = { setOffset(0) }, enabled = offsetMs != 0, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = { setOffset(0) }, enabled = offsetMs != 0, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     CrystaListIcons.Outlined.Replay,
                     contentDescription = stringResource(Res.string.settings_reset_to_default),
@@ -149,7 +150,7 @@ fun LyricsOffsetEditor(
                         onDone()
                     },
                     colors = buttonColors,
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Filled.Check, contentDescription = stringResource(Res.string.done))
                 }
@@ -163,7 +164,7 @@ fun LyricsOffsetEditor(
             FilledTonalIconButton(
                 onClick = { adjustOffset(-OFFSET_STEP_MS) },
                 colors = buttonColors,
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 modifier = Modifier.size(56.dp),
             ) {
                 Icon(CrystaListIcons.Filled.Remove, contentDescription = stringResource(Res.string.lyrics_offset_decrease, OFFSET_STEP_MS))
@@ -263,7 +264,7 @@ fun LyricsOffsetEditor(
             FilledTonalIconButton(
                 onClick = { adjustOffset(OFFSET_STEP_MS) },
                 colors = buttonColors,
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 modifier = Modifier.size(56.dp),
             ) {
                 Icon(CrystaListIcons.Filled.Add, contentDescription = stringResource(Res.string.lyrics_offset_increase, OFFSET_STEP_MS))

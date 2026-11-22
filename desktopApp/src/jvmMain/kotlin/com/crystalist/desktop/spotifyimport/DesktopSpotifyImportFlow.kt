@@ -60,6 +60,7 @@ import org.jetbrains.compose.resources.getPluralString
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import java.util.logging.Logger
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun DesktopSpotifyImportFlow(
@@ -322,7 +323,7 @@ internal fun DesktopSpotifyImportFlow(
             confirmButton = {
                 TextButton(
                     onClick = { errorMessage = null },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.ok)) }
             },
         )

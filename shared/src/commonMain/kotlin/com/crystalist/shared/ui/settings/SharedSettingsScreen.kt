@@ -224,7 +224,7 @@ internal fun SharedSettingsRegistryScreen(
                 modifier =
                     Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.surface)
+                        .background(MaterialTheme.colorScheme.surfaceContainer)
                         .windowInsetsPadding(WindowInsets.safeDrawing),
             ) {
                 SettingsNavigationPane(
@@ -245,7 +245,7 @@ internal fun SharedSettingsRegistryScreen(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (canNavigateBackFromSettings(pageStack, expanded = true)) {
-                            IconButton(onClick = ::closePage, shapes = IconButtonDefaults.shapes()) {
+                            IconButton(onClick = ::closePage, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                             }
                         }
@@ -263,7 +263,7 @@ internal fun SharedSettingsRegistryScreen(
                                 modifier = Modifier.singleLineMarquee(),
                             )
                         }
-                        IconButton(onClick = host.onClose, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = host.onClose, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                         }
                     }
@@ -365,7 +365,7 @@ private fun CompactSettingsHome(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
         topBar = {
             LargeFlexibleTopAppBar(
                 title = {
@@ -392,7 +392,7 @@ private fun CompactSettingsHome(
                                 Modifier.focusProperties {
                                     if (isTv) down = contentFocusRequester
                                 },
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                         }
@@ -400,7 +400,7 @@ private fun CompactSettingsHome(
                 },
                 actions = {
                     if (host.platform == SettingsPlatform.DESKTOP) {
-                        IconButton(onClick = host.onClose, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = host.onClose, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                         }
                     }
@@ -466,7 +466,7 @@ private fun CompactSettingsDetail(
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = MaterialTheme.colorScheme.surfaceContainer,
         topBar = {
             LargeFlexibleTopAppBar(
                 title = { Text(page.title, fontWeight = MaterialTheme.typography.titleLargeEmphasized.fontWeight) },
@@ -477,7 +477,7 @@ private fun CompactSettingsDetail(
                             Modifier.focusProperties {
                                 if (isTv) down = contentFocusRequester
                             },
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                     }

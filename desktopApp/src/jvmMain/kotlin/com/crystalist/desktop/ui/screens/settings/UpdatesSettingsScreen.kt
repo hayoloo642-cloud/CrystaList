@@ -74,6 +74,7 @@ import com.crystalist.shared.update.followsNightlyUpdates
 import org.jetbrains.compose.resources.stringResource
 import java.text.DateFormat
 import java.util.Date
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -161,7 +162,7 @@ fun UpdatesSettingsScreen(colorScheme: ColorScheme) {
                 if (UiState.isDownloadingUpdate && !UiState.updateManagerStarted) {
                     TextButton(
                         onClick = AppState::cancelUpdateDownload,
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.cancel)) }
                 }
             }
@@ -255,13 +256,13 @@ fun UpdatesSettingsScreen(colorScheme: ColorScheme) {
             confirmButton = {
                 TextButton(
                     onClick = { expandedRelease = null },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.close)) }
             },
             dismissButton = {
                 TextButton(onClick = {
                     AppState.openUpdateRelease(release)
-                }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.action_download)) }
+                }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.action_download)) }
             },
         )
     }

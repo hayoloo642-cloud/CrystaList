@@ -869,7 +869,7 @@ fun MobileApp(
                                     if (Settings.shared.devtoolsUnlocked) {
                                         IconButton(
                                             onClick = { open(MobileRoute.Settings(initialPage = SettingsPageId.DEVTOOLS)) },
-                                            shapes = IconButtonDefaults.shapes(),
+                                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                         ) {
                                             Icon(
                                                 CrystaListIcons.Outlined.Settings,
@@ -879,7 +879,7 @@ fun MobileApp(
                                         }
                                     }
                                     if (Settings.shared.listenTogetherEnabled) {
-                                        IconButton(onClick = { open(MobileRoute.ListenTogether()) }, shapes = IconButtonDefaults.shapes()) {
+                                        IconButton(onClick = { open(MobileRoute.ListenTogether()) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                             Icon(
                                                 CrystaListIcons.Outlined.Group,
                                                 contentDescription = stringResource(Res.string.listen_together),
@@ -891,7 +891,7 @@ fun MobileApp(
                                         IconButton(
                                             modifier = Modifier.navigationPopupSource(),
                                             onClick = { showAccountMenu = true },
-                                            shapes = IconButtonDefaults.shapes(),
+                                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                         ) {
                                             if (authManager.isLoggedIn && authManager.accountThumbnail.isNotBlank()) {
                                                 AsyncImage(
@@ -1104,7 +1104,7 @@ fun MobileApp(
                                                                 Text(text.homeUnavailable)
                                                                 Button(
                                                                     onClick = { homeViewModel.refresh {} },
-                                                                    shapes = ButtonDefaults.shapes(),
+                                                                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                                                 ) { Text(text.tryAgain) }
                                                             }
                                                         }
@@ -1866,13 +1866,13 @@ fun MobileApp(
                     confirmButton = {
                         TextButton(
                             onClick = { playVideo(videoId) },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.retry)) }
                     },
                     dismissButton = {
                         TextButton(
                             onClick = videoLookup::dismissFailure,
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.cancel)) }
                     },
                 )
@@ -1894,13 +1894,13 @@ fun MobileApp(
                                 YouTubeSessionState.dismissExpiredSessionNotice()
                                 open(MobileRoute.Login(isSwitchingChannel = false))
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_login))
                         }
                     },
                     dismissButton = {
-                        TextButton(onClick = YouTubeSessionState::dismissExpiredSessionNotice, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = YouTubeSessionState::dismissExpiredSessionNotice, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.action_not_now))
                         }
                     },
@@ -1917,13 +1917,13 @@ fun MobileApp(
                                 ScrobbleSessions.dismissLastFmExpiredNotice()
                                 open(MobileRoute.Settings(initialPage = SettingsPageId.LAST_FM))
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_login))
                         }
                     },
                     dismissButton = {
-                        TextButton(onClick = ScrobbleSessions::dismissLastFmExpiredNotice, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = ScrobbleSessions::dismissLastFmExpiredNotice, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.action_not_now))
                         }
                     },
@@ -1956,7 +1956,7 @@ fun MobileApp(
                                     playbackController.togglePlayPause()
                                 }
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.play))
                         }
@@ -1967,7 +1967,7 @@ fun MobileApp(
                                 Settings.shared.pendingContinuePlayback = false
                                 showContinuePlaybackPrompt = false
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_not_now))
                         }

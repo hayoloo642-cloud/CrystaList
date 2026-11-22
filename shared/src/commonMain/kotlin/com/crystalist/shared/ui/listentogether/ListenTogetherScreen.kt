@@ -399,11 +399,11 @@ fun ListenTogetherScreen(
                         invitationHandled = true
                         manager.leaveRoom()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.listen_together_leave)) }
             },
             dismissButton = {
-                TextButton(onClick = { invitationHandled = true }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { invitationHandled = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -432,7 +432,7 @@ fun ListenTogetherScreen(
                 )
             },
             confirmButton = {
-                TextButton(onClick = manager::addPendingQueueImport, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = manager::addPendingQueueImport, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(if (isHost) Res.string.add else Res.string.suggest))
                 }
             },
@@ -440,12 +440,12 @@ fun ListenTogetherScreen(
                 Row {
                     TextButton(
                         onClick = manager::cancelQueueImport,
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.cancel)) }
                     TextButton(
                         enabled = isHost,
                         onClick = manager::replaceWithPendingQueueImport,
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.replace)) }
                 }
             },
@@ -485,7 +485,7 @@ fun ListenTogetherSettingsScreen(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showHelp = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { showHelp = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.ok))
                 }
             },
@@ -712,11 +712,11 @@ fun ListenTogetherServerScreen(
                     onClick = {
                         if (manager.updateCustomServerMetadata(server.url, name, operator)) editingServer = null
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.save)) }
             },
             dismissButton = {
-                TextButton(onClick = { editingServer = null }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { editingServer = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -772,7 +772,7 @@ fun ListenTogetherBlockedUsersScreen(
                         SettingsSubScreenItem(
                             title = username,
                             trailingContent = {
-                                IconButton(onClick = { manager.unblockUser(username) }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { manager.unblockUser(username) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(CrystaListIcons.Rounded.LockOpen, contentDescription = stringResource(Res.string.unblock))
                                 }
                             },
@@ -841,7 +841,7 @@ fun ListenTogetherLogsScreen(
                 Button(
                     onClick = { shareText(logText) },
                     modifier = Modifier.weight(1f).heightIn(min = 48.dp),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Outlined.Share, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -852,7 +852,7 @@ fun ListenTogetherLogsScreen(
             IconButton(
                 onClick = { onCopyText(logsLabel, logText) },
                 modifier = Modifier.size(48.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.ContentCopy, contentDescription = stringResource(Res.string.copy_logs))
             }
@@ -1012,7 +1012,7 @@ private fun ListenTogetherCreateJoinScreen(
                 }
                 if (joinRequestPending) {
                     item {
-                        TextButton(onClick = onCancelJoin, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = onCancelJoin, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.cancel))
                         }
                     }
@@ -1083,7 +1083,7 @@ private fun ExpressiveButton(
         onClick = onClick,
         modifier = modifier.heightIn(min = ButtonDefaults.MediumContainerHeight).tvFocusHighlight(CircleShape),
         enabled = enabled,
-        shapes = ButtonDefaults.shapes(),
+        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         colors = colors,
         contentPadding = ButtonDefaults.MediumContentPadding,
     ) {
@@ -1102,7 +1102,7 @@ private fun ExpressiveOutlinedButton(
         onClick = onClick,
         modifier = modifier.heightIn(min = 48.dp).tvFocusHighlight(CircleShape),
         enabled = enabled,
-        shapes = ButtonDefaults.shapes(),
+        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
     ) {
         ProvideTextStyle(MaterialTheme.typography.labelLarge) { content() }
     }
@@ -1220,7 +1220,7 @@ private fun UsernameRow(
                 OutlinedButton(
                     onClick = onEdit,
                     modifier = Modifier.heightIn(min = ButtonDefaults.MinHeight).tvFocusHighlight(CircleShape),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                 ) {
                     Icon(
@@ -1529,7 +1529,7 @@ private fun ListenTogetherRoomScreen(
                         shareNormal()
                     }
                 },
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 modifier =
                     Modifier
                         .tvFocusHighlight(CircleShape)
@@ -1653,7 +1653,7 @@ private fun ListenTogetherRoomScreen(
                             if (!isHost) Text(stringResource(Res.string.listen_together_connection_lost_guest))
                             TextButton(
                                 onClick = manager::retryConnection,
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Text(stringResource(Res.string.retry)) }
                         }
                     }
@@ -1671,7 +1671,7 @@ private fun ListenTogetherRoomScreen(
                         Column {
                             Text(track.title, style = MaterialTheme.typography.titleMedium)
                             Text(stringResource(Res.string.listen_together_track_load_failed))
-                            TextButton(onClick = manager::retryRoomTrack, enabled = authenticated, shapes = ButtonDefaults.shapes()) {
+                            TextButton(onClick = manager::retryRoomTrack, enabled = authenticated, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Text(stringResource(Res.string.retry))
                             }
                         }
@@ -1831,7 +1831,7 @@ private fun ListenTogetherScaffold(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     val navigationIcon: @Composable () -> Unit = {
         if (onNavigateBack != null) {
-            IconButton(onClick = onNavigateBack, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = onNavigateBack, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.back))
             }
         }
@@ -2312,12 +2312,12 @@ private fun ServerRow(
             )
         }
         onEdit?.let {
-            IconButton(onClick = it, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = it, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Default.Edit, contentDescription = stringResource(Res.string.listen_together_edit_server))
             }
         }
         onRemove?.let {
-            IconButton(onClick = it, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = it, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     CrystaListIcons.Default.Delete,
                     contentDescription = stringResource(Res.string.remove_server),
@@ -2374,7 +2374,7 @@ private fun ListenTogetherTextDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End,
                 ) {
-                    TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                    TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                     Button(
                         onClick = {
                             if (text.isBlank()) {
@@ -2383,7 +2383,7 @@ private fun ListenTogetherTextDialog(
                                 onConfirm(text.trim())
                             }
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(confirmText) }
                 }
             }

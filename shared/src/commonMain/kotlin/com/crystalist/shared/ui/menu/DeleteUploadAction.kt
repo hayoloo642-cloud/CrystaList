@@ -29,6 +29,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -59,7 +60,7 @@ fun rememberDeleteUploadAction(
             confirmButton = {
                 TextButton(
                     enabled = !deleting,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     onClick = {
                         deleting = true
                         scope.launch {
@@ -82,7 +83,7 @@ fun rememberDeleteUploadAction(
                 ) { Text(stringResource(Res.string.delete)) }
             },
             dismissButton = {
-                TextButton(enabled = !deleting, onClick = { confirming = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(enabled = !deleting, onClick = { confirming = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },

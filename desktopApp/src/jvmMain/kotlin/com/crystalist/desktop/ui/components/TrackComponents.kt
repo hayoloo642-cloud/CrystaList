@@ -457,7 +457,7 @@ fun YTListItem(
             IconButton(
                 onClick = contextMenu::open,
                 modifier = Modifier.alpha(iconAlpha).size(48.dp).navigationPopupSource(),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     CrystaListIcons.Default.MoreVert,

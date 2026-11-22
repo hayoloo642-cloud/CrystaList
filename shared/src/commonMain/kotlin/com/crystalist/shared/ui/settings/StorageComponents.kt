@@ -234,7 +234,7 @@ fun StorageUsageRow(
                 )
             }
             if (onClick != null && onClickLabel != null) {
-                IconButton(onClick = onClick, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = onClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(
                         CrystaListIcons.Outlined.Delete,
                         contentDescription = onClickLabel,
@@ -314,11 +314,11 @@ fun StorageConfirmationDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = { Text(message) },
-        confirmButton = { Button(onClick = onConfirm, shapes = ButtonDefaults.shapes()) { Text(confirmLabel) } },
+        confirmButton = { Button(onClick = onConfirm, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(confirmLabel) } },
         dismissButton = {
             OutlinedButton(
                 onClick = onDismiss,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.cancel)) }
         },
         containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,

@@ -120,7 +120,7 @@ fun VintageClassicControls(
                 onClick = onToggleRepeat,
                 colors = iconColors,
                 modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape).alpha(if (repeatMode == 0) 0.5f else 1f),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = if (repeatMode == 1) CrystaListIcons.Rounded.RepeatOne else CrystaListIcons.Rounded.Repeat,
@@ -136,7 +136,7 @@ fun VintageClassicControls(
                 enabled = onSkipPrevious != null,
                 colors = iconColors,
                 modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = CrystaListIcons.Rounded.SkipPrevious,
@@ -189,7 +189,7 @@ fun VintageClassicControls(
                 enabled = onSkipNext != null,
                 colors = iconColors,
                 modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = CrystaListIcons.Rounded.SkipNext,
@@ -207,7 +207,7 @@ fun VintageClassicControls(
                         contentColor = if (isLiked) MaterialTheme.colorScheme.error else contentColor,
                     ),
                 modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = if (isLiked) CrystaListIcons.Rounded.Favorite else CrystaListIcons.Rounded.FavoriteBorder,
@@ -434,7 +434,7 @@ private fun VintageBottomBarItem(
                     vertical = 8.dp,
                 ),
             modifier = modifier.tvFocusHighlight(CircleShape),
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(VintageBottomBarIconSize))
             Spacer(modifier = Modifier.width(if (spec.showLabels) spec.iconGap else 4.dp))
@@ -455,7 +455,7 @@ private fun VintageBottomBarItem(
                     disabledContentColor = contentColor.copy(alpha = 0.38f),
                 ),
             modifier = modifier.tvFocusHighlight(CircleShape),
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(imageVector = icon, contentDescription = label, modifier = Modifier.size(24.dp))
         }

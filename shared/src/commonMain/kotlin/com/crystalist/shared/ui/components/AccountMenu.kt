@@ -392,13 +392,13 @@ internal fun AccountMenuContent(
                         showLogoutDialog = false
                         onLogout()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.action_logout), color = colorScheme.error)
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showLogoutDialog = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { showLogoutDialog = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -555,7 +555,7 @@ private fun AccountMenuHero(
                 enabled = !isLoggingOut,
                 modifier = Modifier.size(48.dp).then(focusModifier(CircleShape)).navigationPopupSource(),
                 colors = IconButtonDefaults.iconButtonColors(contentColor = colorScheme.error),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     CrystaListIcons.AutoMirrored.Outlined.Logout,

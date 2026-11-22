@@ -117,6 +117,7 @@ import org.jetbrains.compose.resources.stringResource
 import java.io.File
 import kotlin.coroutines.resume
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 private enum class LoginStage {
     Authenticating,
@@ -218,7 +219,7 @@ fun LoginDialog(
                                         cleanupError = null
                                         cleanupAttempt++
                                     },
-                                    shapes = ButtonDefaults.shapes(),
+                                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Text(stringResource(Res.string.retry_cleanup))
                                 }
@@ -383,7 +384,7 @@ private fun WindowsAccountContent(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+            OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             OutlinedButton(
                 enabled = !busy,
                 onClick = {
@@ -391,7 +392,7 @@ private fun WindowsAccountContent(
                     helperLaunchedFromPicker = true
                     needsLogin = true
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.channel_switch_sign_in_again)) }
             Button(
                 enabled = !busy && (selectedAccount != null || canCompleteWithExistingCredentials),
@@ -480,7 +481,7 @@ private fun WindowsAccountContent(
                         }
                     }
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.continue_action)) }
         }
     }
@@ -581,7 +582,7 @@ private fun WindowsHelperContent(
         Spacer(Modifier.height(32.dp))
 
         if (!isRunning) {
-            Button(onClick = { launchHelper() }, shapes = ButtonDefaults.shapes()) {
+            Button(onClick = { launchHelper() }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.start_login_process))
             }
         } else {
@@ -589,7 +590,7 @@ private fun WindowsHelperContent(
         }
 
         Spacer(Modifier.height(16.dp))
-        OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) {
+        OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Text(stringResource(Res.string.cancel))
         }
     }
@@ -609,7 +610,7 @@ private fun WebViewContent(
         Column(Modifier.fillMaxSize().padding(24.dp)) {
             Text(stringResource(Res.string.youtube_login_webview_unwritable))
             Text(error.message ?: error::class.simpleName.orEmpty())
-            Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.close)) }
+            Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.close)) }
         }
         return
     }
@@ -742,7 +743,7 @@ private fun WebViewContent(
             height = 240.dp,
             text = { Text(stringResource(Res.string.login_failed_with_error, stringResource(Res.string.error))) },
             confirmButton = {
-                Button(onClick = { validationFailed = false }, shapes = ButtonDefaults.shapes()) {
+                Button(onClick = { validationFailed = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.close))
                 }
             },
@@ -775,7 +776,7 @@ private fun WebViewContent(
                         completionAttempt++
                     },
                     enabled = loginStage != LoginStage.SelectingAccount,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.complete_sign_in))
                 }
@@ -823,11 +824,11 @@ private fun WebViewContent(
                                 }
                             }
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.continue_action)) }
                 },
                 dismissButton = {
-                    OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                    OutlinedButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                 },
             )
         }

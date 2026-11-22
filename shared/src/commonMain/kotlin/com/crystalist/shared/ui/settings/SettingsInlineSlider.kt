@@ -40,6 +40,7 @@ import com.crystalist.shared.ui.haptics.rememberCrystaListHaptics
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.playback.retainPlaybackKeyFocus
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 internal fun SettingsGroupRegistryBuilder.inlineSlider(
     id: String,
@@ -109,7 +110,7 @@ internal fun SettingsResetButton(
     enabled: Boolean,
     onClick: () -> Unit,
 ) {
-    IconButton(onClick = onClick, enabled = enabled, shapes = IconButtonDefaults.shapes()) {
+    IconButton(onClick = onClick, enabled = enabled, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
         Icon(CrystaListIcons.Outlined.Replay, contentDescription = stringResource(Res.string.settings_reset_to_default))
     }
 }

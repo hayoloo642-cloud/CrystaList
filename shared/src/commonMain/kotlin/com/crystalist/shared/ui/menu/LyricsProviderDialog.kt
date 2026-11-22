@@ -91,6 +91,7 @@ import com.crystalist.shared.ui.tv.tvFocusHighlight
 import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import com.crystalist.shared.utils.formatDuration
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun LyricsProviderDialog(
@@ -116,7 +117,7 @@ fun LyricsProviderDialog(
                     style = MaterialTheme.typography.headlineSmall,
                     modifier = Modifier.weight(1f),
                 )
-                IconButton(onClick = dismiss, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = dismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                 }
             }
@@ -288,7 +289,7 @@ private fun ExpandButton(
     val state = stringResource(if (expanded) Res.string.expanded else Res.string.collapsed)
     IconButton(
         onClick = onClick,
-        shapes = IconButtonDefaults.shapes(),
+        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         colors = IconButtonDefaults.iconButtonColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
         modifier = Modifier.tvFocusHighlight().semantics { stateDescription = state },
     ) {

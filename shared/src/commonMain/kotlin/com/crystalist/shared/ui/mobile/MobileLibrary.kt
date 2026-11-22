@@ -705,7 +705,7 @@ internal fun MobileSongCollectionScreen(
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(errorText)
-                Button(onClick = { retryGeneration++ }, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes()) {
+                Button(onClick = { retryGeneration++ }, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(retryText)
                 }
             }
@@ -901,7 +901,7 @@ internal fun MobileSongCollectionScreen(
                             IconButton(
                                 modifier = Modifier.navigationPopupSource(),
                                 onClick = { openSongMenu(song) },
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                             }
@@ -1034,13 +1034,13 @@ internal fun MobileSongCollectionScreen(
                                 onRemoveDownloads(selectedSongs.map(SongItem::id))
                                 selection.exit()
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.remove), color = MaterialTheme.colorScheme.error) }
                     },
                     dismissButton = {
                         TextButton(
                             onClick = { confirmRemoveSelected = false },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.cancel)) }
                     },
                 )

@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.crystalist.shared.generated.resources.Res
 import com.crystalist.shared.generated.resources.retry
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun RetryableError(
@@ -30,7 +31,7 @@ internal fun RetryableError(
         verticalArrangement = Arrangement.Center,
     ) {
         Text(message, color = MaterialTheme.colorScheme.error)
-        TextButton(onClick = onRetry, shapes = ButtonDefaults.shapes()) {
+        TextButton(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Text(stringResource(Res.string.retry))
         }
     }

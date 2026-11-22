@@ -470,13 +470,13 @@ private fun WindowScope.AppContent(
                                 UiState.showSignIn = true
                                 UiState.showSwitchChannel = false
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_login))
                         }
                     },
                     dismissButton = {
-                        TextButton(onClick = YouTubeSessionState::dismissExpiredSessionNotice, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = YouTubeSessionState::dismissExpiredSessionNotice, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.action_not_now))
                         }
                     },
@@ -494,13 +494,13 @@ private fun WindowScope.AppContent(
                                 UiState.integrationsInitialPage = SettingsPageId.LAST_FM
                                 UiState.showIntegrationsSettings = true
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_login))
                         }
                     },
                     dismissButton = {
-                        TextButton(onClick = ScrobbleSessions::dismissLastFmExpiredNotice, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = ScrobbleSessions::dismissLastFmExpiredNotice, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.action_not_now))
                         }
                     },
@@ -527,7 +527,7 @@ private fun WindowScope.AppContent(
                         }
                     },
                     confirmButton = {
-                        TextButton(onClick = { PlayerState.showPlayerError = false }, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = { PlayerState.showPlayerError = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.ok))
                         }
                     },
@@ -536,7 +536,7 @@ private fun WindowScope.AppContent(
                             {
                                 TextButton(
                                     onClick = { AppState.copyToClipboard("${PlayerState.playerErrorMessage}\n\n$details") },
-                                    shapes = ButtonDefaults.shapes(),
+                                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Text(stringResource(Res.string.copy))
                                 }

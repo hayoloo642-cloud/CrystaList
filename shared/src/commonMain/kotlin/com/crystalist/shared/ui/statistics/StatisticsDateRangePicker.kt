@@ -47,6 +47,7 @@ import kotlinx.datetime.todayIn
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.Clock
 import kotlin.time.Instant
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun statisticsDateRangeLabel(range: StatisticsDateRange): String {
@@ -92,10 +93,10 @@ internal fun StatisticsDateRangePicker(
             TextButton(enabled = selection != null, onClick = {
                 selection?.let(onSelected)
                 onDismiss()
-            }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.apply)) }
+            }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.apply)) }
         },
         dismissButton = {
-            TextButton(onClick = { onDismiss() }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+            TextButton(onClick = { onDismiss() }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
         },
     ) {
         Column(Modifier.verticalScroll(rememberScrollState())) {

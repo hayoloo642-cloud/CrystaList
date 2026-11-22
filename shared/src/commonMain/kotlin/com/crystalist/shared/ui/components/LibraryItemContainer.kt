@@ -48,7 +48,7 @@ fun LibraryItemContainer(
             IconButton(
                 onClick = onMenuClick,
                 modifier = Modifier.width(60.dp).height(48.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.MoreVert, contentDescription = stringResource(Res.string.more_options))
             }

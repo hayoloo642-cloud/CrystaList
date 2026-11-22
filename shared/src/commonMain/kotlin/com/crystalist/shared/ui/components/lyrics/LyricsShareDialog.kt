@@ -331,7 +331,7 @@ fun LyricsShareDialog(
                             TextButton(
                                 enabled = !busy,
                                 onClick = { style = style.copy(textScale = 1f, contentScale = 1f) },
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Text(stringResource(Res.string.lyrics_share_auto_fit))
                             }
@@ -421,7 +421,7 @@ fun LyricsShareDialog(
                     TextButton(
                         enabled = !busy,
                         onClick = onDismiss,
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.cancel)) }
                     Button(
                         enabled = !busy,
@@ -429,7 +429,7 @@ fun LyricsShareDialog(
                             onShareText(shareText)
                             onDismiss()
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.share_as_text)) }
                     Button(
                         enabled = bitmap != null && !busy,
@@ -472,7 +472,7 @@ fun LyricsShareDialog(
                                 }
                             }
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(if (storyMode && !useStoryLayout) stringResource(Res.string.share) else exportLabel) }
                 }
             }

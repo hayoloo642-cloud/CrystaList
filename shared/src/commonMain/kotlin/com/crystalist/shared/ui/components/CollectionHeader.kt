@@ -112,7 +112,7 @@ fun DetailBackButton(
     IconButton(
         onClick = onBackClick,
         modifier = modifier.padding(start = 8.dp, top = 8.dp).tvFocusHighlight(CircleShape),
-        shapes = IconButtonDefaults.shapes(),
+        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
     ) {
         Icon(
             CrystaListIcons.AutoMirrored.Filled.ArrowBack,
@@ -154,7 +154,7 @@ fun CollectionHeaderNavigation(
                                 ).padding(end = 8.dp, top = 8.dp)
                                 .tvFocusHighlight(CircleShape)
                                 .navigationPopupSource(),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                     }

@@ -32,6 +32,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.navigation.navigationPopupSource
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun SpeedDialPinMenuItem(
@@ -61,7 +62,7 @@ fun BuiltinPlaylistMenuButton(
         IconButton(
             modifier = Modifier.tvFocusHighlight(CircleShape).navigationPopupSource(),
             onClick = { expanded = true },
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
         }

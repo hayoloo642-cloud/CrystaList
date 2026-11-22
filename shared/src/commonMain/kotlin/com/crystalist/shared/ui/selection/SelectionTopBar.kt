@@ -28,6 +28,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.navigation.navigationPopupSource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 /**
  * The one selection top bar used by every screen: close (X), "N selected", a select-all
@@ -60,7 +61,7 @@ fun SelectionTopBar(
         navigationIcon =
             if (showClose) {
                 {
-                    IconButton(onClick = onClose, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onClose, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.Filled.Close, contentDescription = stringResource(Res.string.cancel))
                     }
                 }
@@ -82,7 +83,7 @@ fun SelectionTopBar(
                 modifier = Modifier.navigationPopupSource(),
                 onClick = onMore,
                 enabled = moreEnabled,
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.MoreVert, contentDescription = stringResource(Res.string.menu))
             }

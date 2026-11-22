@@ -28,6 +28,7 @@ import com.crystalist.shared.generated.resources.save
 import com.crystalist.shared.generated.resources.title
 import com.crystalist.shared.ui.components.AlertDialog
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun EditSongDialog(
@@ -80,7 +81,7 @@ fun EditSongDialog(
                     Text(stringResource(Res.string.error_unknown), color = MaterialTheme.colorScheme.error)
                 }
                 if (onReset != null) {
-                    TextButton(enabled = !editor.busy, onClick = editor::reset, shapes = ButtonDefaults.shapes()) {
+                    TextButton(enabled = !editor.busy, onClick = editor::reset, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(stringResource(Res.string.reset))
                     }
                 }
@@ -90,11 +91,11 @@ fun EditSongDialog(
             TextButton(
                 enabled = !editor.busy && editor.title.isNotBlank() && editor.artist.isNotBlank(),
                 onClick = editor::confirm,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.save)) }
         },
         dismissButton = {
-            TextButton(enabled = !editor.busy, onClick = editor::dismiss, shapes = ButtonDefaults.shapes()) {
+            TextButton(enabled = !editor.busy, onClick = editor::dismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.cancel))
             }
         },

@@ -58,6 +58,7 @@ import com.crystalist.shared.ui.theme.ComponentShapes
 import com.crystalist.shared.ui.utils.DragScrollableColumn
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -171,7 +172,7 @@ fun PlaylistChooserContent(
                 FilledTonalIconButton(
                     onClick = onDismiss,
                     enabled = !busy,
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         imageVector = CrystaListIcons.Outlined.Close,
@@ -303,7 +304,7 @@ fun PlaylistChooserContent(
             onClick = onAdd,
             enabled = !busy && selectedIds.any { it !in completedIds },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(Res.string.add))
         }
@@ -311,7 +312,7 @@ fun PlaylistChooserContent(
             TextButton(
                 onClick = onCancel,
                 modifier = Modifier.align(Alignment.End).padding(horizontal = 16.dp),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.cancel))
             }

@@ -81,6 +81,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.utils.toPolygonShape
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun EqualizerDialog(
@@ -170,7 +171,7 @@ private fun EqualizerProfileDialog(
                             style = MaterialTheme.typography.bodyMedium,
                         )
                     }
-                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                     }
                 }
@@ -256,16 +257,16 @@ private fun EqualizerProfileDialog(
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    FilledTonalButton(onClick = { onOpenMetroEq(false) }, shapes = ButtonDefaults.shapes()) {
+                    FilledTonalButton(onClick = { onOpenMetroEq(false) }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(stringResource(Res.string.metroeq))
                     }
                     onOpenSystemEqualizer?.let { open ->
-                        FilledTonalButton(onClick = open, shapes = ButtonDefaults.shapes()) {
+                        FilledTonalButton(onClick = open, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.system_equalizer))
                         }
                     }
                     Box {
-                        Button(onClick = { importing = true }, shapes = ButtonDefaults.shapes()) {
+                        Button(onClick = { importing = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.import_profile))
                         }
                         DropdownMenu(expanded = importing, onDismissRequest = { importing = false }) {
@@ -304,11 +305,11 @@ private fun EqualizerProfileDialog(
                         EqualizerProfiles.delete(profile.id)
                         deletingProfile = null
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { deletingProfile = null }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { deletingProfile = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -333,7 +334,7 @@ private fun EqualizerProfileRow(
         if (onEdit != null && onDelete != null) {
             Box {
                 var expanded by remember { mutableStateOf(false) }
-                IconButton(onClick = { expanded = true }, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = { expanded = true }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                 }
                 DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
@@ -376,7 +377,7 @@ internal fun ConfirmEqualizerProfileChange(
                     onDismiss()
                     action()
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.save)) }
         },
         dismissButton = {
@@ -384,8 +385,8 @@ internal fun ConfirmEqualizerProfileChange(
                 TextButton(onClick = {
                     onDismiss()
                     action()
-                }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.metroeq_discard_changes)) }
-                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.metroeq_discard_changes)) }
+                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             }
         },
     )

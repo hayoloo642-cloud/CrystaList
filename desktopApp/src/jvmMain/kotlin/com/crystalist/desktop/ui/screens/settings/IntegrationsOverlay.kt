@@ -59,7 +59,7 @@ fun IntegrationsOverlay(colorScheme: ColorScheme) {
                     .fillMaxWidth()
                     .heightIn(max = 800.dp)
                     .fillMaxHeight(),
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(containerColor = colorScheme.surface),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         ) {

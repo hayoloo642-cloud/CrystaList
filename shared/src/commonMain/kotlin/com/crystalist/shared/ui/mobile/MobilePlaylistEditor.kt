@@ -204,14 +204,14 @@ internal fun MobilePlaylistEditDialog(editor: MobilePlaylistEditor) {
                                 modifier = Modifier.size(72.dp).clip(RoundedCornerShape(12.dp)),
                             )
                             Column {
-                                TextButton(onClick = editor::chooseCover, enabled = !editor.busy, shapes = ButtonDefaults.shapes()) {
+                                TextButton(onClick = editor::chooseCover, enabled = !editor.busy, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Text(stringResource(Res.string.choose_from_library))
                                 }
                                 if (editor.coverBytes != null || (!editor.removeCover && !playlist.customThumbnail.isNullOrBlank())) {
                                     TextButton(
                                         onClick = editor::removeCustomCover,
                                         enabled = !editor.busy,
-                                        shapes = ButtonDefaults.shapes(),
+                                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Text(stringResource(Res.string.remove_custom_image))
                                     }
@@ -247,14 +247,14 @@ internal fun MobilePlaylistEditDialog(editor: MobilePlaylistEditor) {
             TextButton(
                 enabled = !editor.busy && (editor.deleting || editor.name.isNotBlank()),
                 onClick = editor::confirm,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(if (editor.deleting) Res.string.delete else Res.string.save)) }
         },
         dismissButton = {
             TextButton(
                 enabled = !editor.busy,
                 onClick = editor::dismiss,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.cancel)) }
         },
     )

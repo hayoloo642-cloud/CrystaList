@@ -461,7 +461,7 @@ fun AboutArtistContent(
                         )
                         TextButton(onClick = {
                             openLastFm(artistName)
-                        }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.artist_lastfm_read_more)) }
+                        }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.artist_lastfm_read_more)) }
                     }
                 }
             }
@@ -488,7 +488,7 @@ fun AboutArtistContent(
                         )
                         Spacer(Modifier.height(12.dp))
                         data.similarArtists.forEach { name ->
-                            TextButton(onClick = { openLastFm(name) }, shapes = ButtonDefaults.shapes()) { Text(name) }
+                            TextButton(onClick = { openLastFm(name) }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(name) }
                         }
                     }
                 }
@@ -523,7 +523,7 @@ fun AboutArtistContent(
                     TopAppBar(
                         title = { Text(artistName, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                         navigationIcon = {
-                            IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes()) {
+                            IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.back))
                             }
                         },
@@ -651,7 +651,7 @@ private fun LastfmHintCard(
                         .onFailure { Logger.w(TAG, "unable to open Last.fm profile", it) }
                 },
                 modifier = Modifier.align(Alignment.End),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.lastfm_link_text))
             }

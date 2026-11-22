@@ -486,7 +486,7 @@ fun LibraryContent(
                             Column(Modifier.fillMaxWidth().padding(24.dp)) {
                                 Text(stringResource(Res.string.library_load_failed), color = MaterialTheme.colorScheme.error)
                                 onRetry?.let { retry ->
-                                    TextButton(onClick = retry, shapes = ButtonDefaults.shapes()) {
+                                    TextButton(onClick = retry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                         Text(stringResource(Res.string.try_again))
                                     }
                                 }
@@ -785,7 +785,7 @@ private fun LibraryHeader(
                                     MaterialTheme.colorScheme.onSecondaryContainer
                                 },
                         ),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         if (isSearchOpen) CrystaListIcons.Default.Close else CrystaListIcons.Default.Search,
@@ -798,7 +798,7 @@ private fun LibraryHeader(
                     FilledTonalIconButton(
                         onClick = { gridSizeExpanded = true },
                         modifier = Modifier.size(40.dp).tvFocusHighlight(CircleShape).menuAnchorSemantics(gridSizeExpanded),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(CrystaListIcons.Outlined.Tune, contentDescription = stringResource(Res.string.display_density))
                     }

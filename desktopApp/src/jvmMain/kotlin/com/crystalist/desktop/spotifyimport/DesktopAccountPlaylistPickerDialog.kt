@@ -107,7 +107,7 @@ internal fun DesktopAccountPlaylistPickerDialog(
                                         },
                                     )
                                 },
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Text(
                                     stringResource(
@@ -194,13 +194,13 @@ internal fun DesktopAccountPlaylistPickerDialog(
                         horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.cancel))
                         }
                         TextButton(
                             onClick = onReview,
                             enabled = selectedIds.isNotEmpty(),
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(pluralStringResource(Res.plurals.import_playlists, selectedIds.size))
                         }

@@ -243,7 +243,7 @@ fun PlayerPrimaryControls(
             interactionSource = prevInteractionSource,
             colors =
                 ButtonDefaults.filledTonalButtonColors(
-                    containerColor = sideButtonContainerColor.copy(alpha = 0.8f),
+                    containerColor = sideButtonContainerColor,
                     contentColor = sideButtonContentColor,
                 ),
             contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),
@@ -374,7 +374,7 @@ fun PlayerPrimaryControls(
             interactionSource = nextInteractionSource,
             colors =
                 ButtonDefaults.filledTonalButtonColors(
-                    containerColor = sideButtonContainerColor.copy(alpha = 0.85f),
+                    containerColor = sideButtonContainerColor,
                     contentColor = sideButtonContentColor,
                 ),
             contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp),

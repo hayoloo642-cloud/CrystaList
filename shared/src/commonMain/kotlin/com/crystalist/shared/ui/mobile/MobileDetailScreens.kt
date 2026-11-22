@@ -120,6 +120,7 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.TimeSource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun MobileAlbumScreen(
@@ -165,7 +166,7 @@ internal fun MobileAlbumScreen(
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(loadError ?: errorText)
-                Button(onClick = loader::load, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes()) {
+                Button(onClick = loader::load, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.retry))
                 }
             }
@@ -236,7 +237,7 @@ internal fun MobileAlbumScreen(
                             IconButton(
                                 modifier = Modifier.navigationPopupSource(),
                                 onClick = { onSongMenu(song) },
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                             }
@@ -292,7 +293,7 @@ internal fun MobileArtistScreen(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(loadError ?: errorText)
-            Button(onClick = loader::load, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes()) {
+            Button(onClick = loader::load, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.retry))
             }
         }
@@ -581,7 +582,7 @@ internal fun MobilePlaylistScreen(
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(loadError ?: errorText)
-                Button(onClick = { reloadKey++ }, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes()) {
+                Button(onClick = { reloadKey++ }, modifier = Modifier.padding(top = 12.dp), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.retry))
                 }
             }
@@ -761,7 +762,7 @@ internal fun MobilePlaylistScreen(
                                         }
                                     }
                                 },
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Text(stringResource(Res.string.retry))
                             }
@@ -893,7 +894,7 @@ internal fun MobilePlaylistScreen(
                                 modifier = Modifier.navigationPopupSource(),
                                 onClick = { onSongMenu(song) },
                                 enabled = !reorderMode,
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                             }

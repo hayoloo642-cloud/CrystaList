@@ -371,7 +371,7 @@ private fun DesktopOnboardingPage(
                         val uriHandler = LocalUriHandler.current
                         TextButton(
                             onClick = { runCatching { uriHandler.openUri("https://crystalist.app/privacy") } },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.privacy_policy))
                         }
@@ -381,20 +381,20 @@ private fun DesktopOnboardingPage(
                         TextButton(
                             onClick = back,
                             enabled = !content.isWorking,
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(content.backLabel) }
                     }
                     content.secondaryLabel?.let { secondary ->
                         OutlinedButton(
                             onClick = content.onSecondary ?: {},
                             enabled = !content.isWorking,
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(secondary) }
                     }
                     Button(
                         onClick = content.onPrimary,
                         enabled = !content.isWorking,
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(content.primaryLabel) }
                 }
             }
@@ -459,7 +459,7 @@ private fun FinishActions(
             onClick = onLogin,
             enabled = enabled,
             modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.AutoMirrored.Filled.Login, contentDescription = null)
             Text(stringResource(Res.string.log_in), modifier = Modifier.padding(start = 10.dp))
@@ -468,7 +468,7 @@ private fun FinishActions(
             onClick = onRestore,
             enabled = enabled,
             modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp),
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Outlined.SettingsBackupRestore, contentDescription = null)
             Text(stringResource(Res.string.restore_from_backup), modifier = Modifier.padding(start = 10.dp))

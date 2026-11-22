@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.stringResource
 import org.koin.mp.KoinPlatform
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -47,7 +48,7 @@ internal fun rememberPlaylistSyncAction(
             title = { Text(label) },
             text = { Text(stringResource(Res.string.error_occurred)) },
             confirmButton = {
-                TextButton(onClick = { failed = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { failed = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.ok))
                 }
             },

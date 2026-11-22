@@ -19,6 +19,7 @@ import com.crystalist.shared.generated.resources.remove_custom_image
 import com.crystalist.shared.ui.theme.MdSpacing
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +40,7 @@ fun CollectionCoverDialog(
                     onClick = onChoose,
                     enabled = !busy,
                     modifier = Modifier.tvFocusHighlight(CircleShape),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.choose_cover_image))
                 }
@@ -48,7 +49,7 @@ fun CollectionCoverDialog(
                         onClick = onRemove,
                         enabled = !busy,
                         modifier = Modifier.tvFocusHighlight(CircleShape),
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(Res.string.remove_custom_image))
                     }
@@ -63,7 +64,7 @@ fun CollectionCoverDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss, enabled = !busy, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismiss, enabled = !busy, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.close))
             }
         },

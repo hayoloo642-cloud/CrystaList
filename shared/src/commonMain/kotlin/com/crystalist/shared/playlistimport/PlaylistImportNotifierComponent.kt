@@ -56,6 +56,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -120,7 +121,7 @@ fun PlaylistImportProgressCard(
                     if (terminal) PlaylistImportStatusManager.dismiss(importInfo.id) else PlaylistImportStatusManager.cancel(importInfo.id)
                 },
                 modifier = Modifier.size(32.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     CrystaListIcons.Filled.Close,
@@ -173,7 +174,7 @@ fun PlaylistImportProgressIndicator(modifier: Modifier = Modifier) {
                     if (terminal) PlaylistImportStatusManager.dismiss(importInfo.id) else PlaylistImportStatusManager.cancel(importInfo.id)
                 },
                 modifier = Modifier.size(24.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     CrystaListIcons.Filled.Close,

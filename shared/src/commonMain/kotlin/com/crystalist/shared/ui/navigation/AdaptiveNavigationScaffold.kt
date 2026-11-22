@@ -102,6 +102,7 @@ import com.crystalist.shared.ui.utils.DragScrollableColumn
 import org.jetbrains.compose.resources.stringResource
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 class AdaptiveNavigationItem<T>(
     val key: T,
@@ -490,7 +491,7 @@ private fun <T> DesktopWideNavigationRail(
                                     IconButton(
                                         onClick = onToggleSidebar,
                                         modifier = Modifier.size(48.dp),
-                                        shapes = IconButtonDefaults.shapes(),
+                                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Icon(
                                             CrystaListIcons.Filled.Menu,
@@ -614,14 +615,15 @@ private fun <T> DesktopWideNavigationRail(
                                             },
                                             colors =
                                                 androidx.compose.material3.NavigationDrawerItemDefaults.colors(
-                                                    selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                                    // Apple Music marks the active sidebar row with a soft red wash.
+                                                    selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.14f),
                                                     selectedIconColor = MaterialTheme.colorScheme.primary,
                                                     selectedTextColor = MaterialTheme.colorScheme.primary,
                                                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                                     unselectedTextColor = MaterialTheme.colorScheme.onSurface,
                                                     containerColor = Color.Transparent,
                                                 ),
-                                            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 2.dp),
+                                            modifier = Modifier.fillMaxWidth().heightIn(min = 44.dp).padding(horizontal = 8.dp, vertical = 1.dp),
                                         )
                                     } else {
                                         WideNavigationRailItem(
@@ -799,7 +801,7 @@ private fun <T> EditingSidebarNavItem(
             IconButton(
                 onClick = onToggleVisibility,
                 modifier = Modifier.size(40.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     item.icon,

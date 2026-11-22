@@ -76,6 +76,7 @@ import com.crystalist.shared.ui.components.lyrics.LyricsView
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun FullscreenContentLayout(
@@ -158,7 +159,7 @@ fun FullscreenContentLayout(
                                 .align(Alignment.End)
                                 .padding(end = 24.dp)
                                 .size(48.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Default.Close,

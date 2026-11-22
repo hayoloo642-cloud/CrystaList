@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.Instant
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun CrashLogsScreen(
@@ -79,22 +80,22 @@ fun CrashLogsScreen(
                 } else {
                     onClose()
                 }
-            }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.crash_close)) }
+            }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.crash_close)) }
             TextButton(onClick = {
                 selected = null
                 scope.launch { state.clear() }
-            }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.crash_clear)) }
+            }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.crash_clear)) }
         }
         val report = selected
         if (report != null) {
             Row {
                 TextButton(
                     onClick = { scope.launch { clipboard.setText(report.text) } },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.crash_copy_logs)) }
                 TextButton(
                     onClick = { onShare(report.text) },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.crash_share_logs)) }
             }
             SelectionContainer(Modifier.weight(1f)) {
@@ -106,7 +107,7 @@ fun CrashLogsScreen(
             if (reports.isEmpty()) Text(stringResource(Res.string.crash_no_log))
             DragScrollableColumn {
                 items(reports, key = { it.id }) { entry ->
-                    TextButton(onClick = { selected = entry }, shapes = ButtonDefaults.shapes()) {
+                    TextButton(onClick = { selected = entry }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text("${Instant.fromEpochMilliseconds(entry.timestamp)} ·\u00a0${entry.version}")
                     }
                 }

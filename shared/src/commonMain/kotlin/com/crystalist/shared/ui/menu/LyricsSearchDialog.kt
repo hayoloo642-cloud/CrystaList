@@ -51,6 +51,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun LyricsSearchDialog(
@@ -96,14 +97,14 @@ fun LyricsSearchDialog(
             Button(
                 onClick = submitSearch,
                 enabled = title.text.isNotBlank(),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 modifier = Modifier.tvFocusHighlight(),
             ) {
                 Text(stringResource(Res.string.search))
             }
         },
         dismissButton = {
-            OutlinedButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+            OutlinedButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
         },
     )
 }
@@ -122,7 +123,7 @@ private fun LyricsSearchTextField(
         state = state,
         label = { Text(label) },
         trailingIcon = {
-            IconButton(onClick = state::clearText, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = state::clearText, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Default.Clear, stringResource(Res.string.clear))
             }
         },

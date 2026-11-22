@@ -130,6 +130,7 @@ import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Instant
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -240,7 +241,7 @@ fun HistoryContent(
                 IconButton(
                     onClick = onNavigateBack,
                     modifier = Modifier.tvFocusHighlight(CircleShape),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         CrystaListIcons.AutoMirrored.Filled.ArrowBack,
@@ -261,7 +262,7 @@ fun HistoryContent(
         if (error != null && !showFullScreenState) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(error, color = MaterialTheme.colorScheme.error, modifier = Modifier.weight(1f))
-                TextButton(onClick = onRefresh, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                TextButton(onClick = onRefresh, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
             }
         }
         val historyBodyContent = @Composable {
@@ -273,7 +274,7 @@ fun HistoryContent(
                         verticalArrangement = Arrangement.Center,
                     ) {
                         Text(error, color = MaterialTheme.colorScheme.error)
-                        Button(onClick = onRefresh, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                        Button(onClick = onRefresh, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                     }
                 }
 
@@ -532,7 +533,7 @@ private fun EmptyHistory(onRefresh: (() -> Unit)?) {
         )
         if (onRefresh != null) {
             Spacer(Modifier.height(MdSpacing.xs))
-            FilledTonalIconButton(onClick = onRefresh, shapes = IconButtonDefaults.shapes()) {
+            FilledTonalIconButton(onClick = onRefresh, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Outlined.Refresh, stringResource(Res.string.history_refresh))
             }
         }
@@ -585,10 +586,10 @@ fun EditHistoryDialog(
                         onSave(title.trim(), artists.trim(), album.trim().takeIf(String::isNotBlank))
                     }
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.save)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }
 
@@ -613,10 +614,10 @@ fun DeleteHistoryDialog(
             Button(
                 onClick = { onDelete(alsoRemote) },
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.delete)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }
 
@@ -641,10 +642,10 @@ private fun BulkDeleteHistoryDialog(
             Button(
                 onClick = { onDelete(alsoRemote) },
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.delete)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }
 

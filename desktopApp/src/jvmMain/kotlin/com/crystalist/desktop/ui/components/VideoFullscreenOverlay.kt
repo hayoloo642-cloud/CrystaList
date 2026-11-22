@@ -451,7 +451,7 @@ private fun VideoPlayerArea(
                             .hoverable(topControlsInteractionSource)
                             .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                             .size(40.dp),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(CrystaListIcons.Outlined.MusicNote, stringResource(Res.string.switch_to_audio), tint = Color.White)
                 }
@@ -473,7 +473,7 @@ private fun VideoPlayerArea(
                                 .hoverable(topControlsInteractionSource)
                                 .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                                 .size(40.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Default.Close,
@@ -499,7 +499,7 @@ private fun VideoPlayerArea(
                                 .hoverable(topControlsInteractionSource)
                                 .background(Color.Black.copy(alpha = 0.5f), CircleShape)
                                 .size(40.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,

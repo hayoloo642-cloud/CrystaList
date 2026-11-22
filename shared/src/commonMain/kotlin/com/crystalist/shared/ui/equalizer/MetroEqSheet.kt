@@ -37,6 +37,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.menu.tempoPitchMenuAction
 import com.crystalist.shared.ui.navigation.PredictiveNavigationContent
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -65,7 +66,7 @@ fun MetroEqSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     if (tempoPitch) {
-                        IconButton(onClick = { showTempoPitch = false }, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = { showTempoPitch = false }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                         }
                     }
@@ -80,7 +81,7 @@ fun MetroEqSheet(
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier.weight(1f),
                     )
-                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.Default.Close, stringResource(Res.string.close))
                     }
                 }

@@ -457,7 +457,7 @@ fun PlaylistScreen(
                                     )
                                 }
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.retry)) }
                     }
                 }
@@ -523,7 +523,7 @@ fun PlaylistScreen(
                                 menuSong = song
                                 playlistMenu.open()
                             },
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                         }
@@ -713,7 +713,7 @@ fun PlaylistScreen(
                             )
                         }
                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            TextButton(onClick = { pickDesktopCover() }, shapes = ButtonDefaults.shapes()) {
+                            TextButton(onClick = { pickDesktopCover() }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Text(stringResource(Res.string.choose_from_library))
                             }
                             if (stagedDesktopCoverPath != null || hasDesktopCustom) {
@@ -722,7 +722,7 @@ fun PlaylistScreen(
                                         clearStagedDesktopCover()
                                         stagedDesktopCoverRemove = true
                                     },
-                                    shapes = ButtonDefaults.shapes(),
+                                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) { Text(stringResource(Res.string.remove_custom_image)) }
                             }
                         }
@@ -753,16 +753,16 @@ fun PlaylistScreen(
                     TextButton(
                         enabled = editName.isNotBlank() && !coverLoading && !editSaving,
                         onClick = { saveDesktopEdit() },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.playlist_rename_action)) }
                 } else {
                     TextButton(enabled = !coverLoading, onClick = {
                         saveDesktopEdit()
-                    }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.done)) }
+                    }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.done)) }
                 }
             },
             dismissButton = {
-                TextButton(onClick = { cancelDesktopEdit() }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = { cancelDesktopEdit() }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             },
         )
     }
@@ -810,7 +810,7 @@ fun PlaylistScreen(
                         }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.error),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(if (isLocal || isEditable) Res.string.delete else Res.string.remove_from_library))
                 }
@@ -822,7 +822,7 @@ fun PlaylistScreen(
                         deleteFailed = false
                     },
                     modifier = Modifier.focusRequester(cancelFocusRequester),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -854,7 +854,7 @@ fun PlaylistScreen(
         AlertDialog(
             onDismissRequest = { editError = null },
             confirmButton = {
-                TextButton(onClick = { editError = null }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.ok)) }
+                TextButton(onClick = { editError = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.ok)) }
             },
             text = {
                 Text(
@@ -877,7 +877,7 @@ fun PlaylistScreen(
             confirmButton = {
                 TextButton(
                     onClick = { coverError = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.ok)) }
             },
         )

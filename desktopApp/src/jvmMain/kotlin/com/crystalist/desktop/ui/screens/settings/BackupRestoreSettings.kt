@@ -215,6 +215,7 @@ import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import java.io.File
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 private enum class DesktopDestinationType {
     LOCAL,
@@ -279,7 +280,7 @@ private fun ProviderImportDialog(
                             style = MaterialTheme.typography.bodyMedium,
                             color = colorScheme.onSecondaryContainer,
                         )
-                        Button(onClick = onConnect, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes()) {
+                        Button(onClick = onConnect, modifier = Modifier.fillMaxWidth(), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(accountTitle))
                         }
                     }
@@ -323,7 +324,7 @@ private fun ProviderImportDialog(
                                 }
                             if (!text.isNullOrBlank()) onValueChange(text)
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(Res.string.menu_paste))
                     }
@@ -337,13 +338,13 @@ private fun ProviderImportDialog(
                     onDismissRequest()
                     onSubmit(value)
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.import_action_start))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.cancel))
             }
         },
@@ -867,7 +868,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                             }.onFailure { status = getString(Res.string.could_not_open_file_picker, it.message ?: "") }
                         }
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(
                         if (warningSeconds == 0) {
@@ -881,7 +882,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
             dismissButton = {
                 TextButton(
                     onClick = { showBackupWarning = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -910,11 +911,11 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                                 }
                         }
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.restore)) }
             },
             dismissButton = {
-                TextButton(onClick = { restoreFile = null }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = { restoreFile = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             },
         )
     }
@@ -1136,7 +1137,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                         onInputSubmitted = null
                         callback?.invoke(value)
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.import_action_start))
                 }
@@ -1147,7 +1148,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                         inputDialogTitle = null
                         onInputSubmitted = null
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.cancel))
                 }
@@ -1304,7 +1305,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                         selectedDestinationPlaylist = null
                         startUnifiedImport(data, destination)
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.import_action_start))
                 }
@@ -1319,7 +1320,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                             ?.id
                             ?.let(PlaylistImportStatusManager::dismiss)
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.cancel))
                 }
@@ -1349,7 +1350,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                 }
             },
             confirmButton = {
-                TextButton(onClick = { errorDetails = null }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { errorDetails = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.close))
                 }
             },
@@ -1378,7 +1379,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                         pendingDuplicateDestination = null
                         startUnifiedImport(data, dest, ignoreDuplicate = true)
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.import_duplicate_playlist_import_anyway))
                 }
@@ -1390,7 +1391,7 @@ fun BackupRestoreSettingsScreen(colorScheme: ColorScheme) {
                         pendingDuplicateDestination = null
                         pendingImportData = null
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.import_duplicate_playlist_skip))
                 }

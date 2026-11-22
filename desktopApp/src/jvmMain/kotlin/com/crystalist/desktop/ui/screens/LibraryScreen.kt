@@ -137,6 +137,7 @@ import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun LibraryScreen(
@@ -423,7 +424,7 @@ fun LibraryScreen(
             FilledTonalButton(
                 onClick = { showHiddenItems = true },
                 modifier = Modifier.align(Alignment.BottomStart).padding(16.dp),
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.hidden_items_count, hiddenItems.size))
             }
@@ -444,7 +445,7 @@ fun LibraryScreen(
                                     HiddenLibraryItems.restore(item.key)
                                     if (hiddenItems.size == 1) showHiddenItems = false
                                 },
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Text(stringResource(Res.string.restore)) }
                         }
                     }
@@ -453,7 +454,7 @@ fun LibraryScreen(
             confirmButton = {
                 TextButton(
                     onClick = { showHiddenItems = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.close)) }
             },
         )
@@ -528,7 +529,7 @@ fun LibraryScreen(
                     enabled = !deleteConfirmation.isSubmitting(request),
                     onClick = { deleteConfirmation.confirm(request, LibraryContentState::deletePlaylist) },
                     colors = ButtonDefaults.buttonColors(containerColor = colorScheme.error),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(if (deletesPlaylist) Res.string.delete else Res.string.remove_from_library))
                 }
@@ -537,7 +538,7 @@ fun LibraryScreen(
                 TextButton(
                     onClick = { deleteConfirmation.dismiss(request) },
                     modifier = Modifier.focusRequester(cancelFocusRequester),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -602,10 +603,10 @@ internal fun PlaylistNameDialog(
             )
         },
         confirmButton = {
-            TextButton(enabled = !isSaving && value.isNotBlank(), onClick = onConfirm, shapes = ButtonDefaults.shapes()) {
+            TextButton(enabled = !isSaving && value.isNotBlank(), onClick = onConfirm, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(confirmActionLabel)
             }
         },
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }

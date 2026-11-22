@@ -82,7 +82,7 @@ fun TopBarWithPlayer(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 onRefresh?.let { refresh ->
-                    IconButton(onClick = refresh, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = refresh, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(
                             CrystaListIcons.Outlined.Refresh,
                             contentDescription = stringResource(Res.string.refresh_home),
@@ -106,7 +106,7 @@ fun TopBarWithPlayer(
                     IconButton(
                         onClick = onShowAccountPanel,
                         modifier = Modifier.size(48.dp).navigationPopupSource(),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             CrystaListIcons.Outlined.MoreVert,

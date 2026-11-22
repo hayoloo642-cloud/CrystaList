@@ -69,6 +69,7 @@ import com.crystalist.shared.ui.components.AlertDialog
 import com.crystalist.shared.ui.components.PopupVisibility
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 enum class BackupRestoreStatus {
     BUSY,
@@ -161,7 +162,7 @@ fun BackupRestorePage(
             onClick = { showBackupWarning = true },
             modifier = Modifier.fillMaxWidth(),
             enabled = status != BackupRestoreStatus.BUSY,
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(Res.string.create_backup))
         }
@@ -211,7 +212,7 @@ fun BackupRestorePage(
             onClick = { showRestoreWarning = true },
             modifier = Modifier.fillMaxWidth(),
             enabled = status != BackupRestoreStatus.BUSY,
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(Res.string.restore_backup))
         }
@@ -222,7 +223,7 @@ fun BackupRestorePage(
                 onClick = importForeign,
                 modifier = Modifier.fillMaxWidth(),
                 enabled = status != BackupRestoreStatus.BUSY,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Text(stringResource(Res.string.foreign_import_title))
             }
@@ -240,11 +241,11 @@ fun BackupRestorePage(
                         showRestoreWarning = false
                         onImport()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.restore_backup)) }
             },
             dismissButton = {
-                TextButton(onClick = { showRestoreWarning = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { showRestoreWarning = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -268,7 +269,7 @@ fun BackupRestorePage(
                         showBackupWarning = false
                         onExport()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(
                         if (warningSeconds == 0) {
@@ -280,7 +281,7 @@ fun BackupRestorePage(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showBackupWarning = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { showBackupWarning = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },

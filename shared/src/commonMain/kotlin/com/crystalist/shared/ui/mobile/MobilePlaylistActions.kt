@@ -167,13 +167,13 @@ internal fun MobilePlaylistActions(
                         onClick = {
                             workflow.confirmDuplicate()
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.add_anyway)) }
                 },
                 dismissButton = {
                     TextButton(
                         onClick = { workflow.skipDuplicate() },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.skip)) }
                 },
             )
@@ -233,7 +233,7 @@ internal fun MobilePlaylistActions(
                     onClick = {
                         workflow.createPlaylist()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.save))
                 }
@@ -244,7 +244,7 @@ internal fun MobilePlaylistActions(
                         workflow.dismissCreate()
                     },
                     enabled = !workflow.busy,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.cancel))
                 }

@@ -48,6 +48,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.utils.isCrashReportingAvailable
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun SettingsUiRegistryBuilder.registerPrivacySettings(host: SharedSettingsHost) {
@@ -341,7 +342,7 @@ internal fun SettingsUiRegistryBuilder.registerPrivacySettings(host: SharedSetti
                                                     pendingRestore =
                                                         RestoreRequest.BlockedArtist(artist.id, artist.name, onSettingValueChanged)
                                                 },
-                                                shapes = IconButtonDefaults.shapes(),
+                                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                             ) {
                                                 Icon(CrystaListIcons.Filled.Remove, stringResource(Res.string.unblock))
                                             }
@@ -448,7 +449,7 @@ private fun HiddenItemRow(
         }
         IconButton(
             onClick = onRemove,
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Filled.Remove, stringResource(Res.string.show_again))
         }

@@ -479,7 +479,7 @@ fun MiniPlayer(
                                 onTogglePlay()
                             },
                             enabled = playbackEnabled,
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             if (isLoading && active) {
                                 val loadingText = stringResource(Res.string.loading)
@@ -504,7 +504,7 @@ fun MiniPlayer(
                                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
                                     contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                                 ),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.Rounded.SkipNext,

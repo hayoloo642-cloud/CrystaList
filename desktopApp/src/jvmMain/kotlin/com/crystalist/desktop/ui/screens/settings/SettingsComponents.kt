@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -44,6 +45,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.settings.settingsRowContainerColor
 import com.crystalist.shared.ui.utils.segmentedGroupShape
@@ -69,10 +71,10 @@ fun Material3SettingsGroup(
     Column(modifier = Modifier.fillMaxWidth()) {
         title?.let {
             Text(
-                text = it,
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Medium),
-                color = colorScheme.primary,
-                modifier = Modifier.padding(top = 8.dp, bottom = 12.dp, start = 16.dp, end = 32.dp),
+                text = it.uppercase(),
+                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Medium, letterSpacing = 0.6.sp),
+                color = colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 12.dp, bottom = 8.dp, start = 32.dp, end = 32.dp),
             )
         }
 
@@ -139,7 +141,7 @@ private fun Material3SettingsItemRow(
                             onClick = { item.onClick?.invoke() },
                         )
                     },
-                ).padding(horizontal = 16.dp, vertical = 16.dp),
+                ).padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (item.leadingContent != null) {
@@ -149,8 +151,8 @@ private fun Material3SettingsItemRow(
             Box(
                 modifier =
                     Modifier
-                        .size(32.dp)
-                        .clip(CircleShape)
+                        .size(28.dp)
+                        .clip(RoundedCornerShape(7.dp))
                         .background(
                             item.iconContainerColor
                                 ?: MaterialTheme.colorScheme.primary.copy(alpha = if (item.isHighlighted) 0.15f else 0.1f),
@@ -169,10 +171,10 @@ private fun Material3SettingsItemRow(
                             } else {
                                 MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
                             },
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(17.dp),
                 )
             }
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(12.dp))
         }
 
         Column(modifier = Modifier.weight(1f)) {

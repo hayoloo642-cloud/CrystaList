@@ -70,6 +70,7 @@ import javax.swing.JDialog
 import javax.swing.WindowConstants
 import kotlin.math.roundToInt
 import kotlin.time.Duration.Companion.milliseconds
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun DiscordLoginDialog(
@@ -182,7 +183,7 @@ private fun EmbeddedDiscordLoginDialog(
             if (webViewDataDirectory.isFailure) {
                 Column(Modifier.fillMaxSize().padding(24.dp)) {
                     Text(stringResource(Res.string.discord_login_webview_unwritable))
-                    Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.close)) }
+                    Button(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.close)) }
                 }
                 return@DesktopDensityProvider
             }

@@ -353,7 +353,7 @@ private fun StandardMiniplayer(
                 IconButton(
                     onClick = { Settings.shared.miniplayerFocusMode = !Settings.shared.miniplayerFocusMode },
                     modifier = Modifier.size(40.dp),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         CrystaListIcons.Outlined.Fullscreen,
@@ -365,7 +365,7 @@ private fun StandardMiniplayer(
                 IconButton(
                     onClick = { PlayerState.showMiniplayer = false },
                     modifier = Modifier.size(40.dp),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         CrystaListIcons.Outlined.Close,
@@ -442,7 +442,7 @@ private fun FocusModeMiniplayer(
                         IconButton(
                             onClick = { Settings.shared.miniplayerFocusMode = !Settings.shared.miniplayerFocusMode },
                             modifier = Modifier.size(40.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Outlined.FullscreenExit,
@@ -454,7 +454,7 @@ private fun FocusModeMiniplayer(
                         IconButton(
                             onClick = { PlayerState.showMiniplayer = false },
                             modifier = Modifier.size(40.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Outlined.Close,
@@ -521,7 +521,7 @@ private fun FocusModeMiniplayer(
                                             containerColor = colorScheme.secondaryContainer,
                                             contentColor = colorScheme.onSecondaryContainer,
                                         ),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         CrystaListIcons.Rounded.SkipPrevious,
@@ -575,7 +575,7 @@ private fun FocusModeMiniplayer(
                                             containerColor = colorScheme.secondaryContainer,
                                             contentColor = colorScheme.onSecondaryContainer,
                                         ),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         CrystaListIcons.Rounded.SkipNext,

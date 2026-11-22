@@ -28,6 +28,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.koin.mp.KoinPlatform
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -44,7 +45,7 @@ internal fun rememberAlbumSaveToAccountAction(albumId: String): PlayerMenuAction
             title = { Text(label) },
             text = { Text(stringResource(if (success) Res.string.album_saved_to_account else Res.string.error_occurred)) },
             confirmButton = {
-                TextButton(onClick = { succeeded = null }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { succeeded = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.ok))
                 }
             },

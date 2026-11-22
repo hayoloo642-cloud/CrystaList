@@ -31,6 +31,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.menu.groupedMenuItemShapes
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun ReorderMenu(
@@ -48,7 +49,7 @@ internal fun ReorderMenu(
         IconButton(
             onClick = { expanded = true },
             modifier = Modifier.tvFocusHighlight(CircleShape).then(dragHandleModifier),
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             colors =
                 if (onArtwork) {
                     IconButtonDefaults.iconButtonColors(

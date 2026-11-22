@@ -290,7 +290,7 @@ fun SearchBar(
                         placeholder = { Text(text = placeholder, maxLines = 1, overflow = TextOverflow.Clip) },
                         leadingIcon = {
                             if (isQuerySubmitted) {
-                                IconButton(onClick = onBack, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = onBack, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,
                                         contentDescription = backLabel,
@@ -307,14 +307,14 @@ fun SearchBar(
                         },
                         trailingIcon = {
                             if (query.isNotEmpty()) {
-                                IconButton(onClick = onClear, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = onClear, modifier = Modifier.size(48.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(imageVector = CrystaListIcons.Default.Clear, contentDescription = clearLabel)
                                 }
                             } else if (onMicrophoneClick != null) {
                                 IconButton(
                                     onClick = onMicrophoneClick,
                                     modifier = Modifier.size(48.dp),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         imageVector = CrystaListIcons.Rounded.Mic,
@@ -354,7 +354,7 @@ fun SearchBar(
                         IconButton(
                             onClick = onBack,
                             modifier = Modifier.size(barHeight).tvFocusHighlight(CircleShape, scale = 1f),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,
@@ -449,7 +449,7 @@ fun SearchBar(
                         IconButton(
                             onClick = onClear,
                             modifier = Modifier.size(barHeight).tvFocusHighlight(CircleShape, scale = 1f),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.Default.Clear,
@@ -462,7 +462,7 @@ fun SearchBar(
                         IconButton(
                             onClick = onMicrophoneClick,
                             modifier = Modifier.size(barHeight).tvFocusHighlight(CircleShape, scale = 1f),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.Rounded.Mic,
@@ -516,7 +516,7 @@ fun SearchBar(
                         IconButton(
                             onClick = { onRemoveHistoryItem(historyItem) },
                             modifier = Modifier.size(48.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Default.Close,

@@ -260,7 +260,7 @@ fun WindowScope.CustomTitleBar(
                 contentAlignment = Alignment.Center,
             ) {
                 if (hideSearch) {
-                    IconButton(onClick = { UiState.showFloatingSearch = true }, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = { UiState.showFloatingSearch = true }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.Default.Search, contentDescription = stringResource(Res.string.search))
                     }
                 } else {
@@ -377,7 +377,7 @@ fun WindowScope.TopBarWithPlayer(
                 if (showSearchInTopBar) {
                     IconButton(
                         onClick = { UiState.showFloatingSearch = true },
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             CrystaListIcons.Default.Search,
@@ -403,7 +403,7 @@ fun WindowScope.TopBarWithPlayer(
                                 IconButton(
                                     onClick = { PlayerState.toggleShuffle() },
                                     modifier = Modifier.size(40.dp).semantics { stateDescription = shuffleStateDescription },
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         CrystaListIcons.Rounded.Shuffle,
@@ -418,11 +418,11 @@ fun WindowScope.TopBarWithPlayer(
 
                             FilledTonalButton(
                                 onClick = { PlayerState.skipPrevious() },
-                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(18.dp)),
+                                shapes = ButtonDefaults.shapes(shape = CircleShape),
                                 interactionSource = backInteractionSource,
                                 colors =
                                     ButtonDefaults.filledTonalButtonColors(
-                                        containerColor = colorScheme.surfaceContainerHighest,
+                                        containerColor = Color.Transparent,
                                         contentColor = colorScheme.onSurface,
                                     ),
                                 contentPadding = PaddingValues(horizontal = 0.dp),
@@ -439,15 +439,15 @@ fun WindowScope.TopBarWithPlayer(
 
                             FilledTonalButton(
                                 onClick = { PlayerState.togglePlay() },
-                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(18.dp)),
+                                shapes = ButtonDefaults.shapes(shape = CircleShape),
                                 interactionSource = playPauseInteractionSource,
                                 colors =
                                     ButtonDefaults.filledTonalButtonColors(
                                         containerColor = colorScheme.primary,
                                         contentColor = colorScheme.onPrimary,
                                     ),
-                                contentPadding = PaddingValues(horizontal = if (isWindowTight) 8.dp else 16.dp),
-                                modifier = Modifier.height(36.dp).weight(1f),
+                                contentPadding = PaddingValues(horizontal = 0.dp),
+                                modifier = Modifier.height(36.dp).width(36.dp),
                             ) {
                                 Row(
                                     horizontalArrangement = Arrangement.Center,
@@ -473,19 +473,6 @@ fun WindowScope.TopBarWithPlayer(
                                                 null
                                             },
                                             modifier = Modifier.size(18.dp),
-                                        )
-                                    }
-                                    if (!isWindowTight && !PlayerState.isPlaybackLoading) {
-                                        Spacer(Modifier.width(6.dp))
-                                        Text(
-                                            if (isPlaying) {
-                                                stringResource(Res.string.pause)
-                                            } else {
-                                                stringResource(Res.string.play)
-                                            },
-                                            style = MaterialTheme.typography.labelMedium,
-                                            fontWeight = FontWeight.SemiBold,
-                                            maxLines = 1,
                                         )
                                     }
                                 }
@@ -514,7 +501,7 @@ fun WindowScope.TopBarWithPlayer(
                                 IconButton(
                                     onClick = { PlayerState.cycleRepeatMode() },
                                     modifier = Modifier.size(40.dp).semantics { stateDescription = repeatStateDescription },
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         if (PlayerState.repeatMode == RepeatMode.ONE) {
@@ -623,7 +610,7 @@ fun WindowScope.TopBarWithPlayer(
                                     LyricsState.toggleLyricsDrawer()
                                 },
                                 modifier = Modifier.size(40.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     CrystaListIcons.Outlined.FormatAlignCenter,
@@ -637,7 +624,7 @@ fun WindowScope.TopBarWithPlayer(
                             IconButton(
                                 onClick = UiState::togglePersistentPlayerDrawer,
                                 modifier = Modifier.size(40.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     CrystaListIcons.AutoMirrored.Outlined.QueueMusic,
@@ -652,7 +639,7 @@ fun WindowScope.TopBarWithPlayer(
                             IconButton(
                                 onClick = UiState::toggleDeviceConnectPanel,
                                 modifier = Modifier.size(40.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     imageVector =
@@ -675,7 +662,7 @@ fun WindowScope.TopBarWithPlayer(
                             IconButton(
                                 onClick = toggleWindowFullscreen,
                                 modifier = Modifier.size(40.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     imageVector =
@@ -756,7 +743,7 @@ fun WindowScope.TopBarWithPlayer(
 @Composable
 fun TopBarRefreshButton(onRefresh: (() -> Unit)?) {
     if (onRefresh == null) return
-    IconButton(onClick = onRefresh, modifier = Modifier.size(40.dp), shapes = IconButtonDefaults.shapes()) {
+    IconButton(onClick = onRefresh, modifier = Modifier.size(40.dp), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
         Icon(
             CrystaListIcons.Outlined.Refresh,
             contentDescription = stringResource(Res.string.refresh),
@@ -777,7 +764,7 @@ private fun DevtoolsButton(colorScheme: ColorScheme) {
             UiState.showSettings = true
         },
         modifier = Modifier.size(40.dp),
-        shapes = IconButtonDefaults.shapes(),
+        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
     ) {
         Icon(
             CrystaListIcons.Outlined.Adb,
@@ -799,7 +786,7 @@ private fun AccountMenuButton(
         IconButton(
             onClick = onToggleAccountMenu,
             modifier = Modifier.size(40.dp).navigationPopupSource(),
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             val profilePicUrl = AuthState.profilePicUrl
             if (AuthState.isSignedIn && !profilePicUrl.isNullOrBlank()) {
@@ -915,7 +902,13 @@ fun M3ExpressiveSearchBar(
         animationSpec = spring(dampingRatio = 0.75f, stiffness = 350f),
     )
     val containerColor by animateColorAsState(
-        targetValue = if (isSearchFocused) colorScheme.surfaceContainerHigh else colorScheme.surfaceContainerHigh.copy(alpha = 0.65f),
+        // Apple Music search field: iOS input fill, slightly stronger when focused.
+        targetValue =
+            if (isSearchFocused) {
+                colorScheme.surfaceContainerHighest
+            } else {
+                colorScheme.surfaceContainerHigh.copy(alpha = 0.9f)
+            },
         animationSpec = spring(dampingRatio = 0.8f, stiffness = 400f),
     )
     val borderColor by animateColorAsState(
@@ -957,8 +950,8 @@ fun M3ExpressiveSearchBar(
                     .fillMaxWidth()
                     .height(36.dp)
                     .semantics { contentDescription = searchMusicDesc }
-                    .background(containerColor, CircleShape)
-                    .border(BorderStroke(1.dp, borderColor), CircleShape)
+                    .background(containerColor, RoundedCornerShape(10.dp))
+                    .border(BorderStroke(0.dp, borderColor), RoundedCornerShape(10.dp))
                     .onFocusChanged {
                         if (Settings.shared.floatingSearch && it.isFocused) {
                             // clearFocus() during dismissal can refocus this field before the overlay closes.
@@ -1071,7 +1064,7 @@ fun M3ExpressiveSearchBar(
                                 SearchState.reset()
                             },
                             modifier = Modifier.size(28.dp).pointerHoverIcon(PointerIcon.Hand),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Default.Close,
@@ -1167,7 +1160,7 @@ fun M3ExpressiveSearchBar(
                                     SearchState.removeSearchQuery(query)
                                 },
                                 modifier = Modifier.size(32.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     CrystaListIcons.Default.Close,
@@ -1298,7 +1291,7 @@ fun ExpressiveDownloadIndicatorPill(
                         IconButton(
                             onClick = { showMenu = false },
                             modifier = Modifier.size(24.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 CrystaListIcons.Default.Close,
@@ -1379,13 +1372,13 @@ fun ExpressiveDownloadIndicatorPill(
                                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                         TextButton(
                                             onClick = { DownloadManager.retryFailedDownload(songId) },
-                                            shapes = ButtonDefaults.shapes(),
+                                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                         ) {
                                             Text(stringResource(Res.string.retry))
                                         }
                                         TextButton(
                                             onClick = { DownloadManager.dismissFailedDownload(songId) },
-                                            shapes = ButtonDefaults.shapes(),
+                                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                         ) {
                                             Text(stringResource(Res.string.dismiss))
                                         }

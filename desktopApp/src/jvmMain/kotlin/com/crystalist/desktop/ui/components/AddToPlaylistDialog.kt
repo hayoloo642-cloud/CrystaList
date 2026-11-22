@@ -70,6 +70,7 @@ import com.crystalist.shared.ui.theme.MdSpacing
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getPluralString
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun AddToPlaylistDialog() {
@@ -235,7 +236,7 @@ fun AddToPlaylistDialog() {
                                             UiState.showSignIn = true
                                             UiState.showSwitchChannel = false
                                         },
-                                        shapes = ButtonDefaults.shapes(),
+                                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Text(stringResource(Res.string.sign_in))
                                     }

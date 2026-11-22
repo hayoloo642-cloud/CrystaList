@@ -266,7 +266,7 @@ private fun DesktopNavigationScaffold(
                             isSidebarExpanded = false
                         },
                         modifier = Modifier.size(48.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.AutoMirrored.Filled.MenuOpen,
@@ -279,7 +279,7 @@ private fun DesktopNavigationScaffold(
                     IconButton(
                         onClick = { LibraryState.isEditingSidebar = !LibraryState.isEditingSidebar },
                         modifier = Modifier.size(36.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = if (LibraryState.isEditingSidebar) CrystaListIcons.Default.Check else CrystaListIcons.Default.Edit,
@@ -305,7 +305,7 @@ private fun DesktopNavigationScaffold(
                             }
                         },
                         modifier = Modifier.size(36.dp),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = if (LibraryState.isEditingSidebar) CrystaListIcons.Default.Check else CrystaListIcons.Default.Edit,
@@ -456,9 +456,10 @@ private fun WindowScope.AdaptiveDesktopLayout(
             DesktopPlayerVisibility(visible = !PlayerState.isExpanded) {
                 Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)) {
                     Surface(
-                        shape = RoundedCornerShape(14.dp),
-                        color = colorScheme.surfaceContainer,
-                        tonalElevation = 2.dp,
+                        // Apple Music floats a rounded, slightly elevated player card.
+                        shape = RoundedCornerShape(12.dp),
+                        color = colorScheme.surfaceContainerLow,
+                        tonalElevation = 3.dp,
                     ) {
                         StandardBottomPlayer(colorScheme, toggleWindowFullscreen)
                     }

@@ -212,7 +212,7 @@ fun AlbumScreen(
                 } else if (selected && PlaylistAlbumState.albumLoadFailed) {
                     TextButton(
                         onClick = { PlaylistAlbumState.fetchAlbumData(albumId, addToHistory = false) },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(Res.string.try_again))
                     }
@@ -264,7 +264,7 @@ fun AlbumScreen(
                                 menuSong = song
                                 songMenu.open()
                             },
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                         }

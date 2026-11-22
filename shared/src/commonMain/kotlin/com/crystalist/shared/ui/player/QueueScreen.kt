@@ -567,7 +567,7 @@ fun QueueScreen(
                                     tvMenuOpen = true
                                 },
                                 modifier = Modifier.tvFocusHighlight(CircleShape).navigationPopupSource(),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(CrystaListIcons.Rounded.MoreVert, stringResource(Res.string.more_options))
                             }
@@ -982,7 +982,7 @@ private fun QueueBottomToolbar(
                             },
                             enabled = action.enabled,
                             modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape, scale = 1f).navigationPopupSource(),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(action.icon, contentDescription = action.title, tint = MaterialTheme.colorScheme.onSurface)
                         }
@@ -994,7 +994,7 @@ private fun QueueBottomToolbar(
                             onEvent(QueueEvent.ToggleSleepTimer)
                         },
                         modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape, scale = 1f),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Outlined.Bedtime,
@@ -1008,7 +1008,7 @@ private fun QueueBottomToolbar(
                             onEvent(QueueEvent.ToggleShuffle)
                         },
                         modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape, scale = 1f),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = CrystaListIcons.Rounded.Shuffle,
@@ -1022,7 +1022,7 @@ private fun QueueBottomToolbar(
                             onEvent(QueueEvent.CycleRepeat)
                         },
                         modifier = Modifier.size(48.dp).tvFocusHighlight(CircleShape, scale = 1f),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector = if (repeatMode == 1) CrystaListIcons.Rounded.RepeatOne else CrystaListIcons.Rounded.Repeat,
@@ -1186,7 +1186,7 @@ private fun PlaylistHeader(
                         IconButton(
                             onClick = onClearSelection,
                             modifier = Modifier.size(48.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.Filled.Close,
@@ -1556,7 +1556,7 @@ private fun TrackItem(
                         onEvent(QueueEvent.OpenTrackMenu(track.entryKey, contextMenu.offset))
                     },
                     modifier = Modifier.size(40.dp).navigationPopupSource(),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         imageVector = CrystaListIcons.Rounded.MoreVert,

@@ -50,6 +50,7 @@ import com.crystalist.shared.ui.navigation.Screen
 import com.crystalist.shared.ui.screens.BrowseContent
 import com.crystalist.shared.viewmodels.BrowseViewModel
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -126,12 +127,12 @@ fun BrowseScreen(
                             Button(
                                 onClick = { songs.firstOrNull()?.let { PlayerState.playTrack(it, songs) } },
                                 modifier = Modifier.weight(1f),
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Text(stringResource(Res.string.play)) }
                             FilledTonalButton(
                                 onClick = { PlayerState.shuffleQueue(songs) },
                                 modifier = Modifier.weight(1f),
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Text(stringResource(Res.string.shuffle)) }
                         }
                     }

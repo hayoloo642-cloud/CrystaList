@@ -52,6 +52,7 @@ import com.crystalist.shared.ui.playback.retainPlaybackKeyFocus
 import kotlinx.coroutines.cancel
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 private fun SettingsDialogSurface(
@@ -105,14 +106,14 @@ internal fun SettingsSliderDialog(
                 },
             )
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                 TextButton(
                     onClick = {
                         item.onSliderChanged?.invoke(value)
                         onSettingValueChanged()
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.done)) }
             }
         }
@@ -140,7 +141,7 @@ internal fun SettingsTextDialog(
                     placeholder = item.textPlaceholder?.let { placeholder -> ({ Text(placeholder) }) },
                     textObfuscationMode = if (secretVisible) TextObfuscationMode.Visible else TextObfuscationMode.Hidden,
                     trailingIcon = {
-                        IconButton(onClick = { secretVisible = !secretVisible }, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = { secretVisible = !secretVisible }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(
                                 imageVector = if (secretVisible) CrystaListIcons.Filled.VisibilityOff else CrystaListIcons.Filled.Visibility,
                                 contentDescription =
@@ -168,14 +169,14 @@ internal fun SettingsTextDialog(
                 )
             }
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                 TextButton(
                     onClick = {
                         item.onTextChanged?.invoke(textFieldState.text.toString())
                         onSettingValueChanged()
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.done)) }
             }
         }
@@ -222,7 +223,7 @@ internal fun SettingsConfirmDialog(
                 horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
                 Button(
@@ -230,7 +231,7 @@ internal fun SettingsConfirmDialog(
                         onConfirm()
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(confirmLabel)
                 }

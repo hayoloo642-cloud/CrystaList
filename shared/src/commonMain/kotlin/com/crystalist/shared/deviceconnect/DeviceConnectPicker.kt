@@ -35,6 +35,7 @@ import com.crystalist.shared.generated.resources.reject
 import com.crystalist.shared.generated.resources.scrobble_connecting
 import com.crystalist.shared.ui.components.AlertDialog
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun DeviceConnectPairingHost(
@@ -142,12 +143,12 @@ fun DeviceConnectPairingDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onApprove, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onApprove, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.approve))
             }
         },
         dismissButton = {
-            TextButton(onClick = onReject, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onReject, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.reject))
             }
         },

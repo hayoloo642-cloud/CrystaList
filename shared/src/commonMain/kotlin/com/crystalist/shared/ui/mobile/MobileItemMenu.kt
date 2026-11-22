@@ -74,6 +74,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import com.crystalist.shared.db.entities.toSongItem as storedSongToSongItem
 import com.crystalist.shared.ui.components.rememberModalSheetState as rememberBottomSheetState
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 private suspend fun loadPlaylistMenuSongs(
     item: PlaylistItem,
@@ -522,11 +523,11 @@ internal fun MobileItemMenu(
                             onDismiss()
                             onOpenItem(item)
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.play)) }
                 },
                 dismissButton = {
-                    TextButton(onClick = { onDismiss() }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.dismiss)) }
+                    TextButton(onClick = { onDismiss() }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.dismiss)) }
                 },
             )
         }

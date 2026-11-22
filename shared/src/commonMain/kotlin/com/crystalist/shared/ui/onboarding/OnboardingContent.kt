@@ -93,6 +93,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.navigation.PredictiveNavigationContent
 import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 enum class OnboardingPage {
     WELCOME,
@@ -209,7 +210,7 @@ private fun OnboardingPageLayout(
                                 welcomeContent(Modifier.size(24.dp))
                                 Text(stringResource(Res.string.app_name), style = MaterialTheme.typography.titleMedium)
                                 Spacer(Modifier.weight(1f))
-                                IconButton(onClick = { onPausedChange(!paused) }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { onPausedChange(!paused) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         if (paused) CrystaListIcons.Filled.PlayArrow else CrystaListIcons.Filled.Pause,
                                         contentDescription = stringResource(if (paused) Res.string.play else Res.string.pause),
@@ -333,7 +334,7 @@ private fun PrivacyLink() {
     Column {
         TextButton(
             onClick = { openFailed = runCatching { uriHandler.openUri(privacyUrl) }.isFailure },
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(Res.string.onboarding_privacy_policy))
         }
@@ -361,7 +362,7 @@ private fun OnboardingBottomActions(
     )
     Row(modifier, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         content.onBack?.let { back ->
-            IconButton(onClick = back, enabled = !content.isWorking, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = back, enabled = !content.isWorking, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, contentDescription = content.backLabel)
             }
         }
@@ -371,7 +372,7 @@ private fun OnboardingBottomActions(
                     onClick = content.onSecondary ?: {},
                     enabled = !content.isWorking,
                     modifier = preferredActionModifier.weight(secondaryWeight.coerceAtLeast(0.001f)).heightIn(min = 56.dp),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(secondary) }
             } ?: run {
                 if (secondaryWeight > 0f) Spacer(Modifier.weight(secondaryWeight))
@@ -384,7 +385,7 @@ private fun OnboardingBottomActions(
                 (if (content.secondaryLabel == null) preferredActionModifier else Modifier)
                     .weight(if (content.page == OnboardingPage.WELCOME) 1f else 3f - secondaryWeight)
                     .heightIn(min = if (content.page == OnboardingPage.WELCOME) 64.dp else 56.dp),
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(content.primaryLabel)
             if (content.page == OnboardingPage.WELCOME) {

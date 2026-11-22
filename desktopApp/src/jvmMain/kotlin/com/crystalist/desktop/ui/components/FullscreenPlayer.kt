@@ -280,7 +280,7 @@ fun FullscreenPlayerView(
                                     .align(Alignment.TopEnd)
                                     .padding(24.dp)
                                     .size(48.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.Default.Close,
@@ -303,7 +303,7 @@ fun FullscreenPlayerView(
                                     .align(Alignment.TopStart)
                                     .padding(24.dp)
                                     .size(48.dp),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(
                                 imageVector = CrystaListIcons.AutoMirrored.Filled.ArrowBack,

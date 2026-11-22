@@ -62,6 +62,7 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.mp.KoinPlatform
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.TimeSource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 internal fun useCurrentLyricsForPreview(
     songId: String?,
@@ -197,7 +198,7 @@ fun LyricsSettingsPreview(
                         verticalArrangement = Arrangement.Center,
                     ) {
                         Text(noLyrics)
-                        TextButton(onClick = { attempt++ }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                        TextButton(onClick = { attempt++ }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                     }
                 }
 

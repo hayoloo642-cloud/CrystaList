@@ -163,7 +163,7 @@ private fun PlaylistTitleAndDescription(
                 modifier = Modifier.weight(1f).then(titleModifier),
             )
             if (onEdit != null) {
-                IconButton(onClick = onEdit, shapes = IconButtonDefaults.shapes()) {
+                IconButton(onClick = onEdit, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Default.Edit, contentDescription = stringResource(Res.string.edit_playlist))
                 }
             }

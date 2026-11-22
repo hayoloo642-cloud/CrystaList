@@ -268,14 +268,14 @@ fun AppContentHost(
                             ListenTogetherState.listenTogetherManager.suggestTrack(request.song)
                             pendingPlaybackRequest = null
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(Res.string.listen_together_guest_queue))
                     }
                 },
                 dismissButton = {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        TextButton(onClick = { pendingPlaybackRequest = null }, shapes = ButtonDefaults.shapes()) {
+                        TextButton(onClick = { pendingPlaybackRequest = null }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.cancel))
                         }
                         TextButton(
@@ -293,7 +293,7 @@ fun AppContentHost(
                                     }
                                 }
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.listen_together_guest_solo))
                         }

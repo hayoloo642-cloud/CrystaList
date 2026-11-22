@@ -633,11 +633,11 @@ fun PlaylistContextMenu(
             confirmButton = {
                 TextButton(
                     onClick = { removal.confirm(DownloadManager::deleteDownloads) },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.remove)) }
             },
             dismissButton = {
-                TextButton(onClick = removal::dismiss, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = removal::dismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -689,13 +689,13 @@ fun PlaylistContextMenu(
                         showExportDialog = false
                         exportCollection(playlist.title, format) { loadMediaSongs(playlist, actionSongs) }
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.save)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = { showExportDialog = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )

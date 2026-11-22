@@ -57,6 +57,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun ApplicationLogsDialog(onDismiss: () -> Unit) {
@@ -132,7 +133,7 @@ fun ApplicationLogsDialog(onDismiss: () -> Unit) {
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.close)) }
+            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.close)) }
         },
         dismissButton = {
             TextButton(
@@ -166,7 +167,7 @@ fun ApplicationLogsDialog(onDismiss: () -> Unit) {
                     }
                 },
                 enabled = !isExportingLogs,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 if (isExportingLogs) {
                     ContainedLoadingIndicator(modifier = Modifier.size(24.dp))

@@ -24,6 +24,7 @@ import com.crystalist.shared.settings.ArtistNameAliases
 import com.crystalist.shared.settings.displayTitle
 import com.crystalist.shared.ui.components.AlertDialog
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun ArtistNameAliasDialog(
@@ -47,7 +48,7 @@ fun ArtistNameAliasDialog(
                         ArtistNameAliases.clear(artist.id, artist.channelId, artist.title)
                         onDismiss()
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.clear_artist_alias)) }
             }
         },
@@ -58,9 +59,9 @@ fun ArtistNameAliasDialog(
                     ArtistNameAliases.set(artist.id, artist.channelId, artist.displayTitle, name.trim())
                     onDismiss()
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.save)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }

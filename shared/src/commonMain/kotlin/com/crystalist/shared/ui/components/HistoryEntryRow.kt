@@ -166,7 +166,7 @@ fun HistoryEntryRow(
                     IconButton(
                         modifier = Modifier.navigationPopupSource(),
                         onClick = { menuExpanded = true },
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             CrystaListIcons.Outlined.MoreVert,
@@ -235,7 +235,7 @@ fun HistoryEntryRow(
                 }
             }
             onSongMenu?.takeUnless { isSelectMode || showInlineMenu }?.let { open ->
-                IconButton(modifier = Modifier.navigationPopupSource(), onClick = open, shapes = IconButtonDefaults.shapes()) {
+                IconButton(modifier = Modifier.navigationPopupSource(), onClick = open, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options))
                 }
             }

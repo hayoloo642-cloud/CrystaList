@@ -268,7 +268,7 @@ fun SongListItem(
     val contentColor = colors.content
     val subtitleColor = colors.subtitle
     val linkColor = colors.link
-    val artworkShape = animatedCurrentSongArtworkShape(isCurrent, RoundedCornerShape(4.dp))
+    val artworkShape = animatedCurrentSongArtworkShape(isCurrent, RoundedCornerShape(12.dp))
     val artworkRotation by rememberCurrentSongArtworkRotation(isCurrent, isPlaying)
     val numberedArtwork = index != null && !showThumbnail && leadingContent == null
     Row(
@@ -277,9 +277,9 @@ fun SongListItem(
                 .fillMaxWidth()
                 .heightIn(min = 56.dp)
                 .alpha(if (enabled) 1f else 0.38f)
-                .clip(if (isCurrent) CircleShape else RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(8.dp))
                 .background(colors.container)
-                .focusOutline(if (isCurrent) CircleShape else RoundedCornerShape(8.dp))
+                .focusOutline(RoundedCornerShape(8.dp))
                 .currentSongSemantics(isCurrent, isPlaying)
                 .combinedClickable(
                     onClick = {
@@ -410,7 +410,7 @@ fun SongListItem(
         if (trailingContent != null) {
             trailingContent()
         } else {
-            IconButton(modifier = Modifier.navigationPopupSource(), onClick = onShowMenu, shapes = IconButtonDefaults.shapes()) {
+            IconButton(modifier = Modifier.navigationPopupSource(), onClick = onShowMenu, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     CrystaListIcons.Default.MoreVert,
                     contentDescription = stringResource(Res.string.more_options),
@@ -486,11 +486,12 @@ fun YTGridItem(
     val itemEnabled = enabled && !item.isUnavailable
     val pageArtwork = artwork ?: rememberAlbumArtworkSource(item, onClick)
     val onMenuClick = onShowMenu?.let { show -> { show(item) } } ?: onLongClick
+    // Apple Music: title 15/600, subtitle 13/400 in the secondary label color.
     val subtitleStyle =
-        MaterialTheme.typography.labelSmall.copy(
-            fontSize = if (largeText) 12.sp else 10.sp,
-            lineHeight = if (largeText) 16.sp else 12.sp,
-            fontWeight = FontWeight.Medium,
+        MaterialTheme.typography.bodySmall.copy(
+            fontSize = if (largeText) 14.sp else 13.sp,
+            lineHeight = if (largeText) 18.sp else 17.sp,
+            fontWeight = FontWeight.Normal,
         )
     val artworkCornerRadius = if (carouselItemDrawInfo == null) uiEnhanced(ThumbnailCornerRadius, 12.dp) else CarouselItemCornerRadius
     val inset = if (carouselItemDrawInfo == null) gridCellInset() else 0.dp
@@ -959,7 +960,7 @@ fun YTListItem(
         if (trailingContent != null) {
             trailingContent()
         } else if (onShowMenu != null) {
-            IconButton(modifier = Modifier.navigationPopupSource(), onClick = onShowMenu, shapes = IconButtonDefaults.shapes()) {
+            IconButton(modifier = Modifier.navigationPopupSource(), onClick = onShowMenu, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     CrystaListIcons.Default.MoreVert,
                     contentDescription = stringResource(Res.string.more_options),

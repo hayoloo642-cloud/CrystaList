@@ -146,7 +146,7 @@ fun AccountMenu(onDismiss: () -> Unit) {
                                 performLogout { dismiss {} }
                             },
                             enabled = !isLoggingOut,
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.account_retry_cleanup))
                         }

@@ -17,6 +17,7 @@ import com.crystalist.shared.playlistimport.AmazonMusicPlaylistImporter
 import com.crystalist.shared.ui.components.AlertDialog
 import com.crystalist.shared.ui.utils.DragScrollableColumn
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun AmazonMusicMarketplacePicker(
@@ -32,12 +33,12 @@ fun AmazonMusicMarketplacePicker(
                     TextButton(
                         onClick = { onSelect(host) },
                         modifier = Modifier.fillMaxWidth(),
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(host) }
                 }
             }
         },
         confirmButton = {},
-        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) } },
+        dismissButton = { TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) } },
     )
 }

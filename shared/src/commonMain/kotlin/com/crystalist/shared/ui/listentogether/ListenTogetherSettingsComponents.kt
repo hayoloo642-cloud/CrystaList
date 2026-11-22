@@ -68,7 +68,7 @@ fun SettingsSubScreen(
                 title = { Text(title) },
                 navigationIcon = {
                     if (onNavigateBack != null) {
-                        IconButton(onClick = onNavigateBack, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = onNavigateBack, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(
                                 CrystaListIcons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = stringResource(Res.string.back),

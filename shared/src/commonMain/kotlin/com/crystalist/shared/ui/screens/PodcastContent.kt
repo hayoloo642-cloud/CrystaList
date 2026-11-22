@@ -215,7 +215,7 @@ fun PodcastContent(
                 },
                 navigationIcon = {
                     if (onBackClick != null) {
-                        IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                         }
                     }
@@ -241,7 +241,7 @@ fun PodcastContent(
                 ) {
                     Text(stringResource(Res.string.unable_to_load_podcast), color = MaterialTheme.colorScheme.error)
                     Spacer(Modifier.height(12.dp))
-                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                 }
             }
 
@@ -310,7 +310,7 @@ fun PodcastContent(
                         item(key = "podcast_load_error") {
                             Column(Modifier.padding(16.dp)) {
                                 Text(error, color = MaterialTheme.colorScheme.error)
-                                Button(onClick = onRetry, enabled = !isLoading, shapes = ButtonDefaults.shapes()) {
+                                Button(onClick = onRetry, enabled = !isLoading, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Text(stringResource(Res.string.retry))
                                 }
                             }
@@ -413,7 +413,7 @@ private fun PodcastHeader(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             itemVerticalAlignment = Alignment.CenterVertically,
         ) {
-            Button(onClick = onPlay, enabled = page.episodes.any { !it.isUnavailable }, shapes = ButtonDefaults.shapes()) {
+            Button(onClick = onPlay, enabled = page.episodes.any { !it.isUnavailable }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.Rounded.PlayArrow, null, Modifier.size(18.dp))
                 Spacer(Modifier.width(6.dp))
                 Text(stringResource(Res.string.play_latest))
@@ -430,7 +430,7 @@ private fun PodcastHeader(
                             stateDescription = loadingLabel
                         }
                     },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(saveLabel, modifier = Modifier.alpha(if (isSaving) 0f else 1f))
@@ -444,14 +444,14 @@ private fun PodcastHeader(
             FilledTonalIconButton(
                 onClick = onSearchClick,
                 modifier = Modifier.size(36.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.Search, stringResource(Res.string.search_episodes))
             }
             FilledTonalIconButton(
                 onClick = onMenuClick,
                 modifier = Modifier.size(36.dp).navigationPopupSource(),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.podcast_actions))
             }
@@ -578,7 +578,7 @@ private fun EpisodeRow(
                     IconButton(
                         onClick = { showMenu = true },
                         modifier = Modifier.size(36.dp).navigationPopupSource(),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.episode_actions), Modifier.size(20.dp))
                     }
@@ -684,7 +684,7 @@ private fun EpisodeDetailsBody(
                 onClick = onPlay,
                 enabled = !episode.isUnavailable,
                 modifier = Modifier.size(56.dp),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(CrystaListIcons.Rounded.PlayArrow, stringResource(Res.string.play), Modifier.size(32.dp))
             }
@@ -741,7 +741,7 @@ private fun EpisodeDetails(
             confirmButton = {
                 TextButton(
                     onClick = onDismiss,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.close)) }
             },
         )

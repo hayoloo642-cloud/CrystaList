@@ -387,12 +387,13 @@ fun PlayerSlider(
         showThumb = showThumb,
         colors =
             SliderDefaults.colors(
+                // Apple Music: red fill, white thumb, iOS-grey inactive track.
                 activeTrackColor = color,
-                thumbColor = if (showThumb) color else Color.Transparent,
+                thumbColor = if (showThumb) Color.White else Color.Transparent,
                 disabledActiveTrackColor = color,
-                disabledThumbColor = if (showThumb) color else Color.Transparent,
-                inactiveTrackColor = color.copy(alpha = 0.24f),
-                disabledInactiveTrackColor = color.copy(alpha = 0.24f),
+                disabledThumbColor = if (showThumb) Color.White else Color.Transparent,
+                inactiveTrackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
+                disabledInactiveTrackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
             ),
         bufferedFraction = bufferedValue,
         modifier = modifier,
@@ -745,7 +746,7 @@ fun StandardBottomPlayer(
                                 IconButton(
                                     onClick = { PlayerState.togglePlay() },
                                     modifier = Modifier.fillMaxSize(),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     if (PlayerState.isPlaybackLoading) {
                                         LoadingIndicator(
@@ -795,7 +796,7 @@ fun StandardBottomPlayer(
                                 IconButton(
                                     onClick = playerMenu::openAnchored,
                                     modifier = Modifier.fillMaxSize().navigationPopupSource(),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         CrystaListIcons.Outlined.KeyboardArrowUp,
@@ -1197,7 +1198,7 @@ internal fun MediaDetailsDialog(
             )
         },
         confirmButton = {
-            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismiss, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.close))
             }
         },

@@ -199,7 +199,7 @@ internal fun DesktopLyricsContent(
                                 IconButton(
                                     onClick = { showLyricsMenu = !showLyricsMenu },
                                     modifier = Modifier.size(36.dp).navigationPopupSource(),
-                                    shapes = IconButtonDefaults.shapes(),
+                                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                 ) {
                                     Icon(
                                         CrystaListIcons.Outlined.MoreVert,
@@ -225,7 +225,7 @@ internal fun DesktopLyricsContent(
                                     onClose()
                                 },
                                 modifier = Modifier.size(36.dp),
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(
                                     CrystaListIcons.Default.Close,

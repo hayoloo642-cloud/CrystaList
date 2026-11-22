@@ -134,7 +134,7 @@ internal fun SpotifyPlaylistPickerDialog(
                                         },
                                     )
                                 },
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Text(
                                     stringResource(
@@ -218,9 +218,9 @@ internal fun SpotifyPlaylistPickerDialog(
                         horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                        TextButton(onClick = onDismissRequest, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                         Spacer(Modifier.width(12.dp))
-                        Button(enabled = selectedUris.isNotEmpty(), onClick = onReview, shapes = ButtonDefaults.shapes()) {
+                        Button(enabled = selectedUris.isNotEmpty(), onClick = onReview, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(stringResource(Res.string.spotify_import_review, selectedUris.size))
                         }
                     }
@@ -402,9 +402,9 @@ internal fun SpotifyPlaylistPreviewDialog(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
                         horizontalArrangement = Arrangement.End,
                     ) {
-                        OutlinedButton(onClick = onBack, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.back)) }
+                        OutlinedButton(onClick = onBack, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.back)) }
                         Spacer(Modifier.width(12.dp))
-                        Button(onClick = onContinue, shapes = ButtonDefaults.shapes()) {
+                        Button(onClick = onContinue, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Text(
                                 if (playlists.size == 1) {
                                     stringResource(Res.string.spotify_import_choose_destination)
@@ -556,14 +556,14 @@ internal fun SpotifyDestinationDialog(
                         modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
                         horizontalArrangement = Arrangement.End,
                     ) {
-                        OutlinedButton(onClick = onBack, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.back)) }
+                        OutlinedButton(onClick = onBack, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.back)) }
                         Spacer(Modifier.width(12.dp))
                         Button(
                             enabled =
                                 (selectedDestination != Destination.NewSynced && selectedDestination != Destination.NewLocal) ||
                                     playlistName.isNotBlank(),
                             onClick = onImport,
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.action_import))
                         }

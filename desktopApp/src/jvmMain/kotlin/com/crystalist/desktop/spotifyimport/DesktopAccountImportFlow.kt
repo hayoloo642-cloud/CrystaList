@@ -47,6 +47,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import java.util.logging.Logger
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 @Suppress("FunctionName")
@@ -291,7 +292,7 @@ internal fun DesktopAccountImportFlow(
             confirmButton = {
                 TextButton(
                     onClick = { errorMessage = null },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.ok)) }
             },
         )

@@ -152,7 +152,7 @@ fun CollectionFilterBar(
                         },
                         trailingIcon = {
                             if (query.isNotEmpty()) {
-                                IconButton(onClick = { onQueryChange("") }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { onQueryChange("") }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         imageVector = CrystaListIcons.Default.Clear,
                                         contentDescription = stringResource(Res.string.clear_search),
@@ -303,13 +303,13 @@ fun CollectionFilterBar(
                                     MaterialTheme.colorScheme.onSecondaryContainer
                                 },
                         ),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(if (reorderMode) text.lock else text.reorder, maxLines = 1, softWrap = false)
                 }
             }
             if (onClear != null) {
-                TextButton(onClick = onClear, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = onClear, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(
                         text = text.clear ?: "",
                         color = MaterialTheme.colorScheme.error,

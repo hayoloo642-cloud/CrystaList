@@ -28,6 +28,7 @@ import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.utils.isDesktop
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -67,7 +68,7 @@ fun DesktopHorizontalScrollControls(
             enter = fadeIn(MaterialTheme.motionScheme.fastEffectsSpec()),
             exit = fadeOut(MaterialTheme.motionScheme.fastEffectsSpec()),
         ) {
-            FilledTonalIconButton(onClick = { scroll(false) }, shapes = IconButtonDefaults.shapes()) {
+            FilledTonalIconButton(onClick = { scroll(false) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.KeyboardArrowLeft, stringResource(Res.string.previous))
             }
         }
@@ -77,7 +78,7 @@ fun DesktopHorizontalScrollControls(
             enter = fadeIn(MaterialTheme.motionScheme.fastEffectsSpec()),
             exit = fadeOut(MaterialTheme.motionScheme.fastEffectsSpec()),
         ) {
-            FilledTonalIconButton(onClick = { scroll(true) }, shapes = IconButtonDefaults.shapes()) {
+            FilledTonalIconButton(onClick = { scroll(true) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.KeyboardArrowRight, stringResource(Res.string.next))
             }
         }

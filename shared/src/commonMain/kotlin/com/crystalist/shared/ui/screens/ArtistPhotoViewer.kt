@@ -498,7 +498,7 @@ private fun ViewerPageButton(
         enter = fadeIn(MaterialTheme.motionScheme.fastEffectsSpec()),
         exit = fadeOut(MaterialTheme.motionScheme.fastEffectsSpec()),
     ) {
-        FilledTonalIconButton(onClick = onClick, shapes = IconButtonDefaults.shapes()) { Icon(icon, label) }
+        FilledTonalIconButton(onClick = onClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Icon(icon, label) }
     }
 }
 
@@ -512,7 +512,7 @@ private fun ViewerTopBar(
 ) {
     val uriHandler = LocalUriHandler.current
     Box(modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 12.dp, vertical = 8.dp)) {
-        FilledTonalIconButton(onClick = onDismiss, modifier = Modifier.align(Alignment.CenterStart), shapes = IconButtonDefaults.shapes()) {
+        FilledTonalIconButton(onClick = onDismiss, modifier = Modifier.align(Alignment.CenterStart), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Icon(CrystaListIcons.Outlined.Close, stringResource(Res.string.close))
         }
         if (count > 1) {
@@ -526,7 +526,7 @@ private fun ViewerTopBar(
         FilledTonalIconButton(
             onClick = { runCatching { uriHandler.openUri(photo.url) } },
             modifier = Modifier.align(Alignment.CenterEnd),
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Outlined.Image, stringResource(Res.string.artist_photo_open_original))
         }
@@ -669,7 +669,7 @@ private fun PhotoDetailsSheet(
                 }
                 if (loading) ContainedLoadingIndicator(Modifier.size(24.dp))
                 photo.pageUrl?.let { pageUrl ->
-                    IconButton(onClick = { runCatching { uriHandler.openUri(pageUrl) } }, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = { runCatching { uriHandler.openUri(pageUrl) } }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(CrystaListIcons.AutoMirrored.Filled.OpenInNew, stringResource(Res.string.artist_photo_view_on_lastfm))
                     }
                 }
@@ -707,7 +707,7 @@ private fun PhotoDetailsSheet(
                 FilledTonalIconButton(
                     onClick = { actions.share(photo.pageUrl ?: photo.url) },
                     modifier = Modifier.size(56.dp),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Icon(CrystaListIcons.Outlined.Share, stringResource(Res.string.share)) }
                 FilledTonalButton(
                     onClick = onSave,
@@ -719,7 +719,7 @@ private fun PhotoDetailsSheet(
                         ),
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                     modifier = Modifier.height(56.dp),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     if (saving) {
                         ContainedLoadingIndicator(Modifier.size(ButtonDefaults.IconSize))

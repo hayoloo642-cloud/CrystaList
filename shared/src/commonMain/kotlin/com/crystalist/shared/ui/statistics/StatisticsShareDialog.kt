@@ -59,6 +59,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun StatisticsShareDialog(
@@ -195,14 +196,14 @@ internal fun StatisticsShareDialog(
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss, enabled = !busy, shapes = ButtonDefaults.shapes()) {
+            TextButton(onClick = onDismiss, enabled = !busy, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Text(stringResource(Res.string.cancel))
             }
         },
         confirmButton = {
             Button(
                 enabled = bitmap != null && !busy,
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 onClick = {
                     val image = bitmap ?: return@Button
                     busy = true

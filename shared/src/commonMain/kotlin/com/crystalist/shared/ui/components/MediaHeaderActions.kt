@@ -133,7 +133,7 @@ fun InlineSearchRow(
                         FilledTonalIconButton(
                             onClick = onSearchToggle,
                             modifier = Modifier.focusRequester(searchButtonFocus).tvFocusHighlight(CircleShape),
-                            shapes = IconButtonDefaults.shapes(),
+                            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Icon(CrystaListIcons.Default.Search, stringResource(Res.string.search_songs))
                         }
@@ -328,7 +328,7 @@ fun CompactSearchBar(
                 IconButton(
                     onClick = { onQueryChange("") },
                     modifier = Modifier.size(24.dp).pointerHoverIcon(PointerIcon.Hand),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         imageVector = CrystaListIcons.Default.Clear,
@@ -341,7 +341,7 @@ fun CompactSearchBar(
                 IconButton(
                     onClick = onClose,
                     modifier = Modifier.size(24.dp).pointerHoverIcon(PointerIcon.Hand),
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         imageVector = CrystaListIcons.Default.Close,

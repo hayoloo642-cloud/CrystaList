@@ -341,7 +341,7 @@ private fun ProfilesPage(
                     }
                 }
                 if (savedProfile) {
-                    IconButton(onClick = { confirmingProfileDelete = true }, shapes = IconButtonDefaults.shapes()) {
+                    IconButton(onClick = { confirmingProfileDelete = true }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Icon(
                             CrystaListIcons.Outlined.Delete,
                             contentDescription = stringResource(Res.string.delete),
@@ -387,7 +387,7 @@ private fun ProfilesPage(
                 TextButton(
                     onClick = { requestSave(false) },
                     enabled = EqualizerProfiles.hasUnsavedChanges,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Text(stringResource(Res.string.save))
                 }
@@ -396,7 +396,7 @@ private fun ProfilesPage(
                     IconButton(
                         modifier = Modifier.navigationPopupSource(),
                         onClick = { actionsExpanded = true },
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(CrystaListIcons.Default.MoreVert, contentDescription = stringResource(Res.string.more_options))
                     }
@@ -485,13 +485,13 @@ private fun ProfilesPage(
                         EqualizerProfiles.saveCurrent(profileName, saveAs = saveAs)
                         namingProfile = false
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.save)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = { namingProfile = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -511,11 +511,11 @@ private fun ProfilesPage(
                         EqualizerProfiles.delete(activeProfile.id)
                         confirmingProfileDelete = false
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { confirmingProfileDelete = false }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { confirmingProfileDelete = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.cancel))
                 }
             },
@@ -773,7 +773,7 @@ private fun EqualizerGraph(
                             EqualizerProfiles.addBand(MIN_EQUALIZER_FREQUENCY, maxFrequency)
                             selectedBand = profile.bands.size
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.add)) }
                     TextButton(
                         enabled = selectedBand in profile.bands.indices,
@@ -781,12 +781,12 @@ private fun EqualizerGraph(
                             EqualizerProfiles.removeBand(selectedBand)
                             selectedBand = (selectedBand - 1).coerceAtLeast(0)
                         },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.remove)) }
                     TextButton(
                         enabled = EqualizerProfiles.bandHasChanges(selectedBand),
                         onClick = { EqualizerProfiles.resetBand(selectedBand) },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.reset)) }
                 }
                 Row(
@@ -910,7 +910,7 @@ private fun EqualizerGraph(
                     }
                 }
                 if (editableBand(selectedBand)) {
-                    TextButton(onClick = { editingQ = true }, shapes = ButtonDefaults.shapes()) {
+                    TextButton(onClick = { editingQ = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                         Text(stringResource(Res.string.metroeq_q_value, (round(band.q * 100) / 100).toString()))
                     }
                     Text(
@@ -945,10 +945,10 @@ private fun EqualizerGraph(
                     TextButton(onClick = {
                         updateQ(selectedBand, qValue.toDouble())
                         editingQ = false
-                    }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.save)) }
+                    }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.save)) }
                 },
                 dismissButton = {
-                    TextButton(onClick = { editingQ = false }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                    TextButton(onClick = { editingQ = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                 },
             )
         }
@@ -1140,7 +1140,7 @@ private fun AutoEqPage(
                         null
                     } else {
                         {
-                            IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes()) {
+                            IconButton(onClick = { query = "" }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Icon(CrystaListIcons.Outlined.Close, contentDescription = stringResource(Res.string.close))
                             }
                         }
@@ -1277,7 +1277,7 @@ private fun AutoEqError(onRetry: () -> Unit) {
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        FilledTonalButton(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+        FilledTonalButton(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
     }
 }
 
@@ -1293,7 +1293,7 @@ private fun DialogHeader(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         onBack?.let {
-            IconButton(onClick = it, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = it, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(Res.string.back))
             }
         }
@@ -1303,7 +1303,7 @@ private fun DialogHeader(
                 Text(it, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
-        IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes()) {
+        IconButton(onClick = onDismiss, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
             Icon(CrystaListIcons.Outlined.Close, contentDescription = stringResource(Res.string.close))
         }
     }

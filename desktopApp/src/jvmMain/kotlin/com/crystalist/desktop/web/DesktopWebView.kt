@@ -23,6 +23,7 @@ import io.github.kdroidfilter.webview.web.WebView
 import io.github.kdroidfilter.webview.web.WebViewNavigator
 import io.github.kdroidfilter.webview.web.WebViewState
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 internal fun DesktopWebView(
@@ -44,7 +45,7 @@ internal fun DesktopWebViewError() {
             title = { Text(stringResource(Res.string.error_title)) },
             text = { Text(failure?.message ?: stringResource(Res.string.error_unknown)) },
             confirmButton = {
-                TextButton(onClick = { dismissed = true }, shapes = ButtonDefaults.shapes()) {
+                TextButton(onClick = { dismissed = true }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                     Text(stringResource(Res.string.close))
                 }
             },

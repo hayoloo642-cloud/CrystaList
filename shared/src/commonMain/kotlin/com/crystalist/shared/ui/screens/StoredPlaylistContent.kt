@@ -84,6 +84,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import kotlin.concurrent.Volatile
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 class PendingCollectionPlayState {
     @Volatile
@@ -525,12 +526,12 @@ fun StoredPlaylistContent(
                             IconButton(
                                 modifier = Modifier.navigationPopupSource(),
                                 onClick = { onTrackMenu(song) },
-                                shapes = IconButtonDefaults.shapes(),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) {
                                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.menu))
                             }
                             if (selectionEnabled) {
-                                IconButton(onClick = { onRemoveSongs(setOf(song.id)) }, shapes = IconButtonDefaults.shapes()) {
+                                IconButton(onClick = { onRemoveSongs(setOf(song.id)) }, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                     Icon(
                                         CrystaListIcons.Outlined.Delete,
                                         contentDescription = stringResource(Res.string.remove_from_device_desc),
@@ -562,13 +563,13 @@ fun StoredPlaylistContent(
                         pendingRemoval = null
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.remove)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = { pendingRemoval = null },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -586,11 +587,11 @@ fun StoredPlaylistContent(
                         confirmClear = false
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.clear)) }
             },
             dismissButton = {
-                TextButton(onClick = { confirmClear = false }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = { confirmClear = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             },
         )
     }

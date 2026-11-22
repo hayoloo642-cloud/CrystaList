@@ -77,6 +77,7 @@ import com.crystalist.shared.utils.semitonesToPlaybackPitch
 import com.crystalist.shared.utils.stepTempoPitchValue
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun TempoPitchControls(
@@ -123,11 +124,11 @@ fun TempoPitchControls(
                         Settings.shared.saveTempoPitchPreset(presetName, speed, pitch)
                         savingPreset = false
                     },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.save)) }
             },
             dismissButton = {
-                TextButton(onClick = { savingPreset = false }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = { savingPreset = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             },
         )
     }
@@ -139,12 +140,12 @@ fun TempoPitchControls(
                 TextButton(onClick = {
                     Settings.shared.deleteTempoPitchPreset(preset.id)
                     deletingPresetId = null
-                }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.delete)) }
+                }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.delete)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = { deletingPresetId = null },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )
@@ -176,7 +177,7 @@ fun TempoPitchControls(
         TextButton(modifier = Modifier.navigationPopupSource(), onClick = {
             presetName = ""
             savingPreset = true
-        }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.tempo_pitch_save_preset)) }
+        }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.tempo_pitch_save_preset)) }
         if (presets.isNotEmpty()) {
             Text(stringResource(Res.string.tempo_pitch_presets))
             presets.forEach { preset ->
@@ -185,11 +186,11 @@ fun TempoPitchControls(
                         onClick = { preset.apply(speedEnabled, varispeed, onSpeedChange, onPitchChange) },
                         enabled = preset.canApply(speedEnabled, varispeed, onPitchChange != null),
                         modifier = Modifier.weight(1f),
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(preset.name) }
                     TextButton(
                         onClick = { deletingPresetId = preset.id },
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(Res.string.delete)) }
                 }
             }
@@ -204,10 +205,10 @@ fun TempoPitchControls(
                     if (speedEnabled) applySpeed(1f)
                     if (!varispeed) onPitchChange?.invoke(1f)
                 },
-                shapes = ButtonDefaults.shapes(),
+                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) { Text(stringResource(Res.string.reset)) }
             Spacer(Modifier.width(8.dp))
-            Button(onClick = onDone, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.done)) }
+            Button(onClick = onDone, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.done)) }
         }
     }
 }
@@ -230,12 +231,12 @@ private fun TempoPitchSlider(
     var editing by rememberSaveable { mutableStateOf(false) }
     Text(label)
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        TextButton(onClick = { editing = true }, enabled = enabled, shapes = ButtonDefaults.shapes()) { Text(valueText) }
+        TextButton(onClick = { editing = true }, enabled = enabled, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(valueText) }
         Spacer(Modifier.weight(1f))
         TextButton(
             onClick = { onValueChange(defaultValue) },
             enabled = enabled && value != defaultValue,
-            shapes = ButtonDefaults.shapes(),
+            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Text(stringResource(Res.string.reset))
         }
@@ -244,7 +245,7 @@ private fun TempoPitchSlider(
         IconButton(
             onClick = { onValueChange(stepTempoPitchValue(value, -0.05f, range)) },
             enabled = enabled && value > range.start,
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Filled.Remove, stringResource(Res.string.tempo_pitch_decrease, label))
         }
@@ -270,7 +271,7 @@ private fun TempoPitchSlider(
         IconButton(
             onClick = { onValueChange(stepTempoPitchValue(value, 0.05f, range)) },
             enabled = enabled && value < range.endInclusive,
-            shapes = IconButtonDefaults.shapes(),
+            shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
         ) {
             Icon(CrystaListIcons.Filled.Add, stringResource(Res.string.tempo_pitch_increase, label))
         }
@@ -324,11 +325,11 @@ private fun TempoPitchSlider(
                 TextButton(
                     onClick = confirm,
                     enabled = parsed != null,
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.done)) }
             },
             dismissButton = {
-                TextButton(onClick = { editing = false }, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                TextButton(onClick = { editing = false }, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
             },
         )
     }

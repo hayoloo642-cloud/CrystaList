@@ -240,7 +240,7 @@ internal fun PlayerBottomControls(
                             }
                         },
                         modifier = Modifier.size(touchTarget),
-                        shapes = IconButtonDefaults.shapes(),
+                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Icon(
                             imageVector =

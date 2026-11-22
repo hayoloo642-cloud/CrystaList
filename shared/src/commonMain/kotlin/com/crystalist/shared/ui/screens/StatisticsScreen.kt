@@ -368,7 +368,7 @@ fun StatisticsScreen(
                                                         .fillMaxWidth()
                                                         .height(ButtonDefaults.MediumContainerHeight)
                                                         .tvFocusHighlight(CircleShape),
-                                                shapes = ButtonDefaults.shapes(),
+                                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                             ) {
                                                 Icon(CrystaListIcons.Rounded.Shuffle, null)
                                                 Spacer(Modifier.width(8.dp))
@@ -471,7 +471,7 @@ fun StatisticsScreen(
 
 @Composable
 private fun BackButton(onBack: () -> Unit) {
-    IconButton(onClick = onBack, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = IconButtonDefaults.shapes()) {
+    IconButton(onClick = onBack, modifier = Modifier.tvFocusHighlight(CircleShape), shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
         Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
     }
 }
@@ -780,7 +780,7 @@ fun StatisticsDetailScreen(
                             )
                         }
                         onItemMenu?.let { menu ->
-                            IconButton(onClick = { menu(item) }, enabled = !isLoading, shapes = IconButtonDefaults.shapes()) {
+                            IconButton(onClick = { menu(item) }, enabled = !isLoading, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                                 Icon(CrystaListIcons.Default.MoreVert, stringResource(Res.string.more_options_for, item.title))
                             }
                         }
@@ -899,7 +899,7 @@ private fun StatisticsCarousel(
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
-            FilledIconButton(onClick = onOpenDetail, shapes = IconButtonDefaults.shapes()) {
+            FilledIconButton(onClick = onOpenDetail, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(CrystaListIcons.AutoMirrored.Filled.KeyboardArrowRight, stringResource(Res.string.see_all))
             }
         }

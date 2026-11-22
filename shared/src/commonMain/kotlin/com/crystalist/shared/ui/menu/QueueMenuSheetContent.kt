@@ -156,7 +156,7 @@ private fun QueueMenuHeader(
         }
 
         onLike?.let { action ->
-            IconButton(onClick = action, shapes = IconButtonDefaults.shapes()) {
+            IconButton(onClick = action, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                 Icon(
                     imageVector = if (isLiked) CrystaListIcons.Filled.Favorite else CrystaListIcons.Outlined.FavoriteBorder,
                     contentDescription = stringResource(if (isLiked) Res.string.unlike else Res.string.action_like),

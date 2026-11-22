@@ -1682,7 +1682,7 @@ fun LyricsView(
                             ),
                             modifier = Modifier.weight(1f).semantics { liveRegion = LiveRegionMode.Polite },
                         )
-                        TextButton(onClick = selection::clear, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.cancel)) }
+                        TextButton(onClick = selection::clear, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.cancel)) }
                         TextButton(
                             onClick = {
                                 onShareSelection?.invoke(
@@ -1692,7 +1692,7 @@ fun LyricsView(
                                     ),
                                 )
                             },
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) {
                             Text(stringResource(Res.string.share))
                         }

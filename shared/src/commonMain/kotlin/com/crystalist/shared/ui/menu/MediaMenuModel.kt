@@ -92,6 +92,7 @@ import com.crystalist.shared.ui.utils.verticalScrollWithDrag
 import com.crystalist.shared.utils.monthlyAudienceText
 import com.crystalist.shared.utils.parseAudienceCount
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 enum class MediaDownloadState {
     NOT_DOWNLOADED,
@@ -148,7 +149,7 @@ fun artistNavigationMenuAction(
             confirmButton = {
                 TextButton(
                     onClick = { choosingArtist = false },
-                    shapes = ButtonDefaults.shapes(),
+                    shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) { Text(stringResource(Res.string.cancel)) }
             },
         )

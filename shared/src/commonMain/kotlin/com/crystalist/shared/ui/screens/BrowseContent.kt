@@ -144,7 +144,7 @@ fun BrowseContent(
                 },
                 navigationIcon = {
                     if (onBackClick != null) {
-                        IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes()) {
+                        IconButton(onClick = onBackClick, shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) {
                             Icon(CrystaListIcons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                         }
                     }
@@ -168,7 +168,7 @@ fun BrowseContent(
                     verticalArrangement = Arrangement.Center,
                 ) {
                     Text(error, color = MaterialTheme.colorScheme.error)
-                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                 }
             }
 
@@ -393,7 +393,7 @@ fun BrowseContent(
                             item(key = "browse_error", span = { GridItemSpan(maxLineSpan) }) {
                                 Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
                                     Text(error, color = MaterialTheme.colorScheme.error)
-                                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+                                    Button(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
                                 }
                             }
                         }
@@ -421,7 +421,7 @@ private fun LoadMore(
     Box(Modifier.fillMaxWidth().padding(24.dp), contentAlignment = Alignment.Center) {
         when {
             isLoadingMore -> ContainedLoadingIndicator()
-            error != null -> Button(onClick = onRetry, shapes = ButtonDefaults.shapes()) { Text(stringResource(Res.string.retry)) }
+            error != null -> Button(onClick = onRetry, shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp))) { Text(stringResource(Res.string.retry)) }
         }
     }
 }

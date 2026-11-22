@@ -135,6 +135,7 @@ import org.jetbrains.compose.resources.stringResource
 import kotlin.math.abs
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 @Composable
 fun SleepTimerDialog(
@@ -220,7 +221,7 @@ fun SleepTimerDialog(
                                     onDismiss()
                                 },
                                 modifier = Modifier.tvFocusHighlight(CircleShape),
-                                shapes = ButtonDefaults.shapes(),
+                                shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                             ) { Text(stringResource(Res.string.sleep_timer_end_of_song)) }
                         }
                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -244,7 +245,7 @@ fun SleepTimerDialog(
                                     FilledTonalIconButton(
                                         onClick = { expanded = !expanded },
                                         modifier = Modifier.tvFocusHighlight(CircleShape),
-                                        shapes = IconButtonDefaults.shapes(),
+                                        shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                                     ) {
                                         Icon(
                                             CrystaListIcons.Outlined.KeyboardArrowDown,
@@ -318,14 +319,14 @@ fun SleepTimerDialog(
                                 fadeOut = saved.fadeOut
                             },
                             modifier = Modifier.tvFocusHighlight(CircleShape),
-                            shapes = ButtonDefaults.shapes(),
+                            shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                         ) { Text(stringResource(Res.string.reset)) }
                     }
                     Spacer(Modifier.weight(1f))
                     OutlinedButton(
                         onClick = onDismiss,
                         modifier = Modifier.tvFocusHighlight(CircleShape),
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) {
                         Text(stringResource(if (state.isActive) Res.string.close else Res.string.cancel))
                     }
@@ -346,7 +347,7 @@ fun SleepTimerDialog(
                         },
                         enabled = state.isActive || durationMs != null,
                         modifier = Modifier.tvFocusHighlight(CircleShape),
-                        shapes = ButtonDefaults.shapes(),
+                        shapes = ButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                     ) { Text(stringResource(if (state.isActive) Res.string.sleep_timer_cancel else Res.string.ok)) }
                 }
             }

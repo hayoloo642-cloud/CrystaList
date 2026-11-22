@@ -55,6 +55,7 @@ import com.crystalist.shared.ui.haptics.rememberCrystaListHaptics
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.RoundedCornerShape
 
 data class VintagePlayerControlsText(
     val previous: String,
@@ -166,7 +167,7 @@ fun VintagePlayerControls(
                 enabled = enabled && onSkipPrevious != null,
                 colors = IconButtonDefaults.iconButtonColors(contentColor = sideButtonColor),
                 modifier = primaryButtonModifier.size(buttonSize).tvFocusHighlight(CircleShape),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = CrystaListIcons.Rounded.SkipPrevious,
@@ -190,7 +191,7 @@ fun VintagePlayerControls(
                         ),
                 enabled = enabled,
                 interactionSource = interactionSource,
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 if (isLoading && showLoadingIndicator) {
                     val loadingText = stringResource(Res.string.loading)
@@ -217,7 +218,7 @@ fun VintagePlayerControls(
                 enabled = enabled && onSkipNext != null,
                 colors = IconButtonDefaults.iconButtonColors(contentColor = sideButtonColor),
                 modifier = primaryButtonModifier.size(buttonSize).tvFocusHighlight(CircleShape),
-                shapes = IconButtonDefaults.shapes(),
+                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
             ) {
                 Icon(
                     imageVector = CrystaListIcons.Rounded.SkipNext,
@@ -241,7 +242,7 @@ fun VintagePlayerControls(
                                 },
                         ),
                     modifier = Modifier.tvFocusHighlight(CircleShape).semantics { stateDescription = repeatDescription },
-                    shapes = IconButtonDefaults.shapes(),
+                    shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
                 ) {
                     Icon(
                         imageVector =
