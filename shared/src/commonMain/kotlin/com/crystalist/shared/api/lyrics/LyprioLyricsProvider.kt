@@ -394,7 +394,7 @@ class LyprioLyricsProvider internal constructor(
         private const val ROMANIZATION_HEADER = "X-Lyprio-Romanization"
         private const val CLIENT_ROMANIZATION = "client"
         private const val REQUEST_TIMEOUT_MS = 25_000L
-        internal const val SEARCH_TIMEOUT_MS = 50_000L
+        internal const val SEARCH_TIMEOUT_MS = 8_000L
         private const val MAX_RESPONSE_BYTES = 8 * 1024 * 1024
 
         private const val MAX_TOTAL_WAIT_MS = 20_000L

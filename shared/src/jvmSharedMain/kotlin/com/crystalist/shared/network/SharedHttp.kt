@@ -88,9 +88,11 @@ actual fun createHttpClient(): HttpClient =
             deflate(0.8F)
         }
         install(HttpTimeout) {
-            requestTimeoutMillis = 30_000
-            connectTimeoutMillis = 15_000
-            socketTimeoutMillis = 30_000
+            // 30s requests made a stalled endpoint look like a frozen app; 12s fails fast
+            // and the UI can retry or fall back.
+            requestTimeoutMillis = 12_000
+            connectTimeoutMillis = 8_000
+            socketTimeoutMillis = 15_000
         }
         expectSuccess = false
     }

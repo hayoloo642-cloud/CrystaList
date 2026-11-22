@@ -8,7 +8,9 @@ import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import java.io.File
 
-const val PLAYBACK_PRE_CACHE_DELAY_MS = 5_000L
+// Resolve and cache the next track early: waiting five seconds meant the following
+// song still had to fetch its stream when the user pressed next.
+const val PLAYBACK_PRE_CACHE_DELAY_MS = 1_000L
 const val PLAYBACK_PRE_CACHE_BYTES = 1_048_576L
 
 object PlaybackPreCache {

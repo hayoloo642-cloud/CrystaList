@@ -40,6 +40,9 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
@@ -445,16 +448,35 @@ class LyricsRepository(
             }
         }
 
-        for ((fetchIndex, provider) in fetchOrder.withIndex()) {
-            val index = providers.indexOf(provider).takeIf { it >= 0 } ?: Int.MAX_VALUE
-            currentCoroutineContext().ensureActive()
-            if (bestTimingKind >= preferredTiming && index >= bestProviderIndex) continue
-            val fetch = fetchProviderLyrics(lookupVideoId, title, artist, duration, album, provider, isVideoContext = isVideoContext)
-            acceptFetch(fetch, index)
-            if (bestTimingKind >= preferredTiming &&
-                fetchOrder.drop(fetchIndex + 1).none { providerPriority(it.name, providers) < bestProviderIndex }
-            ) {
-                break
+        // Providers used to run one after another, so one slow source (Lyprio allows 50s)
+        // blocked every lookup. Fetch concurrently, then pick the best by priority so the
+        // wall-clock cost is the slowest single provider instead of the sum of them all.
+        val fetchTargets =
+            fetchOrder.mapNotNull { provider ->
+                val index = providers.indexOf(provider).takeIf { it >= 0 } ?: Int.MAX_VALUE
+                if (bestTimingKind >= preferredTiming && index >= bestProviderIndex) null else provider to index
+            }
+        if (fetchTargets.isNotEmpty()) {
+            val fetched =
+                coroutineScope {
+                    fetchTargets
+                        .map { (provider, index) ->
+                            async {
+                                index to fetchProviderLyrics(
+                                    lookupVideoId,
+                                    title,
+                                    artist,
+                                    duration,
+                                    album,
+                                    provider,
+                                    isVideoContext = isVideoContext,
+                                )
+                            }
+                        }.awaitAll()
+                }
+            for ((index, fetch) in fetched.sortedBy { it.first }) {
+                currentCoroutineContext().ensureActive()
+                acceptFetch(fetch, index)
             }
         }
 
@@ -1547,7 +1569,7 @@ class LyricsRepository(
         const val AI_TRANSLATION_CACHE_VERSION = "v5"
         val LEGACY_AI_TRANSLATION_CACHE_VERSIONS = listOf("v2", "v3", "v4")
         const val SYNCED_TRANSLATION_PREFIX = "CRYSTALIST_TRANSLATION_V2:"
-        const val PROVIDER_TIMEOUT_MS = 10_000L
+        const val PROVIDER_TIMEOUT_MS = 6_000L
         const val PROVIDER_RESULTS_CONCURRENCY = 12
         const val NEGATIVE_CACHE_TTL_MS = 7 * 24 * 60 * 60_000L
     }

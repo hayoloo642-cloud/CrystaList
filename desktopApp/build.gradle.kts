@@ -104,8 +104,8 @@ val desktopMemoryJvmArgs =
         "-XX:MinHeapFreeRatio=10",
         "-XX:MaxHeapFreeRatio=30",
         "-XX:+ExplicitGCInvokesConcurrent",
-        "-XX:ParallelGCThreads=2",
-        "-XX:ConcGCThreads=1",
+        "-XX:ParallelGCThreads=4",
+        "-XX:ConcGCThreads=2",
         // Full C2 compilation: C1-only execution made long sessions and JSON
         // parsing noticeably slower.
         "-XX:ReservedCodeCacheSize=128m",
