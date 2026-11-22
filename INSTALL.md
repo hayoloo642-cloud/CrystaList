@@ -3,43 +3,57 @@
 Download the file for your system from the
 [latest release](https://github.com/hayoloo642-cloud/CrystaList/releases/latest).
 
-## macOS (15+)
+| System | File | What it is |
+| --- | --- | --- |
+| Windows 10/11 | `CrystaList-windows-x64-<version>.exe` | Installer wizard |
+| Linux (x86_64) | `CrystaList-linux-x64-<version>.rpm` | RPM package |
+| Linux (any distro) | `CrystaList-linux-x64-<version>.AppImage` | Portable AppImage |
+| macOS 15+ | `CrystaList-macos-arm64-<version>.dmg` | Apple silicon |
+| macOS 15+ | `CrystaList-macos-x64-<version>.dmg` | Intel |
 
-1. Download `CrystaList-macos-arm64-<version>.dmg` (Apple silicon) or
-   `CrystaList-macos-x64-<version>.dmg` (Intel).
-2. Open the DMG and drag **CrystaList** into Applications.
-3. The build is unsigned, so the first launch needs
-   **System Settings → Privacy & Security → Open Anyway**, or:
+## Windows (.exe)
+
+1. Run `CrystaList-windows-x64-<version>.exe`.
+2. Follow the wizard; it installs per-user by default.
+3. Because the build is unsigned, SmartScreen may warn:
+   **More info → Run anyway**.
+
+## Linux (.rpm)
+
+Fedora/RHEL/openSUSE:
+
+```bash
+sudo rpm -i CrystaList-linux-x64-<version>.rpm
+# or, to let the package manager resolve anything missing:
+sudo dnf install ./CrystaList-linux-x64-<version>.rpm
+```
+
+Debian/Ubuntu users: use the AppImage instead, or convert with `alien`.
+
+## Linux (AppImage)
+
+```bash
+chmod +x CrystaList-linux-x64-<version>.AppImage
+./CrystaList-linux-x64-<version>.AppImage
+```
+
+If FUSE is missing, run `--appimage-extract-and-run`
+(Debian/Ubuntu: `sudo apt install libfuse2t64`).
+
+## macOS (.dmg)
+
+1. Open `CrystaList-macos-<arch>-<version>.dmg` and drag **CrystaList** into
+   Applications.
+2. Unsigned build: use **System Settings → Privacy & Security → Open Anyway**,
+   or clear the quarantine flag once:
    ```bash
    xattr -dr com.apple.quarantine /Applications/CrystaList.app
    ```
 
-Apple silicon builds need macOS 15 or newer.
-
-## Windows (10+)
-
-1. Download `CrystaList-windows-x64-<version>.zip`.
-2. Extract it somewhere permanent, e.g. `C:\Users\<you>\Apps\CrystaList`.
-3. Run `CrystaList.exe` from the extracted folder.
-4. SmartScreen may warn about an unsigned app: **More info → Run anyway**.
-
-Keep the whole extracted folder together; the launcher needs the bundled
-runtime next to it.
-
-## Linux (glibc, x86_64)
-
-1. Download `CrystaList-linux-x64-<version>.AppImage`.
-2. Make it executable and run it:
-   ```bash
-   chmod +x CrystaList-linux-x64-*.AppImage
-   ./CrystaList-linux-x64-*.AppImage
-   ```
-3. If FUSE is missing, run with `--appimage-extract-and-run`.
-   On Debian/Ubuntu: `sudo apt install libfuse2`.
-
 ## Signing
 
-None of the builds are code-signed, so macOS and Windows will show a warning
-the first time. Signing needs an Apple Developer ID and a Windows code-signing
-certificate; see `REBRAND.md` for the remaining upstream services
-(Discord app id, Listen Together server, update channel).
+None of these installers are code-signed yet, so Windows and macOS show a
+one-time warning. Proper signing needs an Apple Developer ID and a Windows
+code-signing certificate. See `REBRAND.md` for the upstream services that
+still need your own credentials (Discord app id, Listen Together server,
+update channel).
