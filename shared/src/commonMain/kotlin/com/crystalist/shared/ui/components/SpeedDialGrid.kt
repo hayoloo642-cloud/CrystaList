@@ -404,13 +404,11 @@ fun SpeedDialGridItem(
             is PodcastItem -> Res.string.view_podcast
             else -> null
         }
-    Box(
+    Column(
         modifier =
             modifier
                 .navigationPopupSource(shape)
                 .graphicsLayer { alpha = if (enabled) 1f else 0.38f }
-                .clip(shape)
-                .focusedItemBorder(shape)
                 .onPreviewKeyEvent { event ->
                     if (enabled && event.type == KeyEventType.KeyDown &&
                         (event.key == Key.Menu || (event.key == Key.F10 && event.isShiftPressed)) &&
@@ -430,87 +428,57 @@ fun SpeedDialGridItem(
                     onLongClick = onShowMenu,
                 ).onSecondaryClick(onShowSecondaryMenu ?: onShowMenu),
     ) {
-        if (displayItem is PlaylistItem) {
-            PlaylistCoverImage(displayItem, Modifier.fillMaxSize().clip(artworkShape))
-        } else if (displayItem.thumbnail.isAutoPlaylistIcon()) {
-            AutoPlaylistThumbnail(displayItem.thumbnail, Modifier.fillMaxSize(), artworkShape)
-        } else if (displayItem.thumbnail != null) {
-            AsyncImage(
-                url = displayItem.displayThumbnailUrl,
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize().clip(artworkShape),
-            )
-        }
-
         Box(
             modifier =
                 Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors =
-                                listOf(
-                                    Color.Transparent,
-                                    Color.Transparent,
-                                    Color.Black.copy(alpha = 0.8f),
-                                ),
-                        ),
-                    ),
-        )
-
-        if (!Settings.shared.uiEnhancements && (item is SongItem || item is EpisodeItem)) {
-            SongThumbnailPlayOverlay(
-                isActive = isCurrent,
-                isPlaying = isPlaying,
-                shape = artworkShape,
-            )
-        }
-
-        Row(
-            modifier =
-                Modifier
-                    .align(Alignment.BottomStart)
                     .fillMaxWidth()
-                    .padding(7.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    .weight(1f)
+                    .clip(shape)
+                    .focusedItemBorder(shape),
         ) {
-            if (item is SongItem) {
-                SongStatusBadges(item)
-            } else if (item is AlbumItem && item.isExplicit) {
-                ExplicitBadge()
+            if (displayItem is PlaylistItem) {
+                PlaylistCoverImage(displayItem, Modifier.fillMaxSize().clip(artworkShape))
+            } else if (displayItem.thumbnail.isAutoPlaylistIcon()) {
+                AutoPlaylistThumbnail(displayItem.thumbnail, Modifier.fillMaxSize(), artworkShape)
+            } else if (displayItem.thumbnail != null) {
+                AsyncImage(
+                    url = displayItem.displayThumbnailUrl,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize().clip(artworkShape),
+                )
             }
-            Text(
-                text = (item as? SongItem)?.let(SongMetadataState::apply)?.title ?: displayItem.title,
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.Medium,
-                color = Color.White,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f),
-            )
-            profileContentDescription?.let {
-                Icon(
-                    CrystaListIcons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = stringResource(it),
-                    tint = Color.White,
-                    modifier = Modifier.size(16.dp),
+
+            if (!Settings.shared.uiEnhancements && (item is SongItem || item is EpisodeItem)) {
+                SongThumbnailPlayOverlay(
+                    isActive = isCurrent,
+                    isPlaying = isPlaying,
+                    shape = artworkShape,
+                )
+            }
+
+            if (isPinned) {
+                SpeedDialPinBadge(Modifier.align(Alignment.TopEnd).padding(6.dp))
+            }
+            if (rollHighlight > 0f) {
+                Box(
+                    Modifier
+                        .matchParentSize()
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = rollHighlight * 0.2f))
+                        .border(3.dp, MaterialTheme.colorScheme.primary.copy(alpha = rollHighlight), shape),
                 )
             }
         }
 
-        if (isPinned) {
-            SpeedDialPinBadge(Modifier.align(Alignment.TopEnd).padding(6.dp))
-        }
-        if (rollHighlight > 0f) {
-            Box(
-                Modifier
-                    .matchParentSize()
-                    .background(MaterialTheme.colorScheme.primary.copy(alpha = rollHighlight * 0.2f))
-                    .border(3.dp, MaterialTheme.colorScheme.primary.copy(alpha = rollHighlight), shape),
-            )
-        }
+        Text(
+            text = (item as? SongItem)?.let(SongMetadataState::apply)?.title ?: displayItem.title,
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth().padding(top = 6.dp, start = 2.dp, end = 2.dp),
+        )
     }
 }
 

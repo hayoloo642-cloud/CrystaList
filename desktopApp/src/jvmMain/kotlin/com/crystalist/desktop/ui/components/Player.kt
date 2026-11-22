@@ -1062,12 +1062,12 @@ fun StandardBottomPlayer(
                                                     },
                                             ),
                                         buttonHeight = controlsButtonHeight,
-                                        showLabels = isWide,
-                                        sideButtonContainerColor = colorScheme.surfaceContainerHighest,
-                                        sideButtonContentColor = colorScheme.onSurfaceVariant,
-                                        centerButtonContainerColor = colorScheme.primaryContainer,
-                                        centerButtonContentColor = colorScheme.onPrimaryContainer,
-                                        useRoundedRect = Settings.shared.useRoundedRectPlayButton,
+                                        showLabels = false,
+                                        sideButtonContainerColor = Color.Transparent,
+                                        sideButtonContentColor = colorScheme.onSurface,
+                                        centerButtonContainerColor = colorScheme.primary,
+                                        centerButtonContentColor = colorScheme.onPrimary,
+                                        useRoundedRect = false,
                                     )
                                 }
                             }

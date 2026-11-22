@@ -56,7 +56,7 @@ fun gridCaptionHeight(largeText: Boolean): Dp =
 
 val ThumbnailCornerRadius = 8.dp
 
-val WideNavigationRailExpandedWidth = 220.dp
+val WideNavigationRailExpandedWidth = 232.dp
 val WideNavigationRailCollapsedWidth = 96.dp
 
 val GridItemSize.thumbnailHeight: Dp

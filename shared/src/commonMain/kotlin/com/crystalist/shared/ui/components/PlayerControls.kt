@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.ButtonDefaults
@@ -205,7 +206,9 @@ fun PlayerPrimaryControls(
     val effectiveSideButtonHeight = sideButtonHeight ?: buttonHeight
     val isCompact = buttonHeight < 52.dp
     val minPlayWidth =
-        if (buttonHeight < 40.dp) {
+        if (!showLabels) {
+            buttonHeight
+        } else if (buttonHeight < 40.dp) {
             44.dp
         } else if (buttonHeight < 48.dp) {
             80.dp
@@ -214,9 +217,11 @@ fun PlayerPrimaryControls(
         } else {
             160.dp
         }
-    val sideShape = RoundedCornerShape(effectiveSideButtonHeight / 2)
+    val sideShape = CircleShape
     val playShape =
-        if (useRoundedRect) {
+        if (!showLabels) {
+            CircleShape
+        } else if (useRoundedRect) {
             RoundedCornerShape(16.dp)
         } else if (isCompact) {
             if (isPlaying) RoundedCornerShape(14.dp) else RoundedCornerShape(28.dp)

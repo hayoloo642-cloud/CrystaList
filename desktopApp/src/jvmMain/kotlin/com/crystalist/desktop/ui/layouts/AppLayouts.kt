@@ -133,7 +133,7 @@ private var selectedNavId by
     mutableStateOf(
         if (defaultOpenTabRoot(Settings.shared.desktopDefaultOpenTab()) == "LIBRARY") NavigationId.LIBRARY else NavigationId.HOME,
     )
-private var isSidebarExpanded by mutableStateOf(false)
+private var isSidebarExpanded by mutableStateOf(true)
 
 private fun currentSelectedNavIndex(
     visibleItems: List<NavItem>,
@@ -454,7 +454,15 @@ private fun WindowScope.AdaptiveDesktopLayout(
 
         if (!playerInTopBar && PlayerState.currentTrack != null) {
             DesktopPlayerVisibility(visible = !PlayerState.isExpanded) {
-                StandardBottomPlayer(colorScheme, toggleWindowFullscreen)
+                Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 6.dp)) {
+                    Surface(
+                        shape = RoundedCornerShape(14.dp),
+                        color = colorScheme.surfaceContainer,
+                        tonalElevation = 2.dp,
+                    ) {
+                        StandardBottomPlayer(colorScheme, toggleWindowFullscreen)
+                    }
+                }
             }
         }
     }

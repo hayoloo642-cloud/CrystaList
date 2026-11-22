@@ -434,7 +434,7 @@ fun LazyListScope.renderHomeShelves(
                         Text(
                             title,
                             style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.onSurface,
                         )
                     }
                 }

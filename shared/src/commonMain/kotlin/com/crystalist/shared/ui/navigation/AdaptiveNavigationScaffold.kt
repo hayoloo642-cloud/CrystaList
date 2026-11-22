@@ -607,10 +607,20 @@ private fun <T> DesktopWideNavigationRail(
                                                 Text(
                                                     item.label,
                                                     style = MaterialTheme.typography.labelLarge,
+                                                    fontWeight = if (selected) androidx.compose.ui.text.font.FontWeight.SemiBold else androidx.compose.ui.text.font.FontWeight.Normal,
                                                     maxLines = 1,
                                                     overflow = TextOverflow.Ellipsis,
                                                 )
                                             },
+                                            colors =
+                                                androidx.compose.material3.NavigationDrawerItemDefaults.colors(
+                                                    selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                                                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                                                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                    unselectedTextColor = MaterialTheme.colorScheme.onSurface,
+                                                    containerColor = Color.Transparent,
+                                                ),
                                             modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 2.dp),
                                         )
                                     } else {
