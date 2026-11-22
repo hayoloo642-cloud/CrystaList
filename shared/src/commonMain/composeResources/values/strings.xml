@@ -4025,6 +4025,7 @@
     <string name="exit_fullscreen">Exit fullscreen</string>
     <!-- Translators: Label for fullscreen in the connected-player controls and player menu. -->
     <string name="fullscreen">Fullscreen</string>
+    <string name="apple_music_section">Apple Music</string>
     <!-- Translators: Label for go back in the desktop app. -->
     <string name="go_back">Go back</string>
     <!-- Translators: Label for go forward in the desktop app. -->

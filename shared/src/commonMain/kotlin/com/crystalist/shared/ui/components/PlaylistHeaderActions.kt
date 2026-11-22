@@ -37,6 +37,9 @@ import com.crystalist.shared.generated.resources.remove_from_favorites
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun PlaylistHeaderActions(
@@ -124,11 +127,29 @@ internal fun HeaderPlaybackButtons(
                             .height(buttonHeight)
                             .tvFocusHighlight(shapes.shape)
                     val buttonShapes = ButtonDefaults.shapes(shape = shapes.shape, pressedShape = shapes.pressedShape)
+                    val isPlayButton = (index == 1 && !playFirst) || (index == 0 && playFirst)
                     val content: @Composable RowScope.() -> Unit = {
-                        Icon(icons[index], null, Modifier.size(20.dp))
+                        Icon(
+                            icons[index],
+                            null,
+                            Modifier.size(18.dp),
+                            // Apple Music tints the play glyph red inside a grey pill.
+                            tint = if (isPlayButton) MaterialTheme.colorScheme.primary else LocalContentColor.current,
+                        )
                         Spacer(Modifier.width(8.dp))
-                        Text(label, maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis)
+                        Text(
+                            label,
+                            maxLines = 1,
+                            softWrap = false,
+                            overflow = TextOverflow.Ellipsis,
+                            fontWeight = FontWeight.SemiBold,
+                        )
                     }
+                    val applePillColors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                            contentColor = MaterialTheme.colorScheme.onSurface,
+                        )
                     if (tonalShuffle && index == if (playFirst) 1 else 0) {
                         FilledTonalButton(
                             onClick = callbacks[index],
@@ -136,7 +157,8 @@ internal fun HeaderPlaybackButtons(
                             interactionSource = interactionSource,
                             modifier = buttonModifier,
                             shapes = buttonShapes,
-                            contentPadding = PaddingValues(horizontal = 12.dp),
+                            colors = applePillColors,
+                            contentPadding = PaddingValues(horizontal = 16.dp),
                             content = content,
                         )
                     } else {
@@ -146,7 +168,8 @@ internal fun HeaderPlaybackButtons(
                             interactionSource = interactionSource,
                             modifier = buttonModifier,
                             shapes = buttonShapes,
-                            contentPadding = PaddingValues(horizontal = 12.dp),
+                            colors = applePillColors,
+                            contentPadding = PaddingValues(horizontal = 16.dp),
                             content = content,
                         )
                     }

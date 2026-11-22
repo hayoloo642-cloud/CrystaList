@@ -578,14 +578,22 @@ private fun WindowScope.AppContent(
                                 // Apple Music puts the transport in the top bar, so the default
                                 // layout now opens with the player there. Users can still pick the
                                 // bottom bar in Settings > Appearance.
-                                when (Settings.shared.appLayout) {
-                                    AppLayout.COMFORTABLE,
-                                    AppLayout.EXPRESS,
-                                    -> ExpressLayout(onMaximized, toggleWindowFullscreen) { rootFocusRequester.requestFocus() }
+                                // Apple Music draws the transport in the top bar, so that is the
+                                // default on desktop; Settings > Appearance can move it back down.
+                                when {
+                                    Settings.shared.desktopPlayerInTopBar ->
+                                        FocusedLayout(onMaximized, toggleWindowFullscreen) { rootFocusRequester.requestFocus() }
 
-                                    AppLayout.DYNAMIC,
-                                    AppLayout.FOCUSED,
-                                    -> FocusedLayout(onMaximized, toggleWindowFullscreen) { rootFocusRequester.requestFocus() }
+                                    else ->
+                                        when (Settings.shared.appLayout) {
+                                            AppLayout.COMFORTABLE,
+                                            AppLayout.EXPRESS,
+                                            -> ExpressLayout(onMaximized, toggleWindowFullscreen) { rootFocusRequester.requestFocus() }
+
+                                            AppLayout.DYNAMIC,
+                                            AppLayout.FOCUSED,
+                                            -> FocusedLayout(onMaximized, toggleWindowFullscreen) { rootFocusRequester.requestFocus() }
+                                        }
                                 }
                             }
                         }

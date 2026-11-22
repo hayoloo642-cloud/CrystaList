@@ -60,6 +60,7 @@ import com.crystalist.shared.constants.DeletedPlaylistIdsJsonKey
 import com.crystalist.shared.constants.DensityScaleKey
 import com.crystalist.shared.constants.DesktopRenderBackendKey
 import com.crystalist.shared.constants.DesktopStoppedDownloadIdsJsonKey
+import com.crystalist.shared.constants.DesktopPlayerInTopBarKey
 import com.crystalist.shared.constants.DesktopWindowPlacementKey
 import com.crystalist.shared.constants.DesktopWindowPositionKey
 import com.crystalist.shared.constants.DeviceConnectDefaultDeviceIdKey
@@ -350,6 +351,9 @@ class Settings(
     var enableHapticFeedback by preference(EnableHapticFeedbackKey, true)
 
     var appLayout by preference(AppLayout.EXPRESS)
+
+    /** Desktop only: draw the transport in the top bar like Apple Music. */
+    var desktopPlayerInTopBar by preference(DesktopPlayerInTopBarKey, true)
     var showMiniplayer by preference(false)
     var videoViewerVisible by preference(VideoViewerVisibleKey, false)
     var playVideosInMiniPlayer by preference(PlayVideosInMiniPlayerKey, false)

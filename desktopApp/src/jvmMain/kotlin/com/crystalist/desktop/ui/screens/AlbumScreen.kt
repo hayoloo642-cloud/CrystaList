@@ -104,6 +104,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
+import com.crystalist.shared.utils.formatDuration
 
 private class RetainedAlbumPage {
     var page: AlbumPage? = null
@@ -255,6 +256,15 @@ fun AlbumScreen(
             },
             trackTrailingContent = { song, _ ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Apple Music prints the duration right-aligned before the row menu.
+                    if (song.duration > 0) {
+                        Text(
+                            text = formatDuration(song.duration * 1000L),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(end = 8.dp),
+                        )
+                    }
                     if (selection.active) {
                         Checkbox(checked = selection.isSelected(song.id), onCheckedChange = { selection.toggle(song.id) })
                     } else {

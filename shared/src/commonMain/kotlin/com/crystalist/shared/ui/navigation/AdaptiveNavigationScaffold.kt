@@ -93,6 +93,7 @@ import androidx.window.core.layout.WindowSizeClass
 import com.crystalist.shared.constants.WideNavigationRailCollapsedWidth
 import com.crystalist.shared.constants.WideNavigationRailExpandedWidth
 import com.crystalist.shared.generated.resources.Res
+import com.crystalist.shared.generated.resources.apple_music_section
 import com.crystalist.shared.generated.resources.drag_to_reorder_x
 import com.crystalist.shared.generated.resources.expand_sidebar
 import com.crystalist.shared.ui.haptics.HapticEvent
@@ -434,6 +435,20 @@ fun <T> AdaptiveNavigationScaffold(
 }
 
 @Composable
+@Composable
+private fun SidebarSectionLabel(
+    text: String,
+    visible: Boolean,
+) {
+    if (!visible) return
+    Text(
+        text = text.uppercase(),
+        style = MaterialTheme.typography.labelSmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.fillMaxWidth().padding(start = 16.dp, top = 14.dp, bottom = 4.dp),
+    )
+}
+
 private fun <T> DesktopWideNavigationRail(
     items: List<AdaptiveNavigationItem<T>>,
     visibleItems: List<AdaptiveNavigationItem<T>>,
@@ -566,6 +581,11 @@ private fun <T> DesktopWideNavigationRail(
                                 verticalArrangement = Arrangement.spacedBy(if (isSidebarExpanded) 0.dp else 4.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                             ) {
+                                // Apple Music splits the sidebar into labelled sections.
+                                SidebarSectionLabel(
+                                    text = stringResource(Res.string.apple_music_section),
+                                    visible = isSidebarExpanded,
+                                )
                                 visibleItems.forEach { item ->
                                     val selected = item.key == selectedKey
                                     val icon: @Composable () -> Unit = {

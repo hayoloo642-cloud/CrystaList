@@ -15,6 +15,8 @@ val SupportPromptLaunchThresholdKey = "supportPromptLaunchThreshold"
 val DiscordPendingAuthSessionKey = "discordPendingAuthSession"
 val DesktopWindowPositionKey = "desktopWindowPosition"
 val DesktopWindowPlacementKey = "desktopWindowPlacement"
+// Apple Music keeps the transport in the top bar; this overrides the appLayout choice.
+val DesktopPlayerInTopBarKey = "desktopPlayerInTopBar"
 
 val SponsorBlockEnabledKey = "sponsorBlockEnabled"
 
