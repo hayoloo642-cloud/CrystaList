@@ -196,6 +196,18 @@ internal fun SettingsUiRegistryBuilder.registerLyricsSettings(host: SharedSettin
                 description = stringResource(Res.string.lyrics_progressive_blur_description),
                 checked = settings.lyricsProgressiveBlur,
             ) { settings.lyricsProgressiveBlur = it }
+            switch(
+                id = "lyricsAmbientBackground",
+                title = stringResource(Res.string.lyrics_ambient_background),
+                description = stringResource(Res.string.lyrics_ambient_background_desc),
+                checked = settings.lyricsAmbientBackground,
+            ) { settings.lyricsAmbientBackground = it }
+            switch(
+                id = "lyricsKaraokeMode",
+                title = stringResource(Res.string.lyrics_karaoke_mode),
+                description = stringResource(Res.string.lyrics_karaoke_mode_desc),
+                checked = settings.lyricsKaraokeMode,
+            ) { settings.lyricsKaraokeMode = it }
             if (settings.playerBackgroundStyle == PlayerBackgroundStyle.LIQUID) {
                 switch(
                     id = "lyricsPlusLighter",

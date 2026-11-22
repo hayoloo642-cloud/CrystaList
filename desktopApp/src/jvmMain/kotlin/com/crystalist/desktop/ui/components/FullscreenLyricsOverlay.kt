@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
@@ -258,5 +259,4 @@ private fun FullscreenLyricsFooter(karaoke: Boolean) {
     }
 }
 
-private fun Modifier.clipArtwork(): Modifier =
-    this.then(androidx.compose.ui.draw.clip(RoundedCornerShape(8.dp)))
+private fun Modifier.clipArtwork(): Modifier = this.clip(RoundedCornerShape(8.dp))

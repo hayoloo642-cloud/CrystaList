@@ -1226,6 +1226,10 @@
     <!-- Translators: Supporting text beneath the progressive lyrics blur accessibility option. -->
     <string name="lyrics_progressive_blur_description">Gradually blur lines toward the edges while keeping the active line clear</string>
     <!-- Translators: Label for plus lighter blend mode toggle in lyrics settings. -->
+    <string name="lyrics_ambient_background">Ambient lyrics background</string>
+    <string name="lyrics_ambient_background_desc">Wash full-screen lyrics in the current artwork, like Apple Music</string>
+    <string name="lyrics_karaoke_mode">Karaoke mode</string>
+    <string name="lyrics_karaoke_mode_desc">Enlarge the active line and lower the guide vocal when singing along</string>
     <string name="lyrics_plus_lighter">Plus lighter</string>
     <!-- Translators: Supporting text beneath the plus lighter option in lyrics settings. -->
     <string name="lyrics_plus_lighter_desc">Brighten lyrics with plus-lighter blending on liquid backgrounds</string>
