@@ -1,0 +1,160 @@
+name: Build installers
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: installers-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  linux:
+    name: Linux AppImage
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Install packaging dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2
+          chmod +x ./gradlew
+      - name: Generate installer icons
+        run: ./scripts/gen_icons.sh
+      - name: Build AppImage
+        env:
+          LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
+          LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+        run: ./scripts/build_appimage.sh -Pcrystalist.verifyPackaging=false
+      - name: Collect artifact
+        run: |
+          mkdir -p out
+          version="$(sed -n 's/^appVersion=//p' gradle.properties)"
+          cp dist/CrystaList.AppImage "out/CrystaList-linux-x64-${version}.AppImage"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CrystaList-linux-x64
+          path: out/*
+          if-no-files-found: error
+
+  macos:
+    name: macOS DMG
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Generate installer icons
+        run: ./scripts/gen_icons.sh
+      - name: Build DMG
+        env:
+          LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
+          LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :desktopApp:packageReleaseDmg \
+            -Pcrystalist.debug=false \
+            -Pcrystalist.verifyPackaging=false \
+            --no-daemon --no-configuration-cache
+      - name: Collect artifact
+        run: |
+          mkdir -p out
+          version="$(sed -n 's/^appVersion=//p' gradle.properties)"
+          arch="$(uname -m)"
+          [[ "$arch" == "arm64" ]] && label=arm64 || label=x64
+          cp desktopApp/build/compose/binaries/main-release/dmg/*.dmg "out/CrystaList-macos-${label}-${version}.dmg"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CrystaList-macos
+          path: out/*
+          if-no-files-found: error
+
+  windows:
+    name: Windows package
+    runs-on: windows-2025
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build Windows login helper
+        shell: pwsh
+        run: |
+          dotnet publish metro-wv2-helper/metro-wv2-helper.csproj `
+            --configuration Release --runtime win-x64 --self-contained true `
+            --output desktopApp/src/desktopMain/resources/windows `
+            -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:DebugType=None -p:DebugSymbols=false -p:PublishReadyToRun=true
+      - name: Generate installer icons
+        shell: bash
+        run: ./scripts/gen_icons.sh
+      - name: Build Windows ZIP
+        shell: bash
+        env:
+          LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
+          LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
+        run: |
+          ./gradlew :desktopApp:assembleWindowsRelease \
+            -Pcrystalist.debug=false \
+            -Pcrystalist.verifyPackaging=false \
+            -Pcrystalist.desktop.arch=x86_64 \
+            --no-daemon --no-configuration-cache
+      - name: Collect artifact
+        shell: bash
+        run: |
+          mkdir -p out
+          version="$(sed -n 's/^appVersion=//p' gradle.properties)"
+          cp dist/CrystaList-Desktop-Windows.zip "out/CrystaList-windows-x64-${version}.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CrystaList-windows-x64
+          path: out/*
+          if-no-files-found: error
+
+  release:
+    name: Publish release assets
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, macos, windows]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          generate_release_notes: true
