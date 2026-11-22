@@ -25,6 +25,7 @@ import com.crystalist.shared.settings.displayTitle
 import com.crystalist.shared.ui.components.AlertDialog
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun ArtistNameAliasDialog(

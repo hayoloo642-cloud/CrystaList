@@ -24,6 +24,7 @@ import io.github.kdroidfilter.webview.web.WebViewNavigator
 import io.github.kdroidfilter.webview.web.WebViewState
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun DesktopWebView(

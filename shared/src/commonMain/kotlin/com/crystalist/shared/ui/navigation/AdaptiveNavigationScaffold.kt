@@ -621,7 +621,6 @@ private fun <T> DesktopWideNavigationRail(
                                                     selectedTextColor = MaterialTheme.colorScheme.primary,
                                                     unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                                     unselectedTextColor = MaterialTheme.colorScheme.onSurface,
-                                                    containerColor = Color.Transparent,
                                                 ),
                                             modifier = Modifier.fillMaxWidth().heightIn(min = 44.dp).padding(horizontal = 8.dp, vertical = 1.dp),
                                         )

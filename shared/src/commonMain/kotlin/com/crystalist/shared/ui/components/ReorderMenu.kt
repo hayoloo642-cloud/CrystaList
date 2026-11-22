@@ -32,6 +32,7 @@ import com.crystalist.shared.ui.menu.groupedMenuItemShapes
 import com.crystalist.shared.ui.tv.tvFocusHighlight
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 @Composable
 internal fun ReorderMenu(

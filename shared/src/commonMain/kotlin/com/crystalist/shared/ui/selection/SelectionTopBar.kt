@@ -29,6 +29,7 @@ import com.crystalist.shared.ui.navigation.navigationPopupSource
 import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 
 /**
  * The one selection top bar used by every screen: close (X), "N selected", a select-all
