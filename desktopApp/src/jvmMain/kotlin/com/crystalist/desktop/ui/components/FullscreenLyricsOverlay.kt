@@ -119,20 +119,15 @@ fun FullscreenLyricsOverlay(colorScheme: androidx.compose.material3.ColorScheme)
                 modifier = Modifier.widthIn(max = 460.dp).weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Box(
+                com.crystalist.shared.ui.components.images.AsyncImage(
+                    url = artworkUrl,
                     modifier =
                         Modifier
-                            .fillMaxWidth()
-                            .aspectRatio(1f)
-                            .clip(RoundedCornerShape(12.dp))
+                            .size(380.dp)
                             .shadow(28.dp, RoundedCornerShape(12.dp)),
-                ) {
-                    com.crystalist.shared.ui.components.images.AsyncImage(
-                        url = artworkUrl,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
-                    )
-                }
+                    shape = RoundedCornerShape(12.dp),
+                    contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                )
 
                 Spacer(Modifier.height(20.dp))
 
