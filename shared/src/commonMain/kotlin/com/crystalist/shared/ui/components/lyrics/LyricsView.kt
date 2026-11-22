@@ -338,7 +338,14 @@ fun LyricsView(
                 }
             }
 
-    val displayLyrics = remember(lyrics) { mergeBackgroundLyricsEntries(lyrics) }
+    val displayLyrics =
+        remember(lyrics) {
+            val merged = mergeBackgroundLyricsEntries(lyrics)
+            // Providers often ship line-level lyrics only; synthesise word timings so the
+            // Apple word animation still runs. Display-layer only: the stored lyrics and
+            // the "word synced" detection stay untouched.
+            if (Settings.shared.lyricsEstimatedWordTimings) merged.withEstimatedWordTimings() else merged
+        }
     val unsyncedDisplayLyrics =
         remember(displayLyrics) {
             displayLyrics.mapIndexedNotNull { index, entry ->

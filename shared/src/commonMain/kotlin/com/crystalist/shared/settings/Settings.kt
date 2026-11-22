@@ -130,6 +130,7 @@ import com.crystalist.shared.constants.LyricsNeutralColorKey
 import com.crystalist.shared.constants.LyricsOpenRouterOAuthKey
 import com.crystalist.shared.constants.LyricsOpenRouterOAuthSessionKey
 import com.crystalist.shared.constants.LyricsAmbientBackgroundKey
+import com.crystalist.shared.constants.LyricsEstimatedWordTimingsKey
 import com.crystalist.shared.constants.LyricsKaraokeModeKey
 import com.crystalist.shared.constants.LyricsPlusLighterKey
 import com.crystalist.shared.constants.LyricsProgressiveBlurKey
@@ -488,6 +489,9 @@ class Settings(
 
     /** Karaoke presentation: larger active line, quieter guide vocal. */
     var lyricsKaraokeMode by preference(LyricsKaraokeModeKey, false)
+
+    /** Spread line-only lyrics across their words so the word animation still runs. */
+    var lyricsEstimatedWordTimings by preference(LyricsEstimatedWordTimingsKey, true)
     var lyricsNeutralColor by preference(LyricsNeutralColorKey, false)
     var subtitleTextSize by preference(16f)
     var lyricsClickToSeek by preference(true)

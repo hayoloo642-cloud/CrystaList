@@ -1228,6 +1228,8 @@
     <!-- Translators: Label for plus lighter blend mode toggle in lyrics settings. -->
     <string name="lyrics_ambient_background">Ambient lyrics background</string>
     <string name="lyrics_ambient_background_desc">Wash full-screen lyrics in the current artwork, like Apple Music</string>
+    <string name="lyrics_estimated_word_timings">Animate word-by-word when only line timing exists</string>
+    <string name="lyrics_estimated_word_timings_desc">Spreads each line's duration across its words so words light up as you sing. This is an estimate, not studio word timing.</string>
     <string name="lyrics_karaoke_mode">Karaoke mode</string>
     <string name="lyrics_karaoke_mode_desc">Enlarge the active line and lower the guide vocal when singing along</string>
     <string name="lyrics_plus_lighter">Plus lighter</string>

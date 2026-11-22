@@ -203,6 +203,12 @@ internal fun SettingsUiRegistryBuilder.registerLyricsSettings(host: SharedSettin
                 checked = settings.lyricsAmbientBackground,
             ) { settings.lyricsAmbientBackground = it }
             switch(
+                id = "lyricsEstimatedWordTimings",
+                title = stringResource(Res.string.lyrics_estimated_word_timings),
+                description = stringResource(Res.string.lyrics_estimated_word_timings_desc),
+                checked = settings.lyricsEstimatedWordTimings,
+            ) { settings.lyricsEstimatedWordTimings = it }
+            switch(
                 id = "lyricsKaraokeMode",
                 title = stringResource(Res.string.lyrics_karaoke_mode),
                 description = stringResource(Res.string.lyrics_karaoke_mode_desc),

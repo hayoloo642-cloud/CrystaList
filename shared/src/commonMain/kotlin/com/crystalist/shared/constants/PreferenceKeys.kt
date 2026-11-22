@@ -82,6 +82,7 @@ val LyricsShareImageStyleKey = "lyricsShareImageStyle"
 val LyricsPlusLighterKey = "lyricsPlusLighter"
 val LyricsAmbientBackgroundKey = "lyricsAmbientBackground"
 val LyricsKaraokeModeKey = "lyricsKaraokeMode"
+val LyricsEstimatedWordTimingsKey = "lyricsEstimatedWordTimings"
 val LyricsNeutralColorKey = "lyricsNeutralColor"
 val LyricsShowOriginalLyricsKey = "lyricsShowOriginalLyrics"
 
