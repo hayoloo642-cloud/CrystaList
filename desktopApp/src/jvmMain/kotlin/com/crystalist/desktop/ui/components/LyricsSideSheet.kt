@@ -53,6 +53,7 @@ import com.crystalist.desktop.state.playback.LyricsState
 import com.crystalist.desktop.state.playback.PlayerState
 import com.crystalist.shared.generated.resources.Res
 import com.crystalist.shared.generated.resources.close
+import com.crystalist.shared.generated.resources.fullscreen
 import com.crystalist.shared.generated.resources.lyrics
 import com.crystalist.shared.generated.resources.lyrics_menu
 import com.crystalist.shared.model.LyricsProvider
