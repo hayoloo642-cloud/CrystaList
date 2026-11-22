@@ -97,22 +97,23 @@ version = appVersion
 
 val desktopMemoryJvmArgs =
     listOf(
-        "-XX:MaxDirectMemorySize=128m",
-        "-Xms32m",
-        "-Xmx384m",
+        "-XX:MaxDirectMemorySize=256m",
+        "-Xms128m",
+        "-Xmx1024m",
         "-XX:+UseG1GC",
         "-XX:MinHeapFreeRatio=10",
-        "-XX:MaxHeapFreeRatio=20",
+        "-XX:MaxHeapFreeRatio=30",
         "-XX:+ExplicitGCInvokesConcurrent",
         "-XX:ParallelGCThreads=2",
         "-XX:ConcGCThreads=1",
-        "-XX:TieredStopAtLevel=1",
-        "-XX:CICompilerCount=1",
-        "-XX:ReservedCodeCacheSize=32m",
+        // Full C2 compilation: C1-only execution made long sessions and JSON
+        // parsing noticeably slower.
+        "-XX:ReservedCodeCacheSize=128m",
+        "-XX:+TieredCompilation",
         "-XX:TrimNativeHeapInterval=5000",
         "-XX:+UseCompactObjectHeaders",
         "-Djdk.nio.maxCachedBufferSize=262144",
-        "-Dskiko.gpu.resourceCacheLimit=64m",
+        "-Dskiko.gpu.resourceCacheLimit=128m",
         "-Dorg.bytedeco.javacpp.maxPhysicalBytes=0",
         "-Dorg.bytedeco.javacpp.maxBytes=0",
     )

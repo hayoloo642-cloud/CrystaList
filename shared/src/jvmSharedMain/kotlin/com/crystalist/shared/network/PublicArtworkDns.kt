@@ -3,9 +3,35 @@ package com.crystalist.shared.network
 import okhttp3.Dns
 import java.net.InetAddress
 import java.net.UnknownHostException
+import java.util.concurrent.ConcurrentHashMap
 
 object PublicArtworkDns : Dns {
-    override fun lookup(hostname: String): List<InetAddress> = artworkAddresses(hostname, Dns.SYSTEM.lookup(hostname))
+    private const val CACHE_TTL_MS = 10 * 60 * 1000L
+
+    private class Entry(
+        val addresses: List<InetAddress>,
+        val expiresAt: Long,
+    )
+
+    private val cache = ConcurrentHashMap<String, Entry>()
+
+    override fun lookup(hostname: String): List<InetAddress> {
+        val now = System.currentTimeMillis()
+        cache[hostname]?.let { entry ->
+            if (now < entry.expiresAt) return entry.addresses
+            cache.remove(hostname)
+        }
+        // Artwork grids resolve the same handful of CDN hosts constantly, so keep
+        // the validated result for a short window instead of asking the resolver
+        // on every thumbnail request.
+        val addresses = artworkAddresses(hostname, Dns.SYSTEM.lookup(hostname))
+        cache[hostname] = Entry(addresses, now + CACHE_TTL_MS)
+        if (cache.size > 256) {
+            val cutoff = now
+            cache.entries.removeIf { it.value.expiresAt <= cutoff }
+        }
+        return addresses
+    }
 }
 
 internal fun artworkAddresses(

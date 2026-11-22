@@ -33,9 +33,19 @@ import okio.buffer
 import java.io.File
 import java.io.IOException
 import okhttp3.Interceptor as OkHttpInterceptor
+import okhttp3.OkHttpClient
 
 private const val MAX_REMOTE_ARTWORK_BYTES = 12L * 1024 * 1024
-private const val MEMORY_CACHE_BYTES = 16L * 1024 * 1024
+private const val MEMORY_CACHE_BYTES = 64L * 1024 * 1024
+
+/** Artwork-only client: shared pool plus the public-address DNS guard. */
+private val artworkHttpClient: OkHttpClient by lazy {
+    sharedOkHttpClient
+        .newBuilder()
+        .dns(PublicArtworkDns)
+        .addNetworkInterceptor(ResponseSizeLimitInterceptor)
+        .build()
+}
 
 object DesktopImageLoader {
     private var imageLoader: ImageLoader? = null
@@ -61,13 +71,9 @@ object DesktopImageLoader {
                     add(
                         OkHttpNetworkFetcherFactory(
                             concurrentRequestStrategy = { DeDupeConcurrentRequestStrategy() },
-                            callFactory = {
-                                sharedOkHttpClient
-                                    .newBuilder()
-                                    .dns(PublicArtworkDns)
-                                    .addNetworkInterceptor(ResponseSizeLimitInterceptor)
-                                    .build()
-                            },
+                            // Build once: rebuilding per call throws away the connection pool
+                            // and re-creates the dispatcher for every thumbnail.
+                            callFactory = { artworkHttpClient },
                         ),
                     )
                 }.memoryCache {

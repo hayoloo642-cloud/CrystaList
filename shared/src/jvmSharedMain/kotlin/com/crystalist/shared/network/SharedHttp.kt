@@ -28,7 +28,15 @@ actual fun Throwable.isHttpTransportException(): Boolean = this is IOException
 val sharedOkHttpClient: OkHttpClient by lazy {
     OkHttpClient
         .Builder()
-        .connectionPool(ConnectionPool(10, 5, TimeUnit.MINUTES))
+        // Keep more warm connections so artwork, API and stream requests reuse TLS sessions.
+        .connectionPool(ConnectionPool(32, 5, TimeUnit.MINUTES))
+        .retryOnConnectionFailure(true)
+        .dispatcher(
+            okhttp3.Dispatcher().apply {
+                maxRequests = 128
+                maxRequestsPerHost = 32
+            },
+        )
         .eventListenerFactory {
             object : EventListener() {
                 override fun callFailed(
