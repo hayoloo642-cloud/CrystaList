@@ -435,7 +435,6 @@ fun <T> AdaptiveNavigationScaffold(
 }
 
 @Composable
-@Composable
 private fun SidebarSectionLabel(
     text: String,
     visible: Boolean,
@@ -449,6 +448,7 @@ private fun SidebarSectionLabel(
     )
 }
 
+@Composable
 private fun <T> DesktopWideNavigationRail(
     items: List<AdaptiveNavigationItem<T>>,
     visibleItems: List<AdaptiveNavigationItem<T>>,
