@@ -488,7 +488,7 @@ class Settings(
     var subtitleTextSize by preference(16f)
     var lyricsClickToSeek by preference(true)
     var showLyricsOnPlayer by preference(ShowLyricsOnPlayerKey, false)
-    var lyricsActiveByRealTiming by preference(LyricsActiveByRealTimingKey, false)
+    var lyricsActiveByRealTiming by preference(LyricsActiveByRealTimingKey, true)
     var lyricsProgressiveBlur by preference(LyricsProgressiveBlurKey, false)
 
     var lyricsTextPosition by preference("CENTER")
@@ -497,7 +497,7 @@ class Settings(
     var lyricsAutoScroll by preference(true)
     var lyricsProviderOrder by preference(LyricsProvider.userConfigurable.joinToString(",") { it.name })
     var lyricsEnabledProviders by preference("")
-    var preferWordSyncedLyrics by preference(PreferWordSyncedLyricsKey, false)
+    var preferWordSyncedLyrics by preference(PreferWordSyncedLyricsKey, true)
     var canvasContentOrder by preference(CanvasContentOrderKey, "YOUTUBE_MUSIC_VIDEO,SPOTIFY_CANVAS,APPLE_MUSIC")
     var canvasEnabledSources by preference(CanvasEnabledSourcesKey, "")
     var lyricsShowTranslations by preference(false)
