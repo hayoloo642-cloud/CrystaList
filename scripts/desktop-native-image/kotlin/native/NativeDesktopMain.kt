@@ -1,8 +1,8 @@
-package com.metrolist.desktop.nativeimage
+package com.crystalist.desktop.nativeimage
 
-import com.metrolist.desktop.utils.configureDesktopJvmErrorFile
+import com.crystalist.desktop.utils.configureDesktopJvmErrorFile
 import java.nio.file.Path
-import com.metrolist.desktop.main as desktopMain
+import com.crystalist.desktop.main as desktopMain
 
 fun main(args: Array<String>) {
     if (System.getProperty("org.graalvm.nativeimage.imagecode") == "runtime") {
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
         System.setProperty("compose.application.resources.dir", resources.normalize().toString())
         configureDesktopJvmErrorFile()
         // Native executables have no jstack; this writes every Java stack to native_err_pid*.log for hang reports.
-        System.getenv("METROLIST_NATIVE_THREAD_DUMP_SECONDS")?.toLongOrNull()?.let { seconds ->
+        System.getenv("CRYSTALIST_NATIVE_THREAD_DUMP_SECONDS")?.toLongOrNull()?.let { seconds ->
             Thread.ofPlatform().daemon().name("native-thread-dump").start {
                 Thread.sleep(seconds * 1000)
                 for ((thread, stack) in Thread.getAllStackTraces()) {
@@ -36,7 +36,7 @@ fun main(args: Array<String>) {
             }
         }
     }
-    if (System.getProperty("metrolist.native.backendSmoke").toBoolean()) {
+    if (System.getProperty("crystalist.native.backendSmoke").toBoolean()) {
         nativeBackendSmoke()
     } else {
         desktopMain(args)

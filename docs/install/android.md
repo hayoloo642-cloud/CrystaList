@@ -2,9 +2,9 @@
 
 ## Requirements and download
 
-Use Android 7 or later, API 24. Download the universal APK through [the project channels](README.md#get-the-package). The release app ID is `com.metrolist.music`, so it updates the original 13.x app in place; debug uses `com.metrolist.music.debug`.
+Use Android 7 or later, API 24. Download the universal APK through [the project channels](README.md#get-the-package). The release app ID is `com.crystalist.music`, so it updates the original 13.x app in place; debug uses `com.crystalist.music.debug`.
 
-Metrolist is also listed on [Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/MetrolistGroup/Metrolist/), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.metrolist.music) and [OpenAPK](https://www.openapk.net/metrolist/com.metrolist.music/). The [nightly prerelease](https://github.com/MetrolistGroup/Metrolist/releases/tag/nightly) ships `Metrolist.apk` built from `main` and may be unstable.
+CrystaList is also listed on [Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/MetrolistGroup/Metrolist/), [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.crystalist.music) and [OpenAPK](https://www.openapk.net/crystalist/com.crystalist.music/). The [nightly prerelease](https://github.com/MetrolistGroup/Metrolist/releases/tag/nightly) ships `CrystaList.apk` built from `main` and may be unstable.
 
 ## Install and verify
 

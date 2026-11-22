@@ -8,10 +8,10 @@
 
     <application>
         <receiver
-            android:name="com.metrolist.android.update.CrashUpdateInstallReceiver"
+            android:name="com.crystalist.android.update.CrashUpdateInstallReceiver"
             tools:node="remove" />
         <receiver
-            android:name="com.metrolist.android.update.UpdateInstallReceiver"
+            android:name="com.crystalist.android.update.UpdateInstallReceiver"
             tools:node="remove" />
     </application>
 </manifest>

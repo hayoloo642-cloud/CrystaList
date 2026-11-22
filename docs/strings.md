@@ -2,11 +2,11 @@
 
 ## Catalogs
 
-All user-facing text lives in `shared/src/commonMain/composeResources/values*/strings.xml`. Add English only to `values/strings.xml`, including KMP-only keys. Translators maintain locale catalogs through [Weblate](https://translate.metrolist.cc/projects/metrolist-kmp/metrolist-kmp/). Missing translations fall back to base English at runtime.
+All user-facing text lives in `shared/src/commonMain/composeResources/values*/strings.xml`. Add English only to `values/strings.xml`, including KMP-only keys. Translators maintain locale catalogs through [Weblate](https://translate.crystalist.app/projects/crystalist-kmp/crystalist-kmp/). Missing translations fall back to base English at runtime.
 
 Agents and contributors edit only `values/strings.xml`. Never add, remove, rename or reorder keys in `values-*/strings.xml`, and never copy, sync or prune keys there to match the base catalog. Weblate adds new keys to locale catalogs, and its Cleanup translation files add-on drops keys removed from the base catalog; manual edits to those files conflict with its pending commits and lock the translation. The only exception is resolving a Weblate merge, where you keep Weblate's text and fix only what the validators below reject.
 
-Desktop and shared Compose code use `com.metrolist.shared.generated.resources.Res`. Android's `generateAndroidStrings` scans non-test sources in `androidApp/src` and `shared/src/androidMain` for `R.string`, `R.plurals`, `@string` and `@plurals` references. It generates only those keys for each locale. Missing referenced base keys fail the build. Do not create platform-local catalogs or translation tables.
+Desktop and shared Compose code use `com.crystalist.shared.generated.resources.Res`. Android's `generateAndroidStrings` scans non-test sources in `androidApp/src` and `shared/src/androidMain` for `R.string`, `R.plurals`, `@string` and `@plurals` references. It generates only those keys for each locale. Missing referenced base keys fail the build. Do not create platform-local catalogs or translation tables.
 
 Gradle derives bundled language tags from resource directories containing translated entries. Empty Weblate catalogs stay in the repository but do not appear in app-language choices. Desktop uses the same generated tags. Hinglish uses `values-b+hi+Latn` and `hi-Latn`; saved `hin` selections migrate to that tag. `prepareComposeResourceAliases` generates `values-id` from `values-in` and `values-he` from `values-iw` for Compose. Weblate edits the original catalogs, not generated aliases.
 

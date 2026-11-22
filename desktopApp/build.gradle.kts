@@ -37,7 +37,7 @@ val currentOperatingSystem =
         .current()
 val targetArchitecture =
     providers
-        .gradleProperty("metrolist.desktop.arch")
+        .gradleProperty("crystalist.desktop.arch")
         .orElse(System.getProperty("os.arch"))
         .get()
         .lowercase()
@@ -91,7 +91,7 @@ configurations.matching { it.name.startsWith("jvm") }.configureEach {
     exclude(group = "it.krzeminski")
 }
 
-group = "com.metrolist"
+group = "com.crystalist"
 val appVersion = providers.gradleProperty("appVersion").get()
 version = appVersion
 
@@ -205,7 +205,7 @@ tasks.matching { it.name == "proguardReleaseJars" }.configureEach {
                 }
             }
             // Compose unpacks skiko-* JARs for the host; cross-target natives are already loose packaging inputs.
-            val target = if (isSkikoRuntime) File(jar.parentFile, "metrolist-${jar.name}") else jar
+            val target = if (isSkikoRuntime) File(jar.parentFile, "crystalist-${jar.name}") else jar
             Files.move(stripped.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
             if (target != jar) jar.delete()
         }
@@ -563,7 +563,7 @@ tasks.withType<JavaExec>().configureEach {
             detectCursorSize()?.let { size ->
                 environment("XCURSOR_SIZE", size)
             }
-            environment("METROLIST_CURSOR_CONFIGURED", "1")
+            environment("CRYSTALIST_CURSOR_CONFIGURED", "1")
         }
     }
 
@@ -591,13 +591,13 @@ tasks.withType<Test>().configureEach {
 val sentryDebugMetaProperties = layout.buildDirectory.file("generated/sentry/sentry-debug-meta.properties")
 val sentrySourceRevision =
     providers
-        .gradleProperty("metrolist.sourceRevision")
+        .gradleProperty("crystalist.sourceRevision")
         .orElse(providers.environmentVariable("GITHUB_SHA"))
         .map(String::trim)
         .filter { it.matches(Regex("[0-9a-fA-F]{40}")) }
         .orElse("local")
         .get()
-val sentryBundleId = UUID.nameUUIDFromBytes("com.metrolist.desktop:$platform:$appVersion:$sentrySourceRevision".encodeToByteArray())
+val sentryBundleId = UUID.nameUUIDFromBytes("com.crystalist.desktop:$platform:$appVersion:$sentrySourceRevision".encodeToByteArray())
 val generateSentryDebugMetaProperties =
     tasks.register<WriteProperties>("generateSentryDebugMetaProperties") {
         destinationFile.set(sentryDebugMetaProperties)
@@ -616,7 +616,7 @@ tasks.named<ProcessResources>("jvmProcessResources") {
 }
 
 compose.resources {
-    packageOfResClass = "com.metrolist.desktop.generated.resources"
+    packageOfResClass = "com.crystalist.desktop.generated.resources"
 }
 
 // Compose strips command-line tools from its runtime; temporarily restore java to generate the base CDS archive.
@@ -702,9 +702,9 @@ compose.desktop {
             }
         }
 
-        mainClass = "com.metrolist.desktop.MainKt"
+        mainClass = "com.crystalist.desktop.MainKt"
         javaHome =
-            providers.gradleProperty("metrolist.desktop.javaHome").orNull?.let { home ->
+            providers.gradleProperty("crystalist.desktop.javaHome").orNull?.let { home ->
                 val release = Properties().apply { file("$home/release").inputStream().use(::load) }
                 val architecture = release.getProperty("OS_ARCH").trim('"')
                 val expectedArchitectures = if (isArm64) setOf("aarch64", "arm64") else setOf("x86_64", "amd64")
@@ -722,9 +722,9 @@ compose.desktop {
                 "-Dorg.slf4j.simpleLogger.log.org.freedesktop.dbus=warn",
                 "-XX:ErrorFile=${
                     when (platform) {
-                        "linux" -> "\$METROLIST_JVM_ERROR_FILE"
-                        "win" -> "\$USERPROFILE/.local/state/metrolist/logs/hs_err_pid%p.log"
-                        else -> "\$HOME/.local/state/metrolist/logs/hs_err_pid%p.log"
+                        "linux" -> "\$CRYSTALIST_JVM_ERROR_FILE"
+                        "win" -> "\$USERPROFILE/.local/state/crystalist/logs/hs_err_pid%p.log"
+                        else -> "\$HOME/.local/state/crystalist/logs/hs_err_pid%p.log"
                     }
                 }",
             ) + desktopMemoryJvmArgs
@@ -735,7 +735,7 @@ compose.desktop {
                 "mac" -> targetFormats(TargetFormat.Dmg)
                 else -> targetFormats(TargetFormat.Deb, TargetFormat.Rpm, TargetFormat.AppImage)
             }
-            packageName = "Metrolist"
+            packageName = "CrystaList"
             val versionMatch =
                 Regex("""^(\d+)\.(\d+)\.(\d+)(?:-[A-Za-z0-9][A-Za-z0-9._-]*)?(?:\+[0-9A-Za-z.-]+)?$""")
                     .matchEntire(appVersion)
@@ -760,9 +760,9 @@ compose.desktop {
                 } else {
                     versionComponents.joinToString(".")
                 }
-            description = "Metrolist"
-            copyright = "© 2026 Metrolist"
-            vendor = "MetrolistGroup"
+            description = "CrystaList"
+            copyright = "© 2026 CrystaList"
+            vendor = "CrystaListGroup"
 
             appResourcesRootDir.set(nativeResourcesDir)
 
@@ -809,14 +809,14 @@ compose.desktop {
                 jvmArgs += listOf("-Djava.locale.providers=CLDR,SPI", "-Dwebkit.disable.dmabuf.renderer=1")
             }
             macOS {
-                bundleID = "com.metrolist.desktop"
+                bundleID = "com.crystalist.desktop"
                 // Bytedeco's FFmpeg dylibs are built for macOS 15; older systems fail to load them at playback.
                 minimumSystemVersion = "15.0"
                 infoPlist {
                     extraKeysRawXml =
                         """
                         <key>NSLocalNetworkUsageDescription</key>
-                        <string>Metrolist uses the local network to find and control casting devices.</string>
+                        <string>CrystaList uses the local network to find and control casting devices.</string>
                         <key>NSBonjourServices</key>
                         <array>
                             <string>_fcast._tcp</string>
@@ -826,11 +826,11 @@ compose.desktop {
                         <array>
                             <dict>
                                 <key>CFBundleURLName</key>
-                                <string>Metrolist URL</string>
+                                <string>CrystaList URL</string>
                                 <key>CFBundleURLSchemes</key>
                                 <array>
-                                    <string>metrolist</string>
-                                    <string>metrolist-auth</string>
+                                    <string>crystalist</string>
+                                    <string>crystalist-auth</string>
                                 </array>
                             </dict>
                         </array>
@@ -838,7 +838,7 @@ compose.desktop {
                 }
                 iconFile.set(project.file("src/desktopMain/resources/logo.icns"))
                 dmgPackageVersion = packageVersion
-                dockName = "Metrolist"
+                dockName = "CrystaList"
             }
         }
     }
@@ -846,9 +846,9 @@ compose.desktop {
 
 val cdsCache =
     when (platform) {
-        "win" -> "\$LOCALAPPDATA/Metrolist/cache"
-        "mac" -> "\$HOME/Library/Caches/com.metrolist.desktop"
-        else -> "\$METROLIST_CDS_CACHE"
+        "win" -> "\$LOCALAPPDATA/CrystaList/cache"
+        "mac" -> "\$HOME/Library/Caches/com.crystalist.desktop"
+        else -> "\$CRYSTALIST_CDS_CACHE"
     }
 // Compose assigns launcherJvmArgs while registering its tasks after project evaluation.
 afterEvaluate {
@@ -865,7 +865,7 @@ afterEvaluate {
         }
         if (name.startsWith("createReleaseDistributable") || name.startsWith("packageRelease")) {
             launcherJvmArgs.addAll(
-                "-Dmetrolist.cds.cache=$cdsCache",
+                "-Dcrystalist.cds.cache=$cdsCache",
                 "-Xshare:auto",
                 "-XX:+VerifySharedSpaces",
                 "-XX:+AutoCreateSharedArchive",

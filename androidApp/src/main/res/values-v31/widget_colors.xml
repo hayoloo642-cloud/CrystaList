@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Wallpaper colors, light: Accent 2 surface (tone 95), Accent 1 controls. -->
-    <color name="widget_surface">@android:color/system_accent2_50</color>
-    <color name="widget_surface_highest">@color/widget_primary_container</color>
-    <color name="widget_on_surface">@android:color/system_accent2_900</color>
-    <color name="widget_on_surface_variant">@android:color/system_accent2_700</color>
-    <color name="widget_primary">@android:color/system_accent1_600</color>
-    <color name="widget_on_primary">@android:color/system_accent1_0</color>
-    <color name="widget_primary_container">@android:color/system_accent1_100</color>
-    <color name="widget_on_primary_container">@android:color/system_accent1_900</color>
-    <color name="widget_secondary_container">@color/widget_primary_container</color>
-    <color name="widget_on_secondary_container">@color/widget_on_primary_container</color>
-    <color name="widget_tertiary">@color/widget_primary</color>
-    <color name="widget_on_tertiary">@color/widget_on_primary</color>
-    <color name="widget_tertiary_container">@android:color/system_accent3_100</color>
-    <color name="widget_on_tertiary_container">@android:color/system_accent3_900</color>
+    <!-- Apple Music light: fixed brand palette on Android 12+. -->
+    <color name="widget_surface">#FFFFFF</color>
+    <color name="widget_surface_highest">#F2F2F7</color>
+    <color name="widget_on_surface">#1C1C1E</color>
+    <color name="widget_on_surface_variant">#6C6C70</color>
+    <color name="widget_primary">#FA243C</color>
+    <color name="widget_on_primary">#FFFFFF</color>
+    <color name="widget_primary_container">#FFD9DE</color>
+    <color name="widget_on_primary_container">#8A0018</color>
+    <color name="widget_secondary_container">#FFE1E7</color>
+    <color name="widget_on_secondary_container">#5C0016</color>
+    <color name="widget_tertiary">#0071E3</color>
+    <color name="widget_on_tertiary">#FFFFFF</color>
+    <color name="widget_tertiary_container">#DCEBFF</color>
+    <color name="widget_on_tertiary_container">#00305C</color>
 </resources>

@@ -1,1 +1,1 @@
-Material 3 YouTube Music client for Android
+An Apple Music inspired YouTube Music client

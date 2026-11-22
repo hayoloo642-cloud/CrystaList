@@ -13,8 +13,8 @@ class CollectAndroidApksTest(unittest.TestCase):
             self.metadata(root, "release", ["universal"])
             (root / "stale.apk").write_bytes(b"stale")
             collect(root, root / "dist", "14.0.0-rc0", "release")
-            self.assertEqual({"Metrolist.apk"}, {path.name for path in (root / "dist").iterdir()})
-            self.assertEqual(b"universal", (root / "dist/Metrolist.apk").read_bytes())
+            self.assertEqual({"CrystaList.apk"}, {path.name for path in (root / "dist").iterdir()})
+            self.assertEqual(b"universal", (root / "dist/CrystaList.apk").read_bytes())
             self.metadata(root, "release", ["universal", "arm64-v8a"])
             with self.assertRaises(ValueError):
                 collect(root, root / "split", "14.0.0-rc0", "release")
@@ -28,7 +28,7 @@ class CollectAndroidApksTest(unittest.TestCase):
             root = Path(directory)
             metadata = self.metadata(root, "debug", ["universal"])
             collect(root, root / "dist", "14.0.0-rc0", "debug")
-            self.assertTrue((root / "dist/metrolist-android-14.0.0-rc0-debug.apk").is_file())
+            self.assertTrue((root / "dist/crystalist-android-14.0.0-rc0-debug.apk").is_file())
             with self.assertRaises(ValueError):
                 collect(root, root / "bad", "14.0.0-rc0", "release")
             with self.assertRaises(ValueError):
@@ -47,7 +47,7 @@ class CollectAndroidApksTest(unittest.TestCase):
             root = Path(directory)
             self.metadata(root, "izzy", ["universal"])
             collect(root, root / "dist", "14.0.0-rc0", "izzy")
-            self.assertEqual({"Metrolist-izzy.apk"}, {path.name for path in (root / "dist").iterdir()})
+            self.assertEqual({"CrystaList-izzy.apk"}, {path.name for path in (root / "dist").iterdir()})
 
     def test_nightly_build_metadata_version(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -56,7 +56,7 @@ class CollectAndroidApksTest(unittest.TestCase):
             metadata["elements"][0]["versionName"] = "14.0.0+abcdef0"
             (root / "output-metadata.json").write_text(json.dumps(metadata))
             collect(root, root / "dist", "14.0.0+abcdef0", "release")
-            self.assertTrue((root / "dist/Metrolist.apk").is_file())
+            self.assertTrue((root / "dist/CrystaList.apk").is_file())
             with self.assertRaises(ValueError):
                 collect(root, root / "other", "14.0.0", "release")
 

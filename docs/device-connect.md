@@ -2,7 +2,7 @@
 
 ## Availability
 
-Device Connect uses authenticated encrypted JSON under `shared/src/commonMain/kotlin/com/metrolist/shared/deviceconnect/`. It does not use Listen Together protobufs. The audible target owns playback; controllers send commands and display state.
+Device Connect uses authenticated encrypted JSON under `shared/src/commonMain/kotlin/com/crystalist/shared/deviceconnect/`. It does not use Listen Together protobufs. The audible target owns playback; controllers send commands and display state.
 
 Android and desktop expose it in Integrations and the player device picker. It defaults off. Disabling stops discovery, listeners, sessions and retries without deleting paired devices. iOS does not expose it because its cryptography is unimplemented.
 
@@ -62,9 +62,9 @@ Unresolved account IDs cannot pair. Exchange the `resolved` flag without an acco
 
 Run affected [platform checks](checks.md#platform-checks), including Device Connect protocol, crypto, admission, outbox, chunk and controller tests. Native checks need two clients for mutual approval, reconnect, direct IP, transfer, pull-back, clock correction and queue reordering with duplicate songs. iOS stubs are not a working peer implementation.
 
-The opt-in `DeviceDiscoveryCpuMeasurementTest` opens real multicast sockets. Set `METROLIST_MEASURE_DISCOVERY=1` and `JAVA_TOOL_OPTIONS=-Djava.awt.headless=true`, then run `:shared:desktopTest --tests '*DeviceDiscoveryCpuMeasurementTest'`. It samples JVM thread CPU time once per second for 25 seconds with discovery off and again after five seconds of discovery. It then checks that two desktop controllers resolve each other's TXT records. This measures discovery and registration without the UI, server or playback.
+The opt-in `DeviceDiscoveryCpuMeasurementTest` opens real multicast sockets. Set `CRYSTALIST_MEASURE_DISCOVERY=1` and `JAVA_TOOL_OPTIONS=-Djava.awt.headless=true`, then run `:shared:desktopTest --tests '*DeviceDiscoveryCpuMeasurementTest'`. It samples JVM thread CPU time once per second for 25 seconds with discovery off and again after five seconds of discovery. It then checks that two desktop controllers resolve each other's TXT records. This measures discovery and registration without the UI, server or playback.
 
-On a dual-stack LAN, set `METROLIST_TEST_IPV6_DISCOVERY=1` and run `:shared:desktopTest --tests '*DeviceDiscoveryIpv6InteropTest'` headless. This checks that a dual-stack controller and an IPv6-only peer resolve each other's IPv6 endpoints and TXT records through real multicast sockets.
+On a dual-stack LAN, set `CRYSTALIST_TEST_IPV6_DISCOVERY=1` and run `:shared:desktopTest --tests '*DeviceDiscoveryIpv6InteropTest'` headless. This checks that a dual-stack controller and an IPv6-only peer resolve each other's IPv6 endpoints and TXT records through real multicast sockets.
 
 Linux measurements on one Ethernet interface with IPv4, ULA and link-local IPv6, using the same sampler before and after the fix:
 

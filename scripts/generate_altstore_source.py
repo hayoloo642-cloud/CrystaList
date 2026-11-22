@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Write an AltStore/SideStore source for a stable release IPA.
 
-The release publishes it as `metrolist-altstore.json`, so the stable source URL is
-https://github.com/MetrolistGroup/Metrolist/releases/latest/download/metrolist-altstore.json.
+The release publishes it as `crystalist-altstore.json`, so the stable source URL is
+https://github.com/MetrolistGroup/CrystaList/releases/latest/download/crystalist-altstore.json.
 """
 
 import argparse
@@ -10,21 +10,21 @@ import datetime
 import json
 from pathlib import Path
 
-BUNDLE_ID = "com.metrolist.MetrolistApp"
+BUNDLE_ID = "com.crystalist.CrystaListApp"
 MIN_OS_VERSION = "15.0"
 
 
 def source(repository: str, version: str, ipa: Path, date: str) -> dict:
     raw = f"https://raw.githubusercontent.com/{repository}/v{version}"
     return {
-        "name": "Metrolist",
-        "identifier": "com.metrolist.source",
+        "name": "CrystaList",
+        "identifier": "com.crystalist.source",
         "website": f"https://github.com/{repository}",
         "apps": [
             {
-                "name": "Metrolist",
+                "name": "CrystaList",
                 "bundleIdentifier": BUNDLE_ID,
-                "developerName": "MetrolistGroup",
+                "developerName": "CrystaListGroup",
                 "localizedDescription": "A Material Design YouTube Music client.",
                 "iconURL": f"{raw}/fastlane/metadata/android/en-US/images/icon.png",
                 "versions": [

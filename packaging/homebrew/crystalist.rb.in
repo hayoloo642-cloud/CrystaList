@@ -1,0 +1,19 @@
+cask "crystalist" do
+  arch arm: "arm64", intel: "x64"
+
+  version "@VERSION@"
+  sha256 arm:   "@MACOS_ARM64_SHA256@",
+         intel: "@MACOS_X64_SHA256@"
+
+  url "https://github.com/MetrolistGroup/CrystaList/releases/download/v#{version}/crystalist-desktop-macos-#{arch}-#{version}.dmg"
+  name "CrystaList"
+  desc "YouTube Music desktop client"
+  homepage "https://github.com/MetrolistGroup/CrystaList"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  app "CrystaList.app"
+end

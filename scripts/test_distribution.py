@@ -47,8 +47,8 @@ class DistributionTest(unittest.TestCase):
         installer = next((self.output / 'winget').rglob('*.installer.yaml')).read_text()
         self.assertIn('Silent: --silent\n', installer)
         self.assertIn('Custom: --launch=false', installer)
-        self.assertIn('metrolist-installer-windows-x64-14.0.0.exe', installer)
-        self.assertNotIn('Metrolist-Desktop-windows.zip', installer)
+        self.assertIn('crystalist-installer-windows-x64-14.0.0.exe', installer)
+        self.assertNotIn('CrystaList-Desktop-windows.zip', installer)
         data = json.loads((self.output / 'nix/packaging/release.json').read_text())
         self.assertEqual(set(data['linux']), {'x86_64-linux', 'aarch64-linux'})
         nix_recipe = (self.output / 'nix/packaging/nix/package.nix').read_text()
@@ -61,7 +61,7 @@ class DistributionTest(unittest.TestCase):
         self.assertFalse((self.output / 'flatpak').exists())
         self.assertFalse((self.output / 'aur/PKGBUILD').exists())
         if shutil.which('ruby'):
-            subprocess.run(['ruby', '-c', str(self.output / 'homebrew/Casks/metrolist.rb')], check=True, capture_output=True)
+            subprocess.run(['ruby', '-c', str(self.output / 'homebrew/Casks/crystalist.rb')], check=True, capture_output=True)
 
     def test_generated_nix_flake_keeps_the_matching_input_lock(self):
         self.generate()
@@ -135,9 +135,9 @@ class DistributionTest(unittest.TestCase):
                 if "symbolic-ref" in args:
                     return "origin/main"
                 if "ls-remote" in args:
-                    return "abc refs/heads/build/metrolist-14.0.0" if state == "OPEN" else ""
+                    return "abc refs/heads/build/crystalist-14.0.0" if state == "OPEN" else ""
                 if "diff" in args:
-                    return "Casks/metrolist.rb"
+                    return "Casks/crystalist.rb"
                 if args[:3] == ("gh", "pr", "create"):
                     self.assertIn("--draft", args)
                     self.assertEqual(args[args.index("--base") + 1], "main")
@@ -152,7 +152,7 @@ class DistributionTest(unittest.TestCase):
             self.assertEqual(len(pushes), int(state in ('', 'OPEN')))
             self.assertEqual(len(creations), int(state == ''))
             for args in pushes:
-                self.assertEqual(args[-2:], ('origin', 'build/metrolist-14.0.0'))
+                self.assertEqual(args[-2:], ('origin', 'build/crystalist-14.0.0'))
                 self.assertFalse(any(arg.startswith('--force') for arg in args))
 
     def test_sparse_checkout_can_create_and_update_a_review_branch(self):
@@ -187,12 +187,12 @@ class DistributionTest(unittest.TestCase):
         with patch.dict(os.environ, {"GH_TOKEN": "test"}), patch('propose_distribution.run', side_effect=local_run):
             propose('homebrew', self.output, 'owner/tap', self.version)
             state = "OPEN"
-            cask = self.output / "homebrew/Casks/metrolist.rb"
+            cask = self.output / "homebrew/Casks/crystalist.rb"
             cask.write_text(cask.read_text() + "# Updated recipe\n")
             propose('homebrew', self.output, 'owner/tap', self.version)
         self.assertEqual(len(created), 1)
-        branch = "build/metrolist-14.0.0"
-        self.assertIn("# Updated recipe", run("git", "show", f"{branch}:Casks/metrolist.rb", cwd=remote))
+        branch = "build/crystalist-14.0.0"
+        self.assertIn("# Updated recipe", run("git", "show", f"{branch}:Casks/crystalist.rb", cwd=remote))
         self.assertEqual(run("git", "show", f"{branch}:unrelated", cwd=remote), "keep this file")
         self.assertEqual(run("git", "rev-list", "--count", f"main..{branch}", cwd=remote), "2")
 

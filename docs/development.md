@@ -53,27 +53,27 @@ Use macOS with Xcode, its command-line tools and an installed iOS Simulator runt
 ./scripts/build_ios.sh --sim --run
 ```
 
-The script builds the shared Kotlin framework through the Xcode project and copies the simulator app to `dist/Metrolist.app`. Open `iosApp/iosApp.xcodeproj` to debug the Swift host or configure signing. Direct Xcode builds and the script both derive bundle version metadata from `appVersion` through `scripts/ios_version.sh`.
+The script builds the shared Kotlin framework through the Xcode project and copies the simulator app to `dist/CrystaList.app`. Open `iosApp/iosApp.xcodeproj` to debug the Swift host or configure signing. Direct Xcode builds and the script both derive bundle version metadata from `appVersion` through `scripts/ios_version.sh`.
 
 ```bash
 ./scripts/build_ios.sh --ipa
 ```
 
-This produces an unsigned `dist/Metrolist.ipa`. It needs signing or a sideloading tool before device installation. Linux can compile shared iOS sources but cannot build or run the Xcode app.
+This produces an unsigned `dist/CrystaList.ipa`. It needs signing or a sideloading tool before device installation. Linux can compile shared iOS sources but cannot build or run the Xcode app.
 
 ## Find the code for a change
 
-See [AGENTS.md](../AGENTS.md#modules) for modules and source sets. Put reusable logic in `shared`; keep platform APIs and native lifecycle handling in their platform source sets. Desktop Kotlin is under `desktopApp/src/jvmMain/kotlin/`, but its resources belong in `desktopApp/src/desktopMain/resources/`. The iOS Swift host is under `iosApp/`; its shared Compose entry point is `shared/src/iosMain/kotlin/com/metrolist/shared/MainViewController.kt`.
+See [AGENTS.md](../AGENTS.md#modules) for modules and source sets. Put reusable logic in `shared`; keep platform APIs and native lifecycle handling in their platform source sets. Desktop Kotlin is under `desktopApp/src/jvmMain/kotlin/`, but its resources belong in `desktopApp/src/desktopMain/resources/`. The iOS Swift host is under `iosApp/`; its shared Compose entry point is `shared/src/iosMain/kotlin/com/crystalist/shared/MainViewController.kt`.
 
 | Change | Start here |
 | --- | --- |
-| Screens and components | `androidApp/src/main/kotlin/com/metrolist/android/ui/`, `desktopApp/src/jvmMain/kotlin/com/metrolist/desktop/ui/`, and `shared/src/commonMain/kotlin/com/metrolist/shared/ui/` |
-| Screen state and loading | `shared/src/commonMain/kotlin/com/metrolist/shared/viewmodels/`; Android also has wrappers under `androidApp/.../viewmodels/` |
-| YouTube requests and parsing | `shared/src/commonMain/kotlin/com/metrolist/shared/api/YouTubeRepository.kt` and the adjacent API operations; stream extraction is under `shared/.../youtube/` |
-| Database entities and queries | `shared/src/commonMain/kotlin/com/metrolist/shared/db/`, starting with `MusicDatabase.kt` |
+| Screens and components | `androidApp/src/main/kotlin/com/crystalist/android/ui/`, `desktopApp/src/jvmMain/kotlin/com/crystalist/desktop/ui/`, and `shared/src/commonMain/kotlin/com/crystalist/shared/ui/` |
+| Screen state and loading | `shared/src/commonMain/kotlin/com/crystalist/shared/viewmodels/`; Android also has wrappers under `androidApp/.../viewmodels/` |
+| YouTube requests and parsing | `shared/src/commonMain/kotlin/com/crystalist/shared/api/YouTubeRepository.kt` and the adjacent API operations; stream extraction is under `shared/.../youtube/` |
+| Database entities and queries | `shared/src/commonMain/kotlin/com/crystalist/shared/db/`, starting with `MusicDatabase.kt` |
 | Preferences | `shared/.../constants/PreferenceKeys.kt` and `shared/.../settings/Settings.kt` |
 | Playback | Shared `ui/playback/PlaybackController.kt`, Android `playback/PlayerConnection.kt`, desktop `state/playback/`, and shared `iosMain/.../playback/` |
-| Casting | `shared/src/jvmSharedMain/kotlin/com/metrolist/shared/cast/` |
+| Casting | `shared/src/jvmSharedMain/kotlin/com/crystalist/shared/cast/` |
 
 For example, Android's `ui/screens/HomeScreen.kt` uses the Android `HomeViewModel`, which wraps the shared `HomeViewModel`. The shared class loads API data through `YouTubeRepository` and reads local state through `MusicDatabase`. Follow a screen's imports rather than assuming every platform uses the same wrapper. Koin registrations are in the platform `di/` directories and shared `youtube/di/SharedModule.kt`.
 
@@ -97,11 +97,11 @@ Gradient app icon sources live in `assets/app-icons/gradient/`. Its foreground, 
 
 Android's Original icon matches the README icon (`fastlane/metadata/android/en-US/images/icon.png`). The picker, the adaptive icon and the legacy launcher icon share `ic_launcher_foreground.xml` and `app_icon_original_background.xml`; themed icons use `ic_launcher_monochrome.xml`. Below API 31 it is a white glyph on black. On API 31+ `values-v31/colors.xml` uses the wallpaper's primary container and on-primary-container colors, like the About screen logo. Desktop's `logo.*` files and iOS's `AppIcon.appiconset` use separate artwork.
 
-Shared UI glyphs in `shared/src/commonMain/kotlin/com/metrolist/shared/ui/icons/` come from Google's [Material Symbols SVGs](https://github.com/google/material-design-icons/tree/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/symbols/web) under the [Apache 2.0 license](https://github.com/google/material-design-icons/blob/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/LICENSE), included at `assets/material-symbols/LICENSE`. `scripts/generate_material_symbols.py` pins that revision and maps property names to SVG names. It uses weight 400, grade 0 and optical size 24. Filled uses the Outlined family with `fill1`; Rounded keeps each entry's fill. `FavoriteBorder` always stays hollow. `Movie` and `PictureInPicture` map to `smart_display` and `picture_in_picture_alt`. The script also covers auto-mirrored entries and the Explicit, Saved, Liked and Downloaded status badges, keeping their mirroring, sizes and colors.
+Shared UI glyphs in `shared/src/commonMain/kotlin/com/crystalist/shared/ui/icons/` come from Google's [Material Symbols SVGs](https://github.com/google/material-design-icons/tree/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/symbols/web) under the [Apache 2.0 license](https://github.com/google/material-design-icons/blob/10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7/LICENSE), included at `assets/material-symbols/LICENSE`. `scripts/generate_material_symbols.py` pins that revision and maps property names to SVG names. It uses weight 400, grade 0 and optical size 24. Filled uses the Outlined family with `fill1`; Rounded keeps each entry's fill. `FavoriteBorder` always stays hollow. `Movie` and `PictureInPicture` map to `smart_display` and `picture_in_picture_alt`. The script also covers auto-mirrored entries and the Explicit, Saved, Liked and Downloaded status badges, keeping their mirroring, sizes and colors.
 
 Run `python3 scripts/generate_material_symbols.py regen`, then `verify`. To refresh upstream, pass `--revision <full-commit-sha>`, update `UPSTREAM_REVISION` and record that SHA in the commit body. Paths use the 960-unit grid and `materialSymbol` translates them down by 960. The script normalizes Google's 24-unit SVGs with fontTools. Run `python3 scripts/test_generate_material_symbols.py` and the shared desktop icon test after changing the generator.
 
-The `taskbar` command refreshes Windows' four 75 px ICO glyphs under `desktopApp/src/jvmMain/resources/` with `rsvg-convert` and Pillow, keeping their black outlines, white interiors and PNG encoding. Windows title-bar glyphs in `WindowsWindowFrame.kt` use platform-native artwork. Tray and launcher logos, the eight `MetrolistIconsBrand` marks, iOS app-icon assets and Android notification and widget drawables are separate artwork.
+The `taskbar` command refreshes Windows' four 75 px ICO glyphs under `desktopApp/src/jvmMain/resources/` with `rsvg-convert` and Pillow, keeping their black outlines, white interiors and PNG encoding. Windows title-bar glyphs in `WindowsWindowFrame.kt` use platform-native artwork. Tray and launcher logos, the eight `CrystaListIconsBrand` marks, iOS app-icon assets and Android notification and widget drawables are separate artwork.
 
 ## Navigation
 
@@ -353,7 +353,7 @@ Unchanged JSON lines keep every field, including provider extensions. Editing a 
 
 The first change creates a User fork in the song lyrics row, separate from the provider and translation caches. User lyrics win over refetches and provider selection. Autosave waits 500 ms and flushes on close or backgrounding. Invalid timestamps are reported by line number and saved as a draft beside the recoverable JSON. Revert deletes the fork and draft.
 
-Database open and legacy backup conversion recover rows marked `Manual`, `METROLIST_LOCAL` or `Local` into the User fork, including existing schema 65 installs. Recovery preserves offsets, translations and drafts, leaves active and stashed User forks intact, and clears the old source so Revert stays reverted after a restart.
+Database open and legacy backup conversion recover rows marked `Manual`, `CRYSTALIST_LOCAL` or `Local` into the User fork, including existing schema 65 installs. Recovery preserves offsets, translations and drafts, leaves active and stashed User forks intact, and clears the old source so Revert stays reverted after a restart.
 
 The v13 editor kept the original provider name when editing existing lyrics. Neither v13 nor v14 recorded each row's origin. LRC, plain text and optional cache fields cannot identify every surviving v13 edit. Schema 66 therefore protects every existing nonempty lyrics cache entry once, including v14 fetched entries. Confirmed misses and offset-only rows remain eligible for automatic lookup. Legacy backup conversion applies the same protection to backups from schemas before 66.
 
@@ -401,7 +401,7 @@ Resume checkpoints run every 30 seconds during playback and immediately on pause
 
 Podcast playback reads the local episode checkpoint before starting audio, falling back to YouTube's resume point or progress percentage. Library sync imports account progress only when no local checkpoint exists. Episodes restart when fewer than 30 seconds remain. Episodes with saved progress skip preload promotion so seeking finishes before audio starts.
 
-Backup restore must roll back to the exact prior settings, and exports must reject destinations pointing at the live database or its SQLite sidecars. Restores stage `song.db-wal` beside the backup database and checkpoint it before validation. The database and each sidecar are limited to 512 MiB, with 600 MiB across archive entries. iOS journals the prior settings and database before restoring and recovers an interrupted restore before starting app services. Exports suggest `metrolist-backup-YYYYMMDD-HHMMSS.zip` in local time.
+Backup restore must roll back to the exact prior settings, and exports must reject destinations pointing at the live database or its SQLite sidecars. Restores stage `song.db-wal` beside the backup database and checkpoint it before validation. The database and each sidecar are limited to 512 MiB, with 600 MiB across archive entries. iOS journals the prior settings and database before restoring and recovers an interrupted restore before starting app services. Exports suggest `crystalist-backup-YYYYMMDD-HHMMSS.zip` in local time.
 
 Android backup snapshots use Room's writer connection: `VACUUM INTO` on API 30+, otherwise a copy of the main file and WAL under an exclusive transaction, checkpointed into the staged copy. Each export stages its snapshot and archive in its own private cache directory, including while the destination provider is opening the output. After a failed Android legacy migration, onboarding can create an empty library while keeping the original database under the private `files/legacy-library-recovery/` directory.
 
@@ -427,7 +427,7 @@ Android and desktop offer an opt-in **SponsorBlock (podcasts)** switch. Only ite
 
 Only stable releases offer Sentry reporting. Builds whose app version contains `+` build metadata, including nightlies, never initialize Sentry or send crashes, ANRs, sessions or playback reports. These builds hide Sentry consent in onboarding and Privacy settings and preserve the saved consent for stable releases. Local crash logs and manual report sharing remain available.
 
-Every platform passes reports and breadcrumbs through `redactDiagnosticText` and `redactDiagnosticUrl` in `beforeSend` and `beforeBreadcrumb`, removing credentials, tokens, cookies, query strings, long opaque path segments and IP addresses. Android and desktop send the last 200 playback events, capped at 65,536 characters, as a redacted [Sentry log](https://docs.sentry.io/platforms/java/logs/) with `playback.event_id` linking it to the error, instead of a file attachment. They report playback failures only after recovery is exhausted or a track cannot start. iOS releases are named `com.metrolist.ios@<appVersion>` because sideloaded builds get random bundle IDs, and release workflows upload dSYMs. iOS reports HTTP 5xx automatically only for HTTPS on port 443 to `metrolist.cc`, its subdomains and `metroserverx.meowery.eu`; see [HTTP client errors](https://docs.sentry.io/platforms/apple/configuration/http-client-errors/).
+Every platform passes reports and breadcrumbs through `redactDiagnosticText` and `redactDiagnosticUrl` in `beforeSend` and `beforeBreadcrumb`, removing credentials, tokens, cookies, query strings, long opaque path segments and IP addresses. Android and desktop send the last 200 playback events, capped at 65,536 characters, as a redacted [Sentry log](https://docs.sentry.io/platforms/java/logs/) with `playback.event_id` linking it to the error, instead of a file attachment. They report playback failures only after recovery is exhausted or a track cannot start. iOS releases are named `com.crystalist.ios@<appVersion>` because sideloaded builds get random bundle IDs, and release workflows upload dSYMs. iOS reports HTTP 5xx automatically only for HTTPS on port 443 to `crystalist.app`, its subdomains and `metroserverx.meowery.eu`; see [HTTP client errors](https://docs.sentry.io/platforms/apple/configuration/http-client-errors/).
 
 ### Imports and scrobbling
 

@@ -242,13 +242,13 @@ sentry {
     }
     ignoredBuildTypes.set(setOf("debug", "benchmark", "izzy"))
     tracingInstrumentation.enabled.set(false)
-    org.set("metrolistgroup")
-    projectName.set("metrolist-kmp")
+    org.set("crystalistgroup")
+    projectName.set("crystalist-kmp")
     authToken.set(sentryAuthToken)
 }
 
 android {
-    namespace = "com.metrolist.android"
+    namespace = "com.crystalist.android"
     compileSdk {
         version = release(37) { minorApiLevel = 1 }
     }
@@ -261,7 +261,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.metrolist.music"
+        applicationId = "com.crystalist.music"
         minSdk = 24
         targetSdk = 37
         versionCode = 155
@@ -303,7 +303,7 @@ android {
             isShrinkResources = true
             ndk.debugSymbolLevel = "FULL"
             optimization.keepRules { ignoreFrom("com.materialkolor:material-kolor-android:5.0.1") }
-            manifestPlaceholders["appLabel"] = "Metrolist"
+            manifestPlaceholders["appLabel"] = "CrystaList"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -326,7 +326,7 @@ android {
         }
         debug {
             applicationIdSuffix = ".debug"
-            manifestPlaceholders["appLabel"] = "Metrolist KMP Debug"
+            manifestPlaceholders["appLabel"] = "CrystaList KMP Debug"
         }
     }
 
@@ -420,7 +420,7 @@ androidComponents {
 }
 
 val composeStringsResource =
-    "assets/composeResources/com.metrolist.shared.generated.resources/values/strings.commonMain.cvr"
+    "assets/composeResources/com.crystalist.shared.generated.resources/values/strings.commonMain.cvr"
 
 listOf("debug", "release", "benchmark", "izzy").forEach { variant ->
     val verification =

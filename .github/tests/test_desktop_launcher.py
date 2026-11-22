@@ -22,19 +22,19 @@ class DesktopLauncherTest(unittest.TestCase):
         ).read_text()
         wrapper = source.split("// Write the wrapper script", 1)[1]
         wrapper = wrapper.split('$$"""', 1)[1].split('""".trimIndent()', 1)[0]
-        self.launcher = self.bin / "Metrolist"
+        self.launcher = self.bin / "CrystaList"
         self.executable(self.launcher, wrapper)
         self.executable(
-            self.bin / "Metrolist.bin",
+            self.bin / "CrystaList.bin",
             'printf "%s\\n" "$XCURSOR_THEME" "$XCURSOR_SIZE" '
-            '"$METROLIST_CURSOR_CONFIGURED" "$METROLIST_CDS_CACHE" "$@"',
+            '"$CRYSTALIST_CURSOR_CONFIGURED" "$CRYSTALIST_CDS_CACHE" "$@"',
         )
-        self.native_launcher = self.bin / "Metrolist.native-wrapper"
+        self.native_launcher = self.bin / "CrystaList.native-wrapper"
         native = Path(__file__).resolve().parents[2] / "scripts/desktop-native-image/linux-launcher.sh"
         self.executable(self.native_launcher, native.read_text())
-        native_binary = self.bin.parent / "lib/native/Metrolist"
+        native_binary = self.bin.parent / "lib/native/CrystaList"
         native_binary.parent.mkdir(parents=True)
-        self.executable(native_binary, (self.bin / "Metrolist.bin").read_text())
+        self.executable(native_binary, (self.bin / "CrystaList.bin").read_text())
         self.environment = {
             "PATH": f"{self.tools}:/usr/bin:/bin",
             "HOME": str(self.root / "user home"),
@@ -58,14 +58,14 @@ class DesktopLauncherTest(unittest.TestCase):
         return result.stdout.splitlines()
 
     def test_webview_uses_x11_and_preserves_explicit_backend(self):
-        self.executable(self.bin / "Metrolist.bin", 'printf "%s\n" "$GDK_BACKEND"')
+        self.executable(self.bin / "CrystaList.bin", 'printf "%s\n" "$GDK_BACKEND"')
         self.environment.update(XCURSOR_THEME="Theme", XCURSOR_SIZE="24")
         self.assertEqual(["x11"], self.launch())
         self.environment["GDK_BACKEND"] = "x11,wayland"
         self.assertEqual(["x11,wayland"], self.launch())
 
     def test_missing_display_is_not_guessed_from_global_sockets(self):
-        self.executable(self.bin / "Metrolist.bin", 'printf "%s\\n" "${DISPLAY-unset}"')
+        self.executable(self.bin / "CrystaList.bin", 'printf "%s\\n" "${DISPLAY-unset}"')
         self.environment.update(XCURSOR_THEME="UserTheme", XCURSOR_SIZE="24")
         del self.environment["DISPLAY"]
         self.assertEqual(["unset"], self.launch())
@@ -78,14 +78,14 @@ class DesktopLauncherTest(unittest.TestCase):
             XCURSOR_THEME="UserTheme", XCURSOR_SIZE="32", XDG_CACHE_HOME=cache
         )
         self.assertEqual(
-            ["UserTheme", "32", "1", f"{cache}/metrolist", "argument with spaces"],
+            ["UserTheme", "32", "1", f"{cache}/crystalist", "argument with spaces"],
             self.launch(),
         )
         self.assertFalse(Path(self.environment["PROBE_LOG"]).exists())
 
     def test_crash_file_path_respects_state_directory_and_escapes_hotspot_tokens(self):
         self.executable(
-            self.bin / "Metrolist.bin", 'printf "%s\\n" "$METROLIST_JVM_ERROR_FILE"'
+            self.bin / "CrystaList.bin", 'printf "%s\\n" "$CRYSTALIST_JVM_ERROR_FILE"'
         )
         self.environment.update(XCURSOR_THEME="Theme", XCURSOR_SIZE="24")
         for state in (None, "relative", str(self.root / "state with spaces%p")):
@@ -95,9 +95,9 @@ class DesktopLauncherTest(unittest.TestCase):
                 else:
                     self.environment["XDG_STATE_HOME"] = state
                 directory = (
-                    f"{state}/metrolist/logs"
+                    f"{state}/crystalist/logs"
                     if state and Path(state).is_absolute()
-                    else f'{self.environment["HOME"]}/.local/state/metrolist/logs'
+                    else f'{self.environment["HOME"]}/.local/state/crystalist/logs'
                 )
                 expected = directory.replace("%", "%%") + "/hs_err_pid%p.log"
                 self.assertEqual([expected], self.launch())
@@ -115,7 +115,7 @@ class DesktopLauncherTest(unittest.TestCase):
             ["cursor:theme", "cursor:size"],
             Path(self.environment["PROBE_LOG"]).read_text().splitlines(),
         )
-        self.assertEqual(f'{self.environment["HOME"]}/.cache/metrolist', result[3])
+        self.assertEqual(f'{self.environment["HOME"]}/.cache/crystalist', result[3])
 
     def test_hanging_probe_is_bounded_and_falls_back(self):
         self.executable(self.tools / "hyprctl", "exec sleep 30")
@@ -164,7 +164,7 @@ class DesktopLauncherTest(unittest.TestCase):
             XCURSOR_THEME="UserTheme", XCURSOR_SIZE="32", XDG_CACHE_HOME="relative"
         )
         self.assertEqual(
-            f'{self.environment["HOME"]}/.cache/metrolist', self.launch()[3]
+            f'{self.environment["HOME"]}/.cache/crystalist', self.launch()[3]
         )
 
 

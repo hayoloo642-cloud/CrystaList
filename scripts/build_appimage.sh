@@ -5,7 +5,7 @@ set -euo pipefail
 root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root_dir"
 gradle="${GRADLE:-$root_dir/gradlew}"
-app_image="$root_dir/dist/Metrolist.AppImage"
+app_image="$root_dir/dist/CrystaList.AppImage"
 tools_dir="$root_dir/tools"
 appimagetool="$tools_dir/appimagetool.AppImage"
 appimagetool_version="1.9.1"
@@ -56,7 +56,7 @@ if [[ "${1:-}" == "--native-appdir" ]]; then
     exit 0
 fi
 
-"$gradle" :desktopApp:createAppImageLocal -Pmetrolist.debug=false --no-daemon --no-configuration-cache "$@"
+"$gradle" :desktopApp:createAppImageLocal -Pcrystalist.debug=false --no-daemon --no-configuration-cache "$@"
 
 test -s "$app_image" || { echo "AppImage build produced no output: $app_image" >&2; exit 1; }
 chmod +x "$app_image"

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Wallpaper colors, dark: Accent 2 surface (tone 20), Accent 1 controls. -->
-    <color name="widget_surface">@android:color/system_accent2_800</color>
-    <color name="widget_surface_highest">@color/widget_primary_container</color>
-    <color name="widget_on_surface">@android:color/system_accent2_100</color>
-    <color name="widget_on_surface_variant">@android:color/system_accent2_200</color>
-    <color name="widget_primary">@android:color/system_accent1_200</color>
-    <color name="widget_on_primary">@android:color/system_accent1_800</color>
-    <color name="widget_primary_container">@android:color/system_accent1_700</color>
-    <color name="widget_on_primary_container">@android:color/system_accent1_100</color>
-    <color name="widget_secondary_container">@color/widget_primary_container</color>
-    <color name="widget_on_secondary_container">@color/widget_on_primary_container</color>
-    <color name="widget_tertiary">@color/widget_primary</color>
-    <color name="widget_on_tertiary">@color/widget_on_primary</color>
-    <color name="widget_tertiary_container">@android:color/system_accent3_700</color>
-    <color name="widget_on_tertiary_container">@android:color/system_accent3_100</color>
+    <!-- Apple Music dark: black canvas, elevated grey cards, brand red. -->
+    <color name="widget_surface">#000000</color>
+    <color name="widget_surface_highest">#1C1C1E</color>
+    <color name="widget_on_surface">#FFFFFF</color>
+    <color name="widget_on_surface_variant">#8E8E93</color>
+    <color name="widget_primary">#FA243C</color>
+    <color name="widget_on_primary">#FFFFFF</color>
+    <color name="widget_primary_container">#3D0710</color>
+    <color name="widget_on_primary_container">#FFD9DE</color>
+    <color name="widget_secondary_container">#3A0A16</color>
+    <color name="widget_on_secondary_container">#FFE1E7</color>
+    <color name="widget_tertiary">#0A84FF</color>
+    <color name="widget_on_tertiary">#FFFFFF</color>
+    <color name="widget_tertiary_container">#00284D</color>
+    <color name="widget_on_tertiary_container">#DCEBFF</color>
 </resources>

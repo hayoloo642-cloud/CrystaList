@@ -19,7 +19,7 @@ class BuildTest(unittest.TestCase):
             root = Path(directory)
             work = root / "work"
             (work / "image").mkdir(parents=True)
-            (work / "image/metrolist").write_text("working image")
+            (work / "image/crystalist").write_text("working image")
             (work / "image/libjvm.so").write_text("working shim")
             with zipfile.ZipFile(root / "input.jar", "w"):
                 pass
@@ -60,7 +60,7 @@ for name in ('libjava.so', 'libjvm.so'):
                     self.assertEqual(raised.exception.returncode, 9)
                 else:
                     native_image.build(graal, work, native_image.host_platform(), experiment=True)
-            self.assertEqual((work / "image/metrolist").read_text(), "working image" if fail else "new image")
+            self.assertEqual((work / "image/crystalist").read_text(), "working image" if fail else "new image")
             self.assertEqual((work / "image/libjvm.so").read_text(), "working shim" if fail else "generated shim")
             self.assertEqual(list(work.glob("image-build.*")), [])
             build = json.loads((root / "build.json").read_text())
@@ -81,7 +81,7 @@ for name in ('libjava.so', 'libjvm.so'):
         for failure in (None, 'clang', 'native-image'):
             with self.subTest(failure=failure), tempfile.TemporaryDirectory(prefix='macos build ') as directory:
                 work = Path(directory); graal = work/'graal'
-                (work/'image').mkdir(); (work/'image/Metrolist').write_text('previous')
+                (work/'image').mkdir(); (work/'image/CrystaList').write_text('previous')
                 zipfile.ZipFile(work/'app.jar', 'w').close(); (work/'classpath.txt').write_text(str(work/'app.jar'))
                 (graal/'lib').mkdir(parents=True); (graal/'lib/libjawt.dylib').write_text('jawt')
                 commands = []
@@ -112,7 +112,7 @@ for name in ('libjava.so', 'libjvm.so'):
                             native_image.build(graal, work, 'macos-arm64')
                     else:
                         native_image.build(graal, work, 'macos-arm64')
-                self.assertEqual((work/'image/Metrolist').read_text(), 'previous' if failure else 'macOS native executable')
+                self.assertEqual((work/'image/CrystaList').read_text(), 'previous' if failure else 'macOS native executable')
                 self.assertEqual(list(work.glob('image-build.*')), [])
                 self.assertEqual(commands[0][0], 'clang')
 

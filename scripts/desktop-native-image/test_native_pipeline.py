@@ -99,18 +99,18 @@ class PipelineTest(unittest.TestCase):
                 res = native_image.windows_resources(work, '14.2.1+abcdef0', rc='rc.exe')
             run.assert_called_once()
             self.assertEqual(['rc.exe', '/nologo', '/fo', str(res)], run.call_args.args[0][:4])
-            manifest = (work/'windows-resources/metrolist.manifest').read_text()
+            manifest = (work/'windows-resources/crystalist.manifest').read_text()
             self.assertIn('{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}', manifest)
             self.assertIn('PerMonitorV2', manifest)
-            rc = (work/'windows-resources/metrolist.rc').read_text()
+            rc = (work/'windows-resources/crystalist.rc').read_text()
             self.assertIn('FILEVERSION 14,2,1,0', rc)
             self.assertIn('"ProductVersion", "14.2.1+abcdef0"', rc)
             self.assertIn('logo.ico', rc)
             (work/'classpath.txt').write_text('app.jar')
-            command = native_image.arguments(work, work, work/'image/Metrolist.exe', 'windows-x64')
-            self.assertIn(f'-H:NativeLinkerOption={work / "windows-resources/metrolist.res"}', command)
-            linux = native_image.arguments(work, work, work/'image/Metrolist', 'linux-x64')
-            self.assertFalse(any('metrolist.res' in arg for arg in linux))
+            command = native_image.arguments(work, work, work/'image/CrystaList.exe', 'windows-x64')
+            self.assertIn(f'-H:NativeLinkerOption={work / "windows-resources/crystalist.res"}', command)
+            linux = native_image.arguments(work, work, work/'image/CrystaList', 'linux-x64')
+            self.assertFalse(any('crystalist.res' in arg for arg in linux))
             # Main.kt renames the X11 window class through this package.
             self.assertIn('--add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED', linux)
             self.assertNotIn('--add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED', command)
@@ -118,8 +118,8 @@ class PipelineTest(unittest.TestCase):
     def test_output_argument_leaves_exe_suffix_to_native_image(self):
         with tempfile.TemporaryDirectory() as directory:
             work = Path(directory); (work/'classpath.txt').write_text('app.jar')
-            for target, output, expected in [('windows-x64', work/'image/Metrolist.exe', work/'image/Metrolist'),
-                                             ('linux-x64', work/'image/Metrolist', work/'image/Metrolist')]:
+            for target, output, expected in [('windows-x64', work/'image/CrystaList.exe', work/'image/CrystaList'),
+                                             ('linux-x64', work/'image/CrystaList', work/'image/CrystaList')]:
                 command = native_image.arguments(work, work, output, target)
                 self.assertEqual(str(expected), command[command.index('-o') + 1])
                 self.assertIn('-march=compatibility', command)
@@ -189,14 +189,14 @@ class PipelineTest(unittest.TestCase):
     def test_windows_archive_requires_matching_helper_and_architecture(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); image=root/'image'; image.mkdir()
-            executable(image/'Metrolist.exe')
+            executable(image/'CrystaList.exe')
             helper=image/'resources/windows/metro-wv2-helper.exe';executable(helper)
             checksum=helper.with_suffix('.exe.sha256'); checksum.write_text(hashlib.sha256(helper.read_bytes()).hexdigest())
             result=package.package(image,'windows-x64',root/'dist','14.0.0-test')
             with zipfile.ZipFile(result) as archive:
-                self.assertIn('Metrolist.exe',archive.namelist())
+                self.assertIn('CrystaList.exe',archive.namelist())
                 manifest=json.loads(archive.read('install-manifest.json'))
-                self.assertEqual(manifest['launcher'],'Metrolist.exe')
+                self.assertEqual(manifest['launcher'],'CrystaList.exe')
                 self.assertEqual(manifest['architecture'],'x86_64')
             executable(image/'foreign.dll',0xAA64)
             with self.assertRaisesRegex(ValueError,'x64'):
@@ -207,15 +207,15 @@ class PipelineTest(unittest.TestCase):
 
     def test_linux_appimage_does_not_replace_jvm_package(self):
         with tempfile.TemporaryDirectory() as directory:
-            root=Path(directory);image=root/'image';posix_executable(image/'Metrolist','linux-x64')
-            previous=root/'dist/Metrolist.AppImage';previous.parent.mkdir();previous.write_text('JVM package')
+            root=Path(directory);image=root/'image';posix_executable(image/'CrystaList','linux-x64')
+            previous=root/'dist/CrystaList.AppImage';previous.parent.mkdir();previous.write_text('JVM package')
             def pack(command,**_):
                 Path(command[-1]).write_text('native package')
             with patch('subprocess.run',side_effect=pack):
                 result=package.package(image,'linux-x64',root/'dist','14.0.0-test')
             self.assertEqual(previous.read_text(),'JVM package')
             self.assertNotEqual(result,previous)
-            app=root/'dist/metrolist-desktop-native-linux-x64-14.0.0-test.AppDir'
+            app=root/'dist/crystalist-desktop-native-linux-x64-14.0.0-test.AppDir'
             self.assertTrue(os.access(app/'AppRun',os.X_OK))
             self.assertEqual((package.ROOT/'scripts/linux-appimage-apprun.sh').read_text(), (app/'AppRun').read_text())
             self.assertTrue((app/'resources').is_symlink())
@@ -226,7 +226,7 @@ class PipelineTest(unittest.TestCase):
             with self.subTest(name=name), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 image = root / 'image'
-                posix_executable(image / 'Metrolist', 'linux-x64')
+                posix_executable(image / 'CrystaList', 'linux-x64')
                 library = image / 'lib' / name
                 posix_executable(library, 'linux-x64')
                 with self.assertRaisesRegex(ValueError, 'host audio libraries'):
@@ -243,7 +243,7 @@ class PipelineTest(unittest.TestCase):
             for library in ('libavcodec.so.62', 'libasound.so.2'):
                 with zipfile.ZipFile(jar, 'w') as archive:
                     archive.writestr(f'org/bytedeco/ffmpeg/linux-arm64/{library}', b'native')
-                tar = root / 'Metrolist.tar.gz'
+                tar = root / 'CrystaList.tar.gz'
                 with tarfile.open(tar, 'w:gz') as archive:
                     archive.add(jar, arcname='lib/app/ffmpeg.jar')
                 for source in (jar, tar):
@@ -278,7 +278,7 @@ class PipelineTest(unittest.TestCase):
         for target, foreign, library in [('linux-x64', 'linux-arm64', 'libshim.so'), ('linux-arm64', 'linux-x64', 'libavutil.so.60'), ('macos-arm64', 'linux-arm64', 'libjawt.dylib')]:
             with self.subTest(target=target), tempfile.TemporaryDirectory() as directory:
                 image = Path(directory)
-                paths = [image/'Metrolist', image/'lib'/library, image/'resources/sidecar']
+                paths = [image/'CrystaList', image/'lib'/library, image/'resources/sidecar']
                 for path in paths:
                     posix_executable(path, target)
                 self.assertCountEqual(package.validate_posix(image, target), paths)
@@ -299,17 +299,17 @@ class PipelineTest(unittest.TestCase):
                     paths[1].write_bytes(b'\xcf\xfa\xed\xfe' + struct.pack('<I', 0x1000007) + bytes(24))
                     with self.assertRaisesRegex(ValueError, target):
                         package.validate_posix(image, target)
-                (image/'Metrolist').write_bytes(b'\x7fELF')
+                (image/'CrystaList').write_bytes(b'\x7fELF')
                 with self.assertRaises(ValueError):
                     package.validate_posix(image, target)
-                (image/'Metrolist').unlink()
-                with self.assertRaisesRegex(ValueError, 'no Metrolist'):
+                (image/'CrystaList').unlink()
+                with self.assertRaisesRegex(ValueError, 'no CrystaList'):
                     package.validate_posix(image, target)
 
     def test_macos_bundle_signs_completed_contents_before_bundle(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); image = root/'image'
-            for name in ['Metrolist', 'libjawt.dylib', 'lib/libjawt.dylib', 'resources/macos/libsidecar.dylib']:
+            for name in ['CrystaList', 'libjawt.dylib', 'lib/libjawt.dylib', 'resources/macos/libsidecar.dylib']:
                 posix_executable(image/name, 'macos-arm64')
             (image/'resources/config.txt').write_text('resource')
             graal = root/'graal'; macos_jdk(graal)
@@ -321,9 +321,9 @@ class PipelineTest(unittest.TestCase):
             def sign(command, **kwargs):
                 self.assertTrue(kwargs['check'])
                 path = Path(command[-1])
-                app = root/'dist/metrolist-desktop-native-macos-arm64-14.0.0-test/Metrolist.app'
+                app = root/'dist/crystalist-desktop-native-macos-arm64-14.0.0-test/CrystaList.app'
                 if command[0] == 'install_name_tool':
-                    self.assertEqual(command[1:4], ['-add_rpath', '@executable_path/.', str(app/'Contents/MacOS/Metrolist')])
+                    self.assertEqual(command[1:4], ['-add_rpath', '@executable_path/.', str(app/'Contents/MacOS/CrystaList')])
                     self.assertFalse(signed)
                     edited.append(path)
                     return
@@ -331,8 +331,8 @@ class PipelineTest(unittest.TestCase):
                 self.assertTrue((app/'Contents/Info.plist').is_file())
                 if '--sign' in command:
                     self.assertNotIn('--deep', command)
-                    self.assertEqual(edited, [app/'Contents/MacOS/Metrolist'])
-                    if path == app/'Contents/MacOS/Metrolist':
+                    self.assertEqual(edited, [app/'Contents/MacOS/CrystaList'])
+                    if path == app/'Contents/MacOS/CrystaList':
                         self.assertIn(app/'Contents/MacOS/lib/libjawt.dylib', signed)
                         self.assertIn(app/'Contents/MacOS/libawt.dylib', signed)
                     signed.append(path)
@@ -342,31 +342,31 @@ class PipelineTest(unittest.TestCase):
             with patch('subprocess.run', side_effect=sign), patch('subprocess.check_output', return_value='Load command 1\n      cmd LC_BUILD_VERSION\n    minos 14.0\n'):
                 result = package.package(image, 'macos-arm64', root/'dist', '14.0.0-test', graal)
             self.assertEqual(len(signed), len(package.MACOS_JDK_DYLIBS) + 3)
-            self.assertEqual(signed[-2].name, 'Metrolist')
+            self.assertEqual(signed[-2].name, 'CrystaList')
             with zipfile.ZipFile(result) as archive:
-                info = plistlib.loads(archive.read('Metrolist.app/Contents/Info.plist'))
+                info = plistlib.loads(archive.read('CrystaList.app/Contents/Info.plist'))
                 self.assertTrue(info['NSHighResolutionCapable'])
                 self.assertEqual(info['LSMinimumSystemVersion'], '14.0')
-                self.assertEqual(info['CFBundleURLTypes'][0]['CFBundleURLSchemes'], ['metrolist', 'metrolist-auth'])
+                self.assertEqual(info['CFBundleURLTypes'][0]['CFBundleURLSchemes'], ['crystalist', 'crystalist-auth'])
                 self.assertEqual(info['NSBonjourServices'], ['_fcast._tcp', '_googlecast._tcp'])
-                self.assertEqual(archive.read('Metrolist.app/Contents/Resources/config.txt'), b'resource')
-                self.assertEqual(archive.read('Metrolist.app/Contents/Resources/fontconfig.properties'),
+                self.assertEqual(archive.read('CrystaList.app/Contents/Resources/config.txt'), b'resource')
+                self.assertEqual(archive.read('CrystaList.app/Contents/Resources/fontconfig.properties'),
                                  (graal/'lib/fontconfig.properties.src').read_bytes())
                 self.assertFalse(any(name.endswith(('fontconfig.bfc', 'fontconfig.properties.src')) for name in archive.namelist()))
-                self.assertEqual(archive.read('Metrolist.app/Contents/MacOS/libjvm.dylib'), (image/'libjvm.dylib').read_bytes())
-                self.assertEqual(archive.read('Metrolist.app/Contents/MacOS/libjawt.dylib'), (image/'libjawt.dylib').read_bytes())
+                self.assertEqual(archive.read('CrystaList.app/Contents/MacOS/libjvm.dylib'), (image/'libjvm.dylib').read_bytes())
+                self.assertEqual(archive.read('CrystaList.app/Contents/MacOS/libjawt.dylib'), (image/'libjawt.dylib').read_bytes())
                 for library in package.MACOS_JDK_DYLIBS:
                     if library != 'libmlib_image.dylib':
-                        self.assertIn('Metrolist.app/Contents/MacOS/' + Path(library).name, archive.namelist())
+                        self.assertIn('CrystaList.app/Contents/MacOS/' + Path(library).name, archive.namelist())
                 self.assertFalse(any(name.endswith(('unrelated.txt', 'libmlib_image.dylib')) for name in archive.namelist()))
-                self.assertEqual(archive.read('Metrolist.app/Contents/MacOS/lib/libjawt.dylib'), (graal/'lib/libjawt.dylib').read_bytes())
-                self.assertTrue(archive.getinfo('Metrolist.app/Contents/MacOS/Metrolist').external_attr >> 16 & 0o111)
+                self.assertEqual(archive.read('CrystaList.app/Contents/MacOS/lib/libjawt.dylib'), (graal/'lib/libjawt.dylib').read_bytes())
+                self.assertTrue(archive.getinfo('CrystaList.app/Contents/MacOS/CrystaList').external_attr >> 16 & 0o111)
 
     def test_macos_rejects_missing_awt_foreign_libraries_and_data_before_signing(self):
         for failure in ('no-graal', 'no-awt', 'no-fontconfig-properties', 'foreign', 'data'):
             with self.subTest(failure=failure), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory); image = root/'image'; graal = root/'graal'
-                posix_executable(image/'Metrolist', 'macos-arm64')
+                posix_executable(image/'CrystaList', 'macos-arm64')
                 (image/'resources').mkdir()
                 macos_jdk(graal)
                 if failure == 'no-awt':
@@ -386,7 +386,7 @@ class PipelineTest(unittest.TestCase):
         for tool in ('install_name_tool', 'codesign'):
             with self.subTest(tool=tool), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory); image = root/'image'; graal = root/'graal'
-                posix_executable(image/'Metrolist', 'macos-arm64')
+                posix_executable(image/'CrystaList', 'macos-arm64')
                 (image/'resources').mkdir(); macos_jdk(graal)
                 def fail(command, **kwargs):
                     if command[0] == tool:
@@ -399,7 +399,7 @@ class PipelineTest(unittest.TestCase):
     def test_macos_existing_executable_rpath_is_not_added_twice(self):
         for path in ('@executable_path/.', '@executable_path/'):
             with self.subTest(path=path), patch('subprocess.run') as run, patch('subprocess.check_output', return_value=f'Load command 0\n      cmd LC_RPATH\n  cmdsize 48\n     path {path} (offset 12)\n'):
-                package.macos_rpath(Path('Metrolist'))
+                package.macos_rpath(Path('CrystaList'))
                 run.assert_not_called()
 
     def test_packager_uses_ci_graalvm_home_and_allows_explicit_override(self):
@@ -415,19 +415,19 @@ class PipelineTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {}, clear=True):
             work = Path(directory); (work/'classpath.txt').write_text('app.jar')
             with patch('subprocess.check_output', return_value='Load command 1\n      cmd LC_BUILD_VERSION\n    minos 11.0\n') as otool:
-                command = native_image.arguments(work/'graal', work, work/'Metrolist', 'macos-arm64')
+                command = native_image.arguments(work/'graal', work, work/'CrystaList', 'macos-arm64')
                 otool.assert_called_once_with(['otool', '-l', str(work/'graal/lib/libawt.dylib')], text=True)
             self.assertIn('-march=compatibility', command)
             self.assertIn('-H:NativeLinkerOption=-mmacosx-version-min=11.0', command)
             self.assertIn(f'-H:NativeLinkerOption={work / "macos-awt.o"}', command)
             self.assertIn('-J--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED', command)
-            self.assertIn('--features=com.metrolist.desktop.nativeimage.MacosAwtFeature', command)
+            self.assertIn('--features=com.crystalist.desktop.nativeimage.MacosAwtFeature', command)
             with patch.dict(os.environ, MACOSX_DEPLOYMENT_TARGET='13.2'), patch('subprocess.check_output') as otool:
-                command = native_image.arguments(work/'graal', work, work/'Metrolist', 'macos-arm64')
+                command = native_image.arguments(work/'graal', work, work/'CrystaList', 'macos-arm64')
                 self.assertIn('-H:NativeLinkerOption=-mmacosx-version-min=13.2', command)
                 otool.assert_not_called()
             for target in ('linux-x64', 'linux-arm64', 'windows-x64'):
-                command = native_image.arguments(work/'graal', work, work/'Metrolist', target)
+                command = native_image.arguments(work/'graal', work, work/'CrystaList', target)
                 self.assertFalse(any('macos' in option or 'MacosAwt' in option for option in command))
 
     def test_macos_minimum_version_covers_legacy_and_current_load_commands(self):

@@ -1,4 +1,4 @@
-package com.metrolist.desktop.nativeimage;
+package com.crystalist.desktop.nativeimage;
 
 import com.oracle.svm.core.annotate.Alias;
 import com.oracle.svm.core.annotate.Substitute;
@@ -17,7 +17,7 @@ final class JavaCppResources {
     private static final Set<String> NAMES = load();
 
     private static Set<String> load() {
-        try (InputStream input = ClassLoader.getSystemResourceAsStream("metrolist-javacpp-resources.txt")) {
+        try (InputStream input = ClassLoader.getSystemResourceAsStream("crystalist-javacpp-resources.txt")) {
             if (input == null) return null;
             Set<String> names = new HashSet<>();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {

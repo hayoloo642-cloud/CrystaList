@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.28.0.schema.json
+PackageIdentifier: CrystaListGroup.CrystaList
+PackageVersion: '@VERSION@'
+PackageLocale: en-US
+Publisher: CrystaListGroup
+PublisherUrl: https://github.com/CrystaListGroup
+PublisherSupportUrl: https://github.com/CrystaListGroup/CrystaList/issues
+PackageName: CrystaList Desktop
+PackageUrl: https://github.com/CrystaListGroup/CrystaList
+License: GPL-3.0
+LicenseUrl: https://github.com/CrystaListGroup/CrystaList/blob/v@VERSION@/LICENSE
+ShortDescription: YouTube Music desktop client
+ReleaseNotesUrl: https://github.com/CrystaListGroup/CrystaList/releases/tag/v@VERSION@
+ManifestType: defaultLocale
+ManifestVersion: 1.28.0

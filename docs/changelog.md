@@ -1,6 +1,6 @@
 ---v14.0.1
 # Fixes after 14.0.0
-Metrolist 14.0.1 fixes upgrades from 13.x, playback and desktop stability, and brings back several 13.x features.
+CrystaList 14.0.1 fixes upgrades from 13.x, playback and desktop stability, and brings back several 13.x features.
 
 ## Highlights
 - Restored gapless playback on Android (@nyxiereal)
@@ -42,7 +42,7 @@ Full changelog: https://github.com/MetrolistGroup/Metrolist/commits/v14.0.1
 
 ---v14.0.0
 # First public multiplatform release
-Metrolist 14.0.0 replaces the standalone Android app with Metrolist-KMP.
+CrystaList 14.0.0 replaces the standalone Android app with CrystaList-KMP.
 
 ## Highlights
 - Added Windows portable ZIPs and an x64 installer, macOS DMGs, and Linux AppImages, with x64 and ARM64 desktop builds (@l6t9 @nyxiereal @applxcake)
@@ -83,7 +83,7 @@ Full changelog: https://github.com/MetrolistGroup/Metrolist/commits/v14.0.0
 
 ---v13.7.0
 # KMP status update
-Metrolist-KMP remains in alpha. To try it, join our Discord and donate at least $1 to support development.
+CrystaList-KMP remains in alpha. To try it, join our Discord and donate at least $1 to support development.
 
 ## Highlights
 - Migrated networking to InnerTubeX with automatic client fallback (@nyxiereal)
@@ -119,7 +119,7 @@ This hotfix repairs lyrics and the media controller.
 
 ---v13.6.2
 # KMP development
-We are fixing the remaining bugs in Metrolist KMP and preparing for release. It is still at least a couple of weeks away.
+We are fixing the remaining bugs in CrystaList KMP and preparing for release. It is still at least a couple of weeks away.
 
 # Major changes
 - Fixed playback issues caused by changes that also broke official apps (@nyxiereal)
@@ -149,7 +149,7 @@ Full changelog: https://github.com/MetrolistGroup/Metrolist/compare/v13.6.1...v1
 
 ---v13.6.1
 # KMP development
-We aim to release the Kotlin Multiplatform version of Metrolist within the next month. Until then, the current app remains in maintenance mode and receives bug fixes and minor improvements.
+We aim to release the Kotlin Multiplatform version of CrystaList within the next month. Until then, the current app remains in maintenance mode and receives bug fixes and minor improvements.
 
 # Major changes
 - Improved playback reliability and recovery from YouTube player failures (@alltechdev @JASK625 @kairosci @mostafaalagamy @nyxiereal)
@@ -175,7 +175,7 @@ Full changelog: https://github.com/MetrolistGroup/Metrolist/compare/v13.6.0...v1
 
 ---v13.5.0
 # Maintenance mode
-Metrolist is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
+CrystaList is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
 
 # Major changes
 - Rewrote the Discord RPC integration again (@adrielGGmotion @nyxiereal)
@@ -202,7 +202,7 @@ Metrolist is in maintenance mode. We accept only bug fixes and minor improvement
 
 ---v13.4.3
 # Maintenance mode
-Metrolist is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
+CrystaList is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
 
 # Major changes
 - Rewrote the Discord RPC integration (@adrielGGmotion)
@@ -228,7 +228,7 @@ Metrolist is in maintenance mode. We accept only bug fixes and minor improvement
 
 ---v13.4.2
 # Maintenance mode
-Metrolist is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
+CrystaList is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
 
 # Major changes
 - Fixed random crashes and some memory leaks (@nyxiereal)
@@ -256,7 +256,7 @@ Metrolist is in maintenance mode. We accept only bug fixes and minor improvement
 
 ---v13.4.1
 # Maintenance mode
-Metrolist is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
+CrystaList is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
 
 # Major changes
 - Fixed cached songs showing up in the downloads playlist (@nyxiereal)
@@ -296,9 +296,9 @@ Metrolist is in maintenance mode. We accept only bug fixes and minor improvement
 Full changelog: https://github.com/MetrolistGroup/Metrolist/compare/v13.4.0...v13.4.1
 ---v13.4.0
 # Maintenance mode
-Metrolist is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
+CrystaList is in maintenance mode. We accept only bug fixes and minor improvements. Do not submit PRs for new features or major changes.
 
-This April 1 release starts maintenance mode. Metrolist development continues.
+This April 1 release starts maintenance mode. CrystaList development continues.
 
 # Major changes
 - Multiple playback fixes and reliability improvements (@alltechdev)

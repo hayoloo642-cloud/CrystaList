@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.28.0.schema.json
+PackageIdentifier: CrystaListGroup.CrystaList
+PackageVersion: '@VERSION@'
+InstallerType: exe
+Scope: user
+InstallModes:
+  - interactive
+  - silent
+InstallerSwitches:
+  Silent: --silent
+  SilentWithProgress: --silent
+  Custom: --launch=false
+UpgradeBehavior: install
+Protocols:
+  - crystalist
+AppsAndFeaturesEntries:
+  - DisplayName: CrystaList Desktop
+    Publisher: CrystaListGroup
+    ProductCode: CrystaList
+Installers:
+  - Architecture: x64
+    InstallerUrl: '@WINDOWS_URL@'
+    InstallerSha256: '@WINDOWS_SHA256@'
+ManifestType: installer
+ManifestVersion: 1.28.0

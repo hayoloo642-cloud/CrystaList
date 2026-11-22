@@ -12,6 +12,6 @@
     <exclude domain="file" path="animated_cover_video_cache" />
     <exclude domain="root" path="app_webview" />
     <exclude domain="database" path="exoplayer_internal.db" />
-    <exclude domain="external" path="Metrolist/Downloads" />
-    <exclude domain="external" path="Metrolist/Cache" />
+    <exclude domain="external" path="CrystaList/Downloads" />
+    <exclude domain="external" path="CrystaList/Cache" />
 </full-backup-content>

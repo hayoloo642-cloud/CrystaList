@@ -54,7 +54,7 @@ Prism ZIPs contain `databases/prism.db`, optional SQLite sidecars and these comp
 - `files/offline/pages/<id>.json` for cached playlist membership and order.
 - `shared_prefs/artist_prefs.xml` for starred artists in its `favorites` JSON string.
 
-Raw database imports cannot recover those companion collections. Listening durations come from `play_events`, never a fabricated duration from `lastPlayed`. Preserve existing Metrolist metadata and import deduplication. Do not fetch missing data from the network or import credentials/settings, local media or Prism-specific caches. Malformed recognized companion data and external XML entities must fail before merging. Preserve extraction size limits and the 4,096-entry cap; export oversized backups without downloads.
+Raw database imports cannot recover those companion collections. Listening durations come from `play_events`, never a fabricated duration from `lastPlayed`. Preserve existing CrystaList metadata and import deduplication. Do not fetch missing data from the network or import credentials/settings, local media or Prism-specific caches. Malformed recognized companion data and external XML entities must fail before merging. Preserve extraction size limits and the 4,096-entry cap; export oversized backups without downloads.
 
 ## Playlist header responses
 

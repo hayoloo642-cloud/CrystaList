@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="startup_background">@android:color/background_light</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="ic_launcher_background">#FF000000</color>
+    <color name="startup_background">#FFFFFFFF</color>
+    <color name="teal_200">#FFFA243C</color>
+    <color name="teal_700">#FFD60017</color>
+    <color name="ic_launcher_background">#FFFA243C</color>
     <color name="ic_launcher_glyph">#FFFFFFFF</color>
 
     <color name="widget_text_primary">@color/widget_on_surface</color>

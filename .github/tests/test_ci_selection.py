@@ -124,7 +124,7 @@ class CIWorkflowTest(unittest.TestCase):
                          ":androidApp:testDebugUnitTest", ":shared:testAndroidHostTest"):
                 self.assertIn(task, tasks)
             self.assertEqual(":androidApp:assembleDebug" in tasks, assemble == "true")
-            self.assertIn("-Pmetrolist.sourceRevision=", tasks)
+            self.assertIn("-Pcrystalist.sourceRevision=", tasks)
         release_tasks = self.task_arguments("reusable-android-build.yml", "Build Android",
                                             BUILD_VARIANT="release", ASSEMBLE="true", VERIFICATION_ONLY="false")
         self.assertIn(":androidApp:assembleRelease", release_tasks)

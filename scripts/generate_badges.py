@@ -40,10 +40,10 @@ BADGES = [
     ("macos-apple-silicon", "apple", True, "Apple silicon", "macOS", "DMG", "Download the macOS DMG for Apple silicon", ""),
     ("macos-intel", "intel", True, "Intel", "macOS", "DMG", "Download the macOS DMG for Intel", ""),
     ("linux-appimage", "appimage", True, "x86_64 and ARM64", "Linux", "AppImage", "Download the Linux AppImage", ""),
-    ("store-obtainium", "obtainium", False, "Add to", "Obtainium", "", "Add Metrolist to Obtainium", ""),
-    ("store-izzyondroid", "izzyondroid", False, "F-Droid repo", "IzzyOnDroid", "", "Get Metrolist from IzzyOnDroid",
+    ("store-obtainium", "obtainium", False, "Add to", "Obtainium", "", "Add CrystaList to Obtainium", ""),
+    ("store-izzyondroid", "izzyondroid", False, "F-Droid repo", "IzzyOnDroid", "", "Get CrystaList from IzzyOnDroid",
      "IzzyOnDroid logo by IzzySoft and Wolfshappen, used unaltered."),
-    ("store-openapk", "openapk", False, "Get it on", "OpenAPK", "", "Get Metrolist on OpenAPK", ""),
+    ("store-openapk", "openapk", False, "Get it on", "OpenAPK", "", "Get CrystaList on OpenAPK", ""),
 ]
 
 
@@ -105,7 +105,7 @@ def badge(sans, mono, spec):
             raise SystemExit(f"{spec[0]}: title overlaps tag")
         parts.append(f'<path d="M{tag_x - 12:.1f} 16V40" stroke="{BORDER}"/>')
         parts.append(f'<path d="{d}" fill="{INK}"/>')
-    desc = f"{caption} / {title}{' / ' + tag if tag else ''}. Metrolist download badge. {credit}".strip()
+    desc = f"{caption} / {title}{' / ' + tag if tag else ''}. CrystaList download badge. {credit}".strip()
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" '
         f'viewBox="0 0 {W} {H}" role="img" aria-labelledby="t d"><title id="t">{label}</title>'

@@ -40,9 +40,9 @@ With logging enabled, `WindowsWindow` records native minimize and restore sizes 
 
 ## System tray
 
-On Linux and Windows, Metrolist uses `ComposeNativeTray` to integrate with native system notification areas (StatusNotifierItem/D-Bus on Linux and Shell_NotifyIcon on Windows). Left-clicking the tray icon toggles window visibility when `desktopTrayToggleOnClick` is enabled, and right-clicking opens the tray context menu.
+On Linux and Windows, CrystaList uses `ComposeNativeTray` to integrate with native system notification areas (StatusNotifierItem/D-Bus on Linux and Shell_NotifyIcon on Windows). Left-clicking the tray icon toggles window visibility when `desktopTrayToggleOnClick` is enabled, and right-clicking opens the tray context menu.
 
-On macOS, Metrolist uses Compose Multiplatform's stock `Tray` backed by OpenJDK's `java.awt.SystemTray` (`CTrayIcon`) to avoid AWT/AppKit event loop deadlocks. On macOS, left-clicking opens the native status bar menu, and right-clicking triggers the window toggle action when `desktopTrayToggleOnClick` is enabled. Template rendering is explicitly enabled via the `apple.awt.enableTemplateImages` system property so macOS automatically adapts icon contrast to the menu bar appearance. Native macOS images register `CTrayIcon` and `CMenuItem` callbacks for JNI accessibility.
+On macOS, CrystaList uses Compose Multiplatform's stock `Tray` backed by OpenJDK's `java.awt.SystemTray` (`CTrayIcon`) to avoid AWT/AppKit event loop deadlocks. On macOS, left-clicking opens the native status bar menu, and right-clicking triggers the window toggle action when `desktopTrayToggleOnClick` is enabled. Template rendering is explicitly enabled via the `apple.awt.enableTemplateImages` system property so macOS automatically adapts icon contrast to the menu bar appearance. Native macOS images register `CTrayIcon` and `CMenuItem` callbacks for JNI accessibility.
 
 The tray menu toggles miniplayer visibility independently of the main window. Closing the main window to the tray does not stop miniplayer controls.
 
@@ -52,7 +52,7 @@ Desktop uses bundled FFmpeg to decode audio and Java Sound to send PCM through A
 
 Linux FFmpeg JARs exclude ALSA, PulseAudio, JACK and PipeWire libraries. JVM distributions, AppImages and native-image builds use the host's audio libraries, configuration and plugins. No Linux target keeps a bundled ALSA fallback. `verifyLinuxAudioLibraries` checks JVM package directories and JARs after packaging, including when other packaging checks are disabled. Native builds check their input classpath before compilation and their output directory before packaging. To check a directory, JAR or tarball directly, run `python3 scripts/desktop-native-image/verify_linux_audio.py <path>`.
 
-PipeWire and PulseAudio hosts need their distribution's ALSA integration. On Arch with PipeWire, install `pipewire-alsa`. If playback progresses silently, check the default ALSA route and restart Metrolist after changing it. An explicit `javax.sound.sampled.SourceDataLine` property delegates selection to Java Sound.
+PipeWire and PulseAudio hosts need their distribution's ALSA integration. On Arch with PipeWire, install `pipewire-alsa`. If playback progresses silently, check the default ALSA route and restart CrystaList after changing it. An explicit `javax.sound.sampled.SourceDataLine` property delegates selection to Java Sound.
 
 For microcuts, export the playback event log immediately. Output-underrun records describe the buffer and time between writes; they do not identify the cause by themselves.
 
@@ -70,15 +70,15 @@ Linux launchers default `WEBKIT_DISABLE_DMABUF_RENDERER` and `WEBKIT_DISABLE_COM
 
 The hidden PO-token WebView is created on first use and reused until shutdown. Idle release navigates it to `about:blank`; the next request loads a fresh attestation document. This bounds native views and contexts because Wry 0.54.2 can retain them after disposal. One idle WebKit process can remain resident. Login and Last.fm views keep their own lifecycles.
 
-On Windows, native WebView creation failures show the error dialog and disable embedded browsers until restart. Pending PO-token requests fail without waiting for the browser timeout, and playback can continue without a PO token. WebView2 error `0x80070002` means the runtime could not be found. Install or repair the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/). The PO-token browser profile uses `%LOCALAPPDATA%/Metrolist/WebView2`, outside the portable ZIP or installation directory. Backup restore imports settings before startup; it does not create a WebView or validate login. Windows YouTube login runs in `metro-wv2-helper`, not the hidden PO-token WebView.
+On Windows, native WebView creation failures show the error dialog and disable embedded browsers until restart. Pending PO-token requests fail without waiting for the browser timeout, and playback can continue without a PO token. WebView2 error `0x80070002` means the runtime could not be found. Install or repair the [Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/). The PO-token browser profile uses `%LOCALAPPDATA%/CrystaList/WebView2`, outside the portable ZIP or installation directory. Backup restore imports settings before startup; it does not create a WebView or validate login. Windows YouTube login runs in `metro-wv2-helper`, not the hidden PO-token WebView.
 
 ## Discord login
 
 Hiding the window to the tray keeps Discord presence, because playback continues. Quit, SIGTERM and the JVM shutdown hook clear presence before closing the connection. A fresh connection sends an empty presence before publishing the current track. A forced process kill cannot run cleanup; Discord controls how long the disconnected Gateway session remains visible. Track-end timestamps describe playback progress and do not guarantee presence expiry.
 
-Desktop Discord login opens the default browser with a PKCE authorization URL and the `metrolist-auth://discord/callback` redirect. The waiting dialog offers Cancel and Open again. Callbacks use the saved two-minute session, require the exact redirect and state, and consume the verifier before token exchange. macOS open-URI events and second-launch arguments on Windows and Linux enter the desktop URL handler. A callback can restore a pending session after an app restart.
+Desktop Discord login opens the default browser with a PKCE authorization URL and the `crystalist-auth://discord/callback` redirect. The waiting dialog offers Cancel and Open again. Callbacks use the saved two-minute session, require the exact redirect and state, and consume the verifier before token exchange. macOS open-URI events and second-launch arguments on Windows and Linux enter the desktop URL handler. A callback can restore a pending session after an app restart.
 
-Windows registers `metrolist-auth` under `HKCU\Software\Classes` for the running packaged executable, including portable ZIPs. The macOS bundle declares the scheme beside `metrolist`. AppImage, Arch, Nix and Flatpak desktop entries advertise `x-scheme-handler/metrolist-auth`. Linux reuses an associated package desktop entry when available. Otherwise login writes a hidden per-user desktop entry and verifies its `xdg-mime` association. AppImage registration uses the persistent AppImage path; native Linux packages use the launcher wrapper. Installed Flatpak uses its exported desktop entry.
+Windows registers `crystalist-auth` under `HKCU\Software\Classes` for the running packaged executable, including portable ZIPs. The macOS bundle declares the scheme beside `crystalist`. AppImage, Arch, Nix and Flatpak desktop entries advertise `x-scheme-handler/crystalist-auth`. Linux reuses an associated package desktop entry when available. Otherwise login writes a hidden per-user desktop entry and verifies its `xdg-mime` association. AppImage registration uses the persistent AppImage path; native Linux packages use the launcher wrapper. Installed Flatpak uses its exported desktop entry.
 
 The embedded login is used when registration fails, when a macOS launch lacks a bundle or open-URI support, or when an unpackaged JVM launch has no native launcher. Linux registration requires working `xdg-mime` and writable user application data. Browser launch failure keeps the waiting dialog available for retry.
 
@@ -89,12 +89,12 @@ Appearance's Matugen colors switch replaces the app's color scheme with the one 
 Copy [`matugen-template.properties`](matugen-template.properties) into Matugen's templates directory and add it to Matugen's `config.toml`:
 
 ```toml
-[templates.metrolist]
-input_path = "~/.config/matugen/templates/metrolist.properties"
-output_path = "~/.config/metrolist/matugen.properties"
+[templates.crystalist]
+input_path = "~/.config/matugen/templates/crystalist.properties"
+output_path = "~/.config/crystalist/matugen.properties"
 ```
 
-The output path follows `XDG_CONFIG_HOME` on every platform, like `settings.properties`. Flatpak reads `~/.var/app/com.metrolist.desktop/config/metrolist/matugen.properties`. Run `matugen image /path/to/wallpaper`; the app reloads the file when Matugen rewrites it. A file with a missing or malformed color is logged and ignored, keeping the last valid palette. Deleting the file restores the normal theme.
+The output path follows `XDG_CONFIG_HOME` on every platform, like `settings.properties`. Flatpak reads `~/.var/app/com.crystalist.desktop/config/crystalist/matugen.properties`. Run `matugen image /path/to/wallpaper`; the app reloads the file when Matugen rewrites it. A file with a missing or malformed color is logged and ignored, keeping the last valid palette. Deleting the file restores the normal theme.
 
 ## Display density
 
@@ -104,7 +104,7 @@ Appearance's Display density scales text, icons and controls on top of the syste
 
 Linux uses X11 or Xwayland by default. Scale setup runs before AWT window identity, URL-handler registration and Swing dispatcher initialization. In Wayland sessions, scale detection checks the compositor before toolkit environment variables, so a neutral `GDK_SCALE=1` cannot hide KDE's fractional output scale. Without compositor tools, detection uses `QT_SCALE_FACTOR`, the product of `GDK_SCALE` and `GDK_DPI_SCALE`, `XDG_SCALE`, Xft DPI from `xrdb -query`, or `[KScreen] ScaleFactor` in `kdeglobals`. Configuration follows `XDG_CONFIG_HOME`. X11 sessions also use these fallbacks.
 
-KDE's Xwayland clients use one global scale, the largest output scale. When `[KScreen] XwaylandClientsScale=false`, KWin scales legacy windows itself, so Metrolist leaves client density at 100% before applying the user's preset. See [KWin's Xwayland scale selection](https://github.com/KDE/kwin/blob/master/src/workspace.cpp). GNOME, Hyprland and Sway use per-monitor correction and monitor refresh. Native Wayland, enabled with `METROLIST_USE_WAKEFIELD=1`, and Windows and macOS use the toolkit's density before applying the user's preset.
+KDE's Xwayland clients use one global scale, the largest output scale. When `[KScreen] XwaylandClientsScale=false`, KWin scales legacy windows itself, so CrystaList leaves client density at 100% before applying the user's preset. See [KWin's Xwayland scale selection](https://github.com/KDE/kwin/blob/master/src/workspace.cpp). GNOME, Hyprland and Sway use per-monitor correction and monitor refresh. Native Wayland, enabled with `CRYSTALIST_USE_WAKEFIELD=1`, and Windows and macOS use the toolkit's density before applying the user's preset.
 
 Disable Wayland scale fix bypasses Linux's automatic scale probes and per-window correction in Wayland sessions. It requires a restart because startup also configures the JVM and Skiko scale. It does not disable the user's Display density preset. X11 system-scale changes require a restart; Wayland monitor changes refresh while the app runs.
 
@@ -130,7 +130,7 @@ Scrolling changes need checks with physical wheel, touchpad and touchscreen inpu
 
 ## Hyprland rendering
 
-`desktopApp/src/jvmMain/kotlin/com/metrolist/desktop/window/HyprlandRenderVisibility.kt` tracks each window's workspace visibility. Before hiding a GL layer, it copies the retained frame to Java-owned pixels for compositor transitions. Live rendering resumes when visible or when compositor state is unknown. Pinned windows and windows visible on another monitor keep rendering.
+`desktopApp/src/jvmMain/kotlin/com/crystalist/desktop/window/HyprlandRenderVisibility.kt` tracks each window's workspace visibility. Before hiding a GL layer, it copies the retained frame to Java-owned pixels for compositor transitions. Live rendering resumes when visible or when compositor state is unknown. Pinned windows and windows visible on another monitor keep rendering.
 
 Retained-image changes need a Hyprland session to check native compositor and driver behavior.
 
@@ -155,11 +155,11 @@ Bytedeco publishes no `windows-arm64` FFmpeg natives. `scripts/build_windows_arm
 ./gradlew :desktopApp:packageReleaseDmg
 ```
 
-The AppImage script writes `dist/Metrolist.AppImage` and accepts `GRADLE` to select the Gradle command. The DMG task requires macOS and writes under `desktopApp/build/compose/binaries/main-release/dmg/`. The bundle declares macOS 15.0 as its minimum because Bytedeco's FFmpeg dylibs target macOS 15; older systems could open the app but failed to load FFmpeg at playback. Packages include their own runtime.
+The AppImage script writes `dist/CrystaList.AppImage` and accepts `GRADLE` to select the Gradle command. The DMG task requires macOS and writes under `desktopApp/build/compose/binaries/main-release/dmg/`. The bundle declares macOS 15.0 as its minimum because Bytedeco's FFmpeg dylibs target macOS 15; older systems could open the app but failed to load FFmpeg at playback. Packages include their own runtime.
 
-The AppImage script and Windows and macOS release workflows pass `-Pmetrolist.debug=false` so release packages use the release title and settings.
+The AppImage script and Windows and macOS release workflows pass `-Pcrystalist.debug=false` so release packages use the release title and settings.
 
-On launch, JVM and native AppImages install a per-user `Metrolist.desktop` with the persistent AppImage path and a copied icon. Pinned launchers can reopen it after the temporary mount disappears. An installed system `Metrolist.desktop` takes precedence. Moving the AppImage requires launching it once from its new location to update the entry.
+On launch, JVM and native AppImages install a per-user `CrystaList.desktop` with the persistent AppImage path and a copied icon. Pinned launchers can reopen it after the temporary mount disappears. An installed system `CrystaList.desktop` takes precedence. Moving the AppImage requires launching it once from its new location to update the entry.
 
 The Arch recipe is in [`aur/`](../aur/). `make aur-install` builds from the local tree. Standalone recipes fetch remote source. `bash aur/test-recipe.sh` checks recipe behavior without building the app.
 
@@ -173,7 +173,7 @@ Sidecars under `desktopApp/src/desktopMain/resources/{linux,macos,windows}/` are
 
 ### macOS package verification
 
-x64 packaging uses `-Pmetrolist.desktop.arch=x86_64` for natives and `-Pmetrolist.desktop.javaHome=<x64 JDK>` for jlink, jpackage and the runtime. Cross-architecture macOS builds unpack the target Skiko dylib and checksum into the packaging inputs because Compose selects Skiko natives for the Gradle host. CI verifies the mounted DMG's launcher, JRE and native architectures, and requires a loose Skiko dylib when the launcher sets `skiko.library.path`. Packages are unsigned and unnotarized.
+x64 packaging uses `-Pcrystalist.desktop.arch=x86_64` for natives and `-Pcrystalist.desktop.javaHome=<x64 JDK>` for jlink, jpackage and the runtime. Cross-architecture macOS builds unpack the target Skiko dylib and checksum into the packaging inputs because Compose selects Skiko natives for the Gradle host. CI verifies the mounted DMG's launcher, JRE and native architectures, and requires a loose Skiko dylib when the launcher sets `skiko.library.path`. Packages are unsigned and unnotarized.
 
 A manual `build-desktop.yml` run verifies Linux and builds both DMGs as artifacts. `macos-x64-use-intel-runner=true` selects Intel instead of Apple Silicon with Rosetta. The repository variable `MACOS_X64_USE_INTEL_RUNNER` also controls that choice.
 
@@ -181,7 +181,7 @@ Linux cannot validate DMG packaging or Rosetta. Before release, inspect Finder b
 
 ### Flatpak
 
-The local manifest is `flatpak/com.metrolist.desktop.yaml`, with app ID `com.metrolist.desktop`. It builds the committed `main` branch with its submodules, so commit changes before building.
+The local manifest is `flatpak/com.crystalist.desktop.yaml`, with app ID `com.crystalist.desktop`. It builds the committed `main` branch with its submodules, so commit changes before building.
 
 ```sh
 make flatpak-deps
@@ -200,9 +200,9 @@ JVM packages include `jdk.accessibility` so Windows can load Java Access Bridge 
 
 | OS | CDS cache |
 | --- | --- |
-| Linux | `$XDG_CACHE_HOME/metrolist`, default `~/.cache/metrolist` |
-| macOS | `~/Library/Caches/com.metrolist.desktop` |
-| Windows | `%LOCALAPPDATA%/Metrolist/cache` |
+| Linux | `$XDG_CACHE_HOME/crystalist`, default `~/.cache/crystalist` |
+| macOS | `~/Library/Caches/com.crystalist.desktop` |
+| Windows | `%LOCALAPPDATA%/CrystaList/cache` |
 
 Archives stay outside read-only app mounts and installation directories. On Windows, both portable ZIP and installer launchers use `%LOCALAPPDATA%`, which [JDK 25's launcher expands](https://github.com/openjdk/jdk/blob/jdk-25-ga/src/jdk.jpackage/share/native/applauncher/CfgFile.cpp). Close the app before removing a corrupt archive. An unwritable cache can cause a nonzero exit when HotSpot saves it at shutdown. Use `-Xlog:cds=info` to check archive mapping.
 
@@ -216,7 +216,7 @@ AppImage packaging uses `createReleaseRuntimeImage`. A second jpackage runtime l
 
 Windows startup enables the [JDK system proxy selector](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html) before creating network clients. This lets shared HTTP clients use the Windows proxy configuration, including a local proxy configured by Clash/Mihomo. Explicit JVM proxy properties take precedence, and an explicit `java.net.useSystemProxies` value is preserved. Test Home, search, sign-in and playback on Windows with the reporter's proxy mode and port before treating a TLS connection reset as resolved.
 
-The CDS directory is created before crash recovery or a JVM relaunch can exit. Otherwise HotSpot fails with `Unable to create shared archive file` followed by an unrecoverable archive-loading error. The Linux wrapper resolves the HotSpot error-file path from an absolute `XDG_STATE_HOME` before starting the VM, which avoids a crash-path relaunch for custom profiles. Other launcher overrides keep the relaunch guard. Windows uses `$USERPROFILE/.local/state/metrolist/logs` by default and guards custom profiles.
+The CDS directory is created before crash recovery or a JVM relaunch can exit. Otherwise HotSpot fails with `Unable to create shared archive file` followed by an unrecoverable archive-loading error. The Linux wrapper resolves the HotSpot error-file path from an absolute `XDG_STATE_HOME` before starting the VM, which avoids a crash-path relaunch for custom profiles. Other launcher overrides keep the relaunch guard. Windows uses `$USERPROFILE/.local/state/crystalist/logs` by default and guards custom profiles.
 
 Initial Linux scale detection has a shared 2 s command-probe budget before AWT, including `xrdb`, `gsettings` and compositor queries through `gdbus`. These results configure JVM/Skiko scaling; deferring them would initialize AWT at the wrong scale. The Swing application scope stays lazy until after this step. Monitor refresh runs on a background watcher. Both the loading frame and full window use `DesktopDensityProvider`, so the user's density preset also applies to the first frame. Linux URL-handler registration waits for the full app frame.
 
@@ -226,11 +226,11 @@ The Linux loading shell and full app share the custom caption controls. Minimize
 
 After that frame, consent-controlled Sentry on stable releases, enabled Discord integration, native media controls, tray and miniplayer start. Nightlies never initialize Sentry and preserve the saved consent. Windows registry registration runs after the shell and must finish before SMTC attaches. The process AppUserModelID applies before any UI, as [Microsoft requires](https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nf-shobjidl_core-setcurrentprocessexplicitappusermodelid). Taskbar icons fill their cache on IO; taskbar registration uses its COM worker and delayed retry. The Rust WebView/WebView2 paths load on demand for login, token minting or Last.fm browsing, as [Microsoft advises for WebView2](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/performance). FFmpeg loads when playback or a download needs decoding. Downloaded fonts load on IO; the first frame uses the locale-matched system font.
 
-`METROLIST_STARTUP_TRACE=1` with detailed logging enabled writes process ID and JVM uptime for `main`, `settings`, `shell-frame`, `runtime`, `database`, `backend` and `app-frame` to stdout/app.log. Frame markers mean Compose draw completion, not display presentation. Leave this variable unset for normal launches.
+`CRYSTALIST_STARTUP_TRACE=1` with detailed logging enabled writes process ID and JVM uptime for `main`, `settings`, `shell-frame`, `runtime`, `database`, `backend` and `app-frame` to stdout/app.log. Frame markers mean Compose draw completion, not display presentation. Leave this variable unset for normal launches.
 
 ## Credentials and settings files
 
-`shared/src/desktopMain/kotlin/com/metrolist/shared/settings/PlatformSettings.desktop.kt` owns settings persistence. Public preferences use `$XDG_CONFIG_HOME/metrolist/settings.properties`, defaulting to `~/.config/metrolist/settings.properties`. A complete pending snapshot takes precedence after failed replacement. See [corrupt-file recovery](crash-recovery.md#settings-recovery).
+`shared/src/desktopMain/kotlin/com/crystalist/shared/settings/PlatformSettings.desktop.kt` owns settings persistence. Public preferences use `$XDG_CONFIG_HOME/crystalist/settings.properties`, defaulting to `~/.config/crystalist/settings.properties`. A complete pending snapshot takes precedence after failed replacement. See [corrupt-file recovery](crash-recovery.md#settings-recovery).
 
 Windows protects credentials with DPAPI. macOS uses AES-GCM with a Keychain key. An unavailable Keychain is retried; never replace an existing encrypted file with plaintext. Authentication failure preserves a unique encrypted backup. Only the original key can decrypt it.
 
@@ -275,7 +275,7 @@ The preference takes effect on restart, before AWT and Skiko initialize. An expl
 
 ## Logs and profiling
 
-Sanitized warnings and errors go to `$XDG_STATE_HOME/metrolist/logs/app.log`, defaulting to `~/.local/state/metrolist/logs/app.log`. On Windows the default is `%USERPROFILE%\.local\state\metrolist\logs\app.log`. Detailed logging adds lower severities. Rotation keeps five 10 MiB archives.
+Sanitized warnings and errors go to `$XDG_STATE_HOME/crystalist/logs/app.log`, defaulting to `~/.local/state/crystalist/logs/app.log`. On Windows the default is `%USERPROFILE%\.local\state\crystalist\logs\app.log`. Detailed logging adds lower severities. Rotation keeps five 10 MiB archives.
 
 With detailed logging enabled before launch, Skiko logs its selected renderer and GPU when it initializes a rendering context. An explicit `skiko.hardwareInfo.enabled` property overrides this behavior. After the first visible frame, `Runtime` records the JVM vendor, build, architecture, VM mode, selected JIT/CDS arguments and requested Skiko backend. HotSpot's `emulated-client` mode describes its C1 configuration, not CPU emulation. Requested options do not prove which backend or CDS archives are active. Use Skiko's `Renderer info` for the active backend and `-Xlog:cds=info` for archive mapping. These diagnostics leave rendering and JVM defaults unchanged.
 
@@ -297,7 +297,7 @@ The Spotify sign-in button in player artwork settings opens the same login windo
 
 ### Crash reports
 
-After a crash, restart the app once so the previous-exit diagnostic is written. Then collect `app.log`, its recent archives, any `hs_err_pid<PID>.log`, and `session-running.txt` if present. On Windows these are in `%USERPROFILE%\.local\state\metrolist\logs`, or `%XDG_STATE_HOME%\metrolist\logs` when `XDG_STATE_HOME` is set. After a video-load failure, export the playback event log. Include the build ID, exact failure time, track link, OS version, GPU and driver version. On Windows, also include the Event Viewer Application Error entry.
+After a crash, restart the app once so the previous-exit diagnostic is written. Then collect `app.log`, its recent archives, any `hs_err_pid<PID>.log`, and `session-running.txt` if present. On Windows these are in `%USERPROFILE%\.local\state\crystalist\logs`, or `%XDG_STATE_HOME%\crystalist\logs` when `XDG_STATE_HOME` is set. After a video-load failure, export the playback event log. Include the build ID, exact failure time, track link, OS version, GPU and driver version. On Windows, also include the Event Viewer Application Error entry.
 
 ### Account sync failures
 
@@ -313,7 +313,7 @@ A useful report also includes the app version, the song's YouTube Music URL, the
 
 ## Updates and restore
 
-Desktop checks the public Metrolist release list and keeps cached notes after failures. Registered Windows installations can download and verify stable installers. Portable installations, other systems and prereleases open the release page.
+Desktop checks the public CrystaList release list and keeps cached notes after failures. Registered Windows installations can download and verify stable installers. Portable installations, other systems and prereleases open the release page.
 
 Restore accepts `.zip` and `.backup` with the same validation. Preserve original databases, sidecars and settings until installation succeeds or rollback completes. Failed restart-helper launch disarms restore and reports the error. Use disposable profiles for recovery checks.
 

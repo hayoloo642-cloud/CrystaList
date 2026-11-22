@@ -16,7 +16,7 @@ from package import macos_minimum_version
 from verify_linux_audio import verify_linux_audio
 
 ROOT = Path(__file__).resolve().parents[2]
-METADATA = Path(__file__).parent / 'resources/META-INF/native-image/com.metrolist/desktop-experiment'
+METADATA = Path(__file__).parent / 'resources/META-INF/native-image/com.crystalist/desktop-experiment'
 
 
 def host_platform():
@@ -63,7 +63,7 @@ def platform_natives(work, target):
     return directory
 
 
-JAVACPP_INDEX = 'metrolist-javacpp-resources.txt'
+JAVACPP_INDEX = 'crystalist-javacpp-resources.txt'
 
 
 def javacpp_resource_index(classpath, output):
@@ -106,22 +106,22 @@ WINDOWS_MANIFEST = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 
 def windows_resources(work, version, rc=None):
-    """Compile the manifest, icon and version info that Native Image links into Metrolist.exe."""
+    """Compile the manifest, icon and version info that Native Image links into CrystaList.exe."""
     directory = work / 'windows-resources'
     directory.mkdir(parents=True, exist_ok=True)
-    (directory / 'metrolist.manifest').write_text(WINDOWS_MANIFEST, encoding='utf-8')
+    (directory / 'crystalist.manifest').write_text(WINDOWS_MANIFEST, encoding='utf-8')
     numbers = [int(part) for part in version.split('+')[0].split('-')[0].split('.')] + [0]
     numeric = ','.join(str(part) for part in numbers[:4])
     quoted = lambda path: '"' + str(path).replace('\\', '\\\\') + '"'
-    (directory / 'metrolist.rc').write_text('\n'.join([
+    (directory / 'crystalist.rc').write_text('\n'.join([
         '#pragma code_page(65001)',
         f'1 ICON {quoted(ROOT / "desktopApp/src/desktopMain/resources/logo.ico")}',
-        f'1 24 {quoted(directory / "metrolist.manifest")}',
+        f'1 24 {quoted(directory / "crystalist.manifest")}',
         '1 VERSIONINFO', f'FILEVERSION {numeric}', f'PRODUCTVERSION {numeric}', 'BEGIN',
         '  BLOCK "StringFileInfo"', '  BEGIN', '    BLOCK "040904B0"', '    BEGIN',
-        '      VALUE "FileDescription", "Metrolist"', f'      VALUE "FileVersion", "{version}"',
-        '      VALUE "InternalName", "Metrolist"', '      VALUE "OriginalFilename", "Metrolist.exe"',
-        '      VALUE "ProductName", "Metrolist"', f'      VALUE "ProductVersion", "{version}"',
+        '      VALUE "FileDescription", "CrystaList"', f'      VALUE "FileVersion", "{version}"',
+        '      VALUE "InternalName", "CrystaList"', '      VALUE "OriginalFilename", "CrystaList.exe"',
+        '      VALUE "ProductName", "CrystaList"', f'      VALUE "ProductVersion", "{version}"',
         '    END', '  END', '  BLOCK "VarFileInfo"', '  BEGIN', '    VALUE "Translation", 0x0409, 0x04B0', '  END', 'END', '']),
         encoding='utf-8')
     if rc is None:
@@ -129,8 +129,8 @@ def windows_resources(work, version, rc=None):
         rc = shutil.which('rc') or (kits[-1] if kits else None)
         if rc is None:
             raise RuntimeError('rc.exe from the Windows SDK is required to build the Windows native image')
-    output = directory / 'metrolist.res'
-    subprocess.run([str(rc), '/nologo', '/fo', str(output), str(directory / 'metrolist.rc')], check=True)
+    output = directory / 'crystalist.res'
+    subprocess.run([str(rc), '/nologo', '/fo', str(output), str(directory / 'crystalist.rc')], check=True)
     return output
 
 
@@ -157,7 +157,7 @@ def arguments(graal, work, output, target, experiment=False, agent=None, macos_v
         if windows:
             # Match Nucleus's GUI launcher while retaining Native Image's main entry point.
             options += ['-H:NativeLinkerOption=/SUBSYSTEM:WINDOWS', '-H:NativeLinkerOption=/ENTRY:mainCRTStartup']
-            options += [f'-H:NativeLinkerOption={work / "windows-resources/metrolist.res"}']
+            options += [f'-H:NativeLinkerOption={work / "windows-resources/crystalist.res"}']
         if target.startswith('linux-'):
             # Module opens are fixed at build time; the JVM's runtime flag does not reach the image.
             options += ['--add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED']
@@ -165,8 +165,8 @@ def arguments(graal, work, output, target, experiment=False, agent=None, macos_v
             options += [f'-H:NativeLinkerOption=-mmacosx-version-min={macos_version or macos_deployment_target(graal)}',
                         f'-H:NativeLinkerOption={work / "macos-awt.o"}',
                         '-J--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED',
-                        '--features=com.metrolist.desktop.nativeimage.MacosAwtFeature']
-    main = 'com.metrolist.desktop.experiment.NativeImageMainKt' if experiment else 'com.metrolist.desktop.nativeimage.NativeDesktopMainKt'
+                        '--features=com.crystalist.desktop.nativeimage.MacosAwtFeature']
+    main = 'com.crystalist.desktop.experiment.NativeImageMainKt' if experiment else 'com.crystalist.desktop.nativeimage.NativeDesktopMainKt'
     classpath = (work / 'classpath.txt').read_text().strip()
     classpath = str(work / 'serialization-config') + os.pathsep + classpath
     if not experiment:
@@ -186,7 +186,7 @@ def build(graal, work, target, experiment=False, agent=None):
     run_options = {'env': dict(os.environ, MACOSX_DEPLOYMENT_TARGET=macos_version)} if macos_version else {}
     with tempfile.TemporaryDirectory(prefix='image-build.', dir=work) as directory:
         image = Path(directory)
-        name = 'metrolist' if experiment else 'Metrolist'
+        name = 'crystalist' if experiment else 'CrystaList'
         output = image / (name + ('.exe' if target.startswith('windows') else ''))
         if not experiment:
             glue = work / 'native-glue'
@@ -242,7 +242,7 @@ def build(graal, work, target, experiment=False, agent=None):
         if target.startswith('windows'):
             (image / 'bin').mkdir(exist_ok=True)
             shutil.copy2(source, image / 'bin' / library)
-            # Metrolist.exe and the JDK DLLs link the MSVC runtime; ship GraalVM's app-local copies like the JDK does,
+            # CrystaList.exe and the JDK DLLs link the MSVC runtime; ship GraalVM's app-local copies like the JDK does,
             # because clean Windows installs have no Visual C++ Redistributable.
             runtimes = sorted([*(graal / 'bin').glob('vcruntime*.dll'), *(graal / 'bin').glob('msvcp*.dll')])
             if not any(path.name.lower() == 'vcruntime140_1.dll' for path in runtimes):
@@ -285,7 +285,7 @@ def main():
     (args.work / 'java-glue.log').unlink(missing_ok=True)
     if sys.platform == 'linux' and not args.inside_scope:
         import fcntl
-        with open('/tmp/metrolist-gradle.lock', 'w') as lock:
+        with open('/tmp/crystalist-gradle.lock', 'w') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             command = ['systemd-run', '--user', '--scope', '--quiet', '-p', 'MemoryMax=16G',
                        '-p', 'MemorySwapMax=2G', '-p', 'CPUWeight=50', sys.executable,

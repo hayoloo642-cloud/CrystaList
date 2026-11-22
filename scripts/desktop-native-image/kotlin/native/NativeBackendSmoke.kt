@@ -1,10 +1,10 @@
-package com.metrolist.desktop.nativeimage
+package com.crystalist.desktop.nativeimage
 
-import com.metrolist.desktop.utils.configureDesktopSentry
-import com.metrolist.desktop.utils.isDesktopPlatformSupported
-import com.metrolist.desktop.window.jna.User32Extend
-import com.metrolist.desktop.window.jna.structure.MENUITEMINFO
-import com.metrolist.desktop.window.jna.structure.windowsBuildNumber
+import com.crystalist.desktop.utils.configureDesktopSentry
+import com.crystalist.desktop.utils.isDesktopPlatformSupported
+import com.crystalist.desktop.window.jna.User32Extend
+import com.crystalist.desktop.window.jna.structure.MENUITEMINFO
+import com.crystalist.desktop.window.jna.structure.windowsBuildNumber
 import com.sun.jna.Pointer
 import com.sun.jna.platform.win32.Advapi32Util
 import com.sun.jna.platform.win32.COM.COMUtils
@@ -42,7 +42,7 @@ private class SerializationProbeType(
 private fun serializationSmoke() {
     val manifest =
         checkNotNull(
-            Thread.currentThread().contextClassLoader.getResourceAsStream("metrolist-serialization-types.tsv"),
+            Thread.currentThread().contextClassLoader.getResourceAsStream("crystalist-serialization-types.tsv"),
         )
     val types = manifest.bufferedReader().use { it.readLines() }
     check(types.isNotEmpty())

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=CrystaList
+Comment=YouTube Music desktop client
+Exec=/usr/bin/crystalist %u
+Icon=crystalist
+Terminal=false
+StartupWMClass=CrystaList
+Categories=AudioVideo;Player;
+MimeType=x-scheme-handler/crystalist;x-scheme-handler/crystalist-auth;

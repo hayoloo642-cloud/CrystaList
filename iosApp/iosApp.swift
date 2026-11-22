@@ -12,7 +12,7 @@ import Shared
 import SwiftUI
 
 @main
-struct MetrolistApp: App {
+struct CrystaListApp: App {
     @UIApplicationDelegateAdaptor(AutomaticBackupAppDelegate.self) private var appDelegate
 
     init() {
@@ -23,12 +23,12 @@ struct MetrolistApp: App {
         configureAppAudioSession()
         if UserDefaults.standard.object(forKey: "iosOnboardingComplete") == nil {
             let existingDatabase = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-                .first?.appendingPathComponent("metrolist/metrolist.db")
+                .first?.appendingPathComponent("crystalist/crystalist.db")
             let isUpgrade = existingDatabase.map { FileManager.default.fileExists(atPath: $0.path) } ?? false
             UserDefaults.standard.set(isUpgrade, forKey: "iosOnboardingComplete")
         }
         if !IosCrashRecovery.shared.hasPendingReport {
-            MetrolistPlatform.shared.initialize()
+            CrystaListPlatform.shared.initialize()
         }
         if UserDefaults.standard.bool(forKey: "sentryEnabled") {
             startSentryReporting()
@@ -55,8 +55,8 @@ struct MetrolistApp: App {
 }
 
 private final class AutomaticBackupAppDelegate: NSObject, UIApplicationDelegate {
-    private static let taskIdentifier = "com.metrolist.automatic-backup"
-    private let settingsChanged = Notification.Name("com.metrolist.automaticBackupSettingsChanged")
+    private static let taskIdentifier = "com.crystalist.automatic-backup"
+    private let settingsChanged = Notification.Name("com.crystalist.automaticBackupSettingsChanged")
 
     func application(
         _ application: UIApplication,
@@ -130,7 +130,7 @@ private struct AppHostView: View {
             .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification).receive(on: RunLoop.main)) { _ in
                 syncSentryConsent()
             }
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("com.metrolist.statusBarVisibilityChanged"))) { notification in
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("com.crystalist.statusBarVisibilityChanged"))) { notification in
                 statusBarHidden = (notification.object as? NSNumber)?.boolValue ?? false
             }
             .onOpenURL { url in
@@ -164,7 +164,7 @@ private func startSentryReporting() {
         options.tracesSampleRate = 0.0
         options.failedRequestTargets = [
             try? NSRegularExpression(
-                pattern: #"^https://(?:(?:[a-z0-9-]+\.)*metrolist\.cc|metroserverx\.meowery\.eu)(?::443)?(?:[/?#]|$)"#,
+                pattern: #"^https://(?:(?:[a-z0-9-]+\.)*crystalist\.cc|metroserverx\.meowery\.eu)(?::443)?(?:[/?#]|$)"#,
                 options: .caseInsensitive
             )
         ].compactMap { $0 }

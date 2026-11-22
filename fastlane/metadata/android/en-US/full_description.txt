@@ -1,10 +1,10 @@
-Material 3 YouTube Music client for Android
+Apple Music inspired YouTube Music client for Android
 
 Features:
 
 - Blazingly fast interruption-free YouTube Music playback
 - YouTube Music login support, logged-out users can also fully enjoy the app
-- **Material 3 Expressive** design
+- **Apple Music inspired expressive** design
 - **Discord Rich Presence**, Scrobbling thru **Last.fm and Listenbrainz**
 - **No ads**, ever
 - Listen Together with other people online in real-time

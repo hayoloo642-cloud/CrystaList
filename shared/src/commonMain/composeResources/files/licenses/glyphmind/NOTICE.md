@@ -2,13 +2,13 @@
 
 Glyphmind code is GPL-3.0-only. The licenses below apply to the corresponding upstream code and datasets. Keep this file and `licenses/` when redistributing the library or dictionary packs.
 
-## Metrolist
+## CrystaList
 
-The romanization rules, word alignment, Mandarin decoder and regression tests come from [Metrolist](https://github.com/MetrolistGroup/Metrolist), revision `1404ba751491965ae943ff1845d8d7e08a6f2093`, following the history behind tag `v14.0.0`. Copyright 2026 Metrolist contributors, including **l6t9**. Original file headers remain in the port. Contributor history is available at the linked repository; these changes do not claim sole authorship. The GPL version 3 text is in `LICENSE`. Glyphmind selects GPL-3.0-only, not a permissive relicensing of those contributions.
+The romanization rules, word alignment, Mandarin decoder and regression tests come from [CrystaList](https://github.com/MetrolistGroup/Metrolist), revision `1404ba751491965ae943ff1845d8d7e08a6f2093`, following the history behind tag `v14.0.0`. Copyright 2026 CrystaList contributors, including **l6t9**. Original file headers remain in the port. Contributor history is available at the linked repository; these changes do not claim sole authorship. The GPL version 3 text is in `LICENSE`. Glyphmind selects GPL-3.0-only, not a permissive relicensing of those contributions.
 
 ## Kuromoji and IPADIC
 
-`JapaneseDictionary.kt` ports the NORMAL-mode lattice construction, unknown-word grouping, punctuation splitting and least-cost path selection from Atilika's Kuromoji 0.9.0. Copyright 2010-2015 Atilika Inc. and contributors, Apache-2.0. Glyphmind replaces Java buffers and the double-array trie with common Kotlin and sorted prefix lookup. It excludes search/extended modes and user dictionaries, which Metrolist did not use.
+`JapaneseDictionary.kt` ports the NORMAL-mode lattice construction, unknown-word grouping, punctuation splitting and least-cost path selection from Atilika's Kuromoji 0.9.0. Copyright 2010-2015 Atilika Inc. and contributors, Apache-2.0. Glyphmind replaces Java buffers and the double-array trie with common Kotlin and sorted prefix lookup. It excludes search/extended modes and user dictionaries, which CrystaList did not use.
 
 `scripts/ExportJapanese.java` transforms the published `kuromoji-ipadic-0.9.0.jar` dictionary into GJP1. Costs, entry order and pronunciation-before-reading selection remain unchanged. The input is `mecab-ipadic-2.7.0-20070801`. Copyright 2000-2003 Nara Institute of Science and Technology. Its NAIST permission and warranty terms and ICOT conditions are retained in `licenses/IPADIC-NOTICE.md` and `licenses/Kuromoji-NOTICE.md`. The Apache text and contributor list are in `licenses/Kuromoji-LICENSE.md` and `licenses/Kuromoji-CONTRIBUTORS.md`.
 
@@ -16,7 +16,7 @@ The Japanese regression oracle was generated with the published JVM Kuromoji 0.9
 
 ## Mandarin and Unicode
 
-The MPY1 pack combines Unicode Unihan 17.0.0 `kMandarin` readings with the character and phrase dictionaries from [houbb/pinyin 0.4.0](https://github.com/houbb/pinyin). Metrolist's conversion retains historical first readings, phrase selection and BMP coverage. Glyphmind moves the table to a verified download and ports its decoder to common Kotlin. Upstream inputs and SHA-256 values remain pinned in `scripts/generate_mandarin_table.py`.
+The MPY1 pack combines Unicode Unihan 17.0.0 `kMandarin` readings with the character and phrase dictionaries from [houbb/pinyin 0.4.0](https://github.com/houbb/pinyin). CrystaList's conversion retains historical first readings, phrase selection and BMP coverage. Glyphmind moves the table to a verified download and ports its decoder to common Kotlin. Upstream inputs and SHA-256 values remain pinned in `scripts/generate_mandarin_table.py`.
 
 Unihan uses Unicode License V3, retained in `licenses/Unicode-LICENSE.txt`. Pinyin's published POM declares Apache-2.0; its upstream text is retained in `licenses/pinyin-LICENSE.txt`. The Tatoeba snapshot builder also uses Unihan simplified/traditional variant properties to label Chinese examples.
 

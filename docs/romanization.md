@@ -1,12 +1,12 @@
 # Romanization and language detection
 
-Metrolist uses [glyphmind 0.1.0](https://github.com/nyxiereal/glyphmind) for common Kotlin romanization and local language detection. Android consumes its JVM variant through Gradle module metadata. Desktop and iOS use the same rules, dictionary formats and model. There is no JavaScript engine or platform transliteration API in this path.
+CrystaList uses [glyphmind 0.1.0](https://github.com/nyxiereal/glyphmind) for common Kotlin romanization and local language detection. Android consumes its JVM variant through Gradle module metadata. Desktop and iOS use the same rules, dictionary formats and model. There is no JavaScript engine or platform transliteration API in this path.
 
 ## Display and timing
 
 `lyricsRomanizationEnabled` remains the generation and display gate. The Larger text setting, original-script toggle, enabled language list and `cyrillicByLine` retain their behavior. Provider romanization remains authoritative. Glyphmind aligns generated text with the original word boundaries; the adapter preserves all timestamps, background flags and spacing flags.
 
-Japanese uses the NORMAL-mode Kuromoji 0.9.0 lattice algorithm ported to Kotlin. Kana rules and sokuon splitting retain Metrolist's output. Mandarin uses the former JVM MPY1 table on every platform. Arabic, Thai, Hangul, Devanagari, Gurmukhi and Cyrillic retain the bundled rules.
+Japanese uses the NORMAL-mode Kuromoji 0.9.0 lattice algorithm ported to Kotlin. Kana rules and sokuon splitting retain CrystaList's output. Mandarin uses the former JVM MPY1 table on every platform. Arabic, Thai, Hangul, Devanagari, Gurmukhi and Cyrillic retain the bundled rules.
 
 Han-only lines use the local detector when confident. Short or uncertain lines retain the lyric's Japanese/Chinese context heuristic. This can change routing for mixed Japanese/Chinese lyrics. iOS now shares JVM Mandarin phrase readings and Japanese tokenization, including kana-only segmentation.
 
@@ -19,10 +19,10 @@ The host supplies Ktor downloads with a byte limit and timeout. Glyphmind pins r
 Storage paths are:
 
 - Android: `noBackupFilesDir/glyphmind`.
-- Desktop: `$XDG_DATA_HOME/metrolist/glyphmind`, resolved by `XdgUtils`.
-- iOS: `Application Support/metrolist/glyphmind`, excluded from backup.
+- Desktop: `$XDG_DATA_HOME/crystalist/glyphmind`, resolved by `XdgUtils`.
+- iOS: `Application Support/crystalist/glyphmind`, excluded from backup.
 
-After successful preparation, Metrolist removes the retired `japanese-dictionary` directory on that platform. Packs stay outside evictable caches. Glyphmind's [pack documentation](https://github.com/nyxiereal/glyphmind/blob/main/docs/packs.md) describes generation, formats and notices.
+After successful preparation, CrystaList removes the retired `japanese-dictionary` directory on that platform. Packs stay outside evictable caches. Glyphmind's [pack documentation](https://github.com/nyxiereal/glyphmind/blob/main/docs/packs.md) describes generation, formats and notices.
 
 ## Local detection and translation
 
@@ -42,9 +42,9 @@ Completed cached translations survive detector-policy changes when source, targe
 ./gradlew --max-workers=2 :androidApp:dependencyInsight --configuration debugRuntimeClasspath --dependency glyphmind
 ```
 
-Run shared iOS compilation and simulator tests on macOS because Metrolist's other native interop dependencies require Apple SDKs. Glyphmind itself publishes all Apple klibs on Linux. Its repository owns the tokenizer oracle, romanizer regression tests, pack installation failure tests and held-out model check.
+Run shared iOS compilation and simulator tests on macOS because CrystaList's other native interop dependencies require Apple SDKs. Glyphmind itself publishes all Apple klibs on Linux. Its repository owns the tokenizer oracle, romanizer regression tests, pack installation failure tests and held-out model check.
 
-Metrolist's `GlyphmindDictionaryWiringTest` runs on desktop and Android host tests with temporary storage and Ktor MockEngine. It covers HTTP status and size checks, a verified install, cancellation and cleanup of the legacy directory.
+CrystaList's `GlyphmindDictionaryWiringTest` runs on desktop and Android host tests with temporary storage and Ktor MockEngine. It covers HTTP status and size checks, a verified install, cancellation and cleanup of the legacy directory.
 
 The bundled upstream `NOTICE.md` and `LICENSE` stay at `files/licenses/glyphmind/`; the retained third-party texts sit in its `licenses/` subdirectory, matching the notice. Shared JAR verification checks those references and packaged files; release verification checks the retained files in the final package.
 

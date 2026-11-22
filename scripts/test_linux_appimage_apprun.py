@@ -18,17 +18,17 @@ class AppRunTest(unittest.TestCase):
         self.app = self.root / 'mounted app'
         (self.app / 'bin').mkdir(parents=True)
         shutil.copyfile(Path(__file__).with_name('linux-appimage-apprun.sh'), self.app / 'AppRun')
-        self.image = self.root / 'Metrolist space % " $ ` \\.AppImage'
+        self.image = self.root / 'CrystaList space % " $ ` \\.AppImage'
         self.image.write_text('#!/bin/sh\nprintf "%s\\n" "$@" > "$TEST_LAUNCH_LOG"\n')
         self.image.chmod(0o755)
-        shutil.copyfile(self.image, self.app / 'bin/Metrolist')
-        (self.app / 'bin/Metrolist').chmod(0o755)
-        (self.app / 'Metrolist.desktop').write_text(
-            '[Desktop Entry]\nType=Application\nName=Metrolist\nExec=Metrolist %u\n'
-            'Icon=Metrolist\nStartupWMClass=Metrolist\nTerminal=false\n'
-            'MimeType=x-scheme-handler/metrolist;x-scheme-handler/metrolist-auth;\n'
+        shutil.copyfile(self.image, self.app / 'bin/CrystaList')
+        (self.app / 'bin/CrystaList').chmod(0o755)
+        (self.app / 'CrystaList.desktop').write_text(
+            '[Desktop Entry]\nType=Application\nName=CrystaList\nExec=CrystaList %u\n'
+            'Icon=CrystaList\nStartupWMClass=CrystaList\nTerminal=false\n'
+            'MimeType=x-scheme-handler/crystalist;x-scheme-handler/crystalist-auth;\n'
         )
-        (self.app / 'Metrolist.png').write_bytes(b'icon')
+        (self.app / 'CrystaList.png').write_bytes(b'icon')
         self.data = self.root / 'user data'
         self.log = self.root / 'launched'
         self.env = {
@@ -48,27 +48,27 @@ class AppRunTest(unittest.TestCase):
 
     def test_pin_relaunches_after_mount_is_removed_and_keeps_uri_arguments(self):
         self.launch()
-        entry = self.data / 'applications/Metrolist.desktop'
+        entry = self.data / 'applications/CrystaList.desktop'
         self.assertTrue(entry.is_file())
-        self.assertEqual(b'icon', (self.data / 'icons/hicolor/512x512/apps/Metrolist.png').read_bytes())
+        self.assertEqual(b'icon', (self.data / 'icons/hicolor/512x512/apps/CrystaList.png').read_bytes())
         self.assertNotIn(str(self.app), entry.read_text())
-        self.assertIn('StartupWMClass=Metrolist\n', entry.read_text())
+        self.assertIn('StartupWMClass=CrystaList\n', entry.read_text())
         shutil.rmtree(self.app)
         self.log.unlink()
         if not shutil.which('gio'):
             self.skipTest('gio is needed to exercise desktop Exec escaping')
-        result = subprocess.run(['gio', 'launch', str(entry), 'metrolist://test/'],
+        result = subprocess.run(['gio', 'launch', str(entry), 'crystalist://test/'],
                                 env=self.env, capture_output=True, text=True, timeout=5)
         self.assertEqual(0, result.returncode, result.stderr)
         deadline = time.monotonic() + 2
         while not self.log.exists() and time.monotonic() < deadline:
             time.sleep(0.01)
-        self.assertEqual('metrolist://test/\n', self.log.read_text())
+        self.assertEqual('crystalist://test/\n', self.log.read_text())
 
     def test_respects_system_package_desktop_entry(self):
         directory = Path(self.env['XDG_DATA_DIRS']) / 'applications'
         directory.mkdir(parents=True)
-        (directory / 'Metrolist.desktop').write_text('system entry')
+        (directory / 'CrystaList.desktop').write_text('system entry')
         self.launch()
         self.assertFalse(self.data.exists())
 
@@ -80,7 +80,7 @@ class AppRunTest(unittest.TestCase):
     def test_relative_data_home_uses_home_and_relaunch_updates_moved_image(self):
         self.env['XDG_DATA_HOME'] = 'relative'
         self.launch()
-        entry = Path(self.env['HOME']) / '.local/share/applications/Metrolist.desktop'
+        entry = Path(self.env['HOME']) / '.local/share/applications/CrystaList.desktop'
         self.assertTrue(entry.is_file())
         moved = self.root / 'moved.AppImage'
         self.image.rename(moved)
@@ -93,25 +93,25 @@ class AppRunTest(unittest.TestCase):
             self.skipTest('gio is needed to exercise the desktop launcher')
         applications = self.data / 'applications'
         applications.mkdir(parents=True)
-        managed_image = self.root / 'managed applications' / 'metrolist.appimage'
+        managed_image = self.root / 'managed applications' / 'crystalist.appimage'
         managed_image.parent.mkdir()
         managed_image.write_text('#!/bin/sh\nexec sh "$TEST_APPRUN" "$@"\n')
         managed_image.chmod(0o755)
         self.env.update(APPIMAGE=str(managed_image), TEST_APPRUN=str(self.app / 'AppRun'))
-        existing = applications / 'metrolist.desktop'
-        source = ('[Desktop Entry]\nType=Application\nName=Metrolist\n'
+        existing = applications / 'crystalist.desktop'
+        source = ('[Desktop Entry]\nType=Application\nName=CrystaList\n'
                   f'TryExec={managed_image}\n'
                   f'Exec=env DESKTOPINTEGRATION=1 {shlex.quote(str(managed_image))} %u\n'
-                  'X-AppImage-Name=Metrolist\n')
+                  'X-AppImage-Name=CrystaList\n')
         existing.write_text(source)
 
-        result = subprocess.run(['gio', 'launch', str(existing), 'metrolist://test/'],
+        result = subprocess.run(['gio', 'launch', str(existing), 'crystalist://test/'],
                                 env=self.env, capture_output=True, text=True, timeout=5)
         self.assertEqual(0, result.returncode, result.stderr)
         deadline = time.monotonic() + 2
         while not self.log.exists() and time.monotonic() < deadline:
             time.sleep(0.01)
-        self.assertEqual('metrolist://test/\n', self.log.read_text())
+        self.assertEqual('crystalist://test/\n', self.log.read_text())
         self.assertEqual([existing], list(applications.iterdir()))
         self.assertEqual(source, existing.read_text())
         self.assertFalse((self.data / 'icons').exists())
@@ -119,7 +119,7 @@ class AppRunTest(unittest.TestCase):
     def test_opt_out_leaves_external_launcher_and_launches_app(self):
         applications = self.data / 'applications'
         applications.mkdir(parents=True)
-        existing = applications / 'gearlever-metrolist.desktop'
+        existing = applications / 'gearlever-crystalist.desktop'
         content = b'externally managed entry'
         existing.write_bytes(content)
 
@@ -129,11 +129,11 @@ class AppRunTest(unittest.TestCase):
         self.assertEqual(content, existing.read_bytes())
         self.assertFalse((self.data / 'icons').exists())
 
-    def test_opt_out_does_not_remove_existing_metrolist_entry(self):
+    def test_opt_out_does_not_remove_existing_crystalist_entry(self):
         applications = self.data / 'applications'
         applications.mkdir(parents=True)
-        existing = applications / 'Metrolist.desktop'
-        content = b'X-Metrolist-AppImage=true\n'
+        existing = applications / 'CrystaList.desktop'
+        content = b'X-CrystaList-AppImage=true\n'
         existing.write_bytes(content)
 
         self.env['DESKTOPINTEGRATION'] = 'appimaged'

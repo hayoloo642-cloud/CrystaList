@@ -53,7 +53,7 @@ class SerializationMetadataTest(unittest.TestCase):
     def test_companions_generics_sealed_enums_objects_and_old_serializers(self):
         classes = {}
         for kind in ('Request', 'Sealed', 'Enum', 'Generic', 'Named'):
-            name = 'com/metrolist/models/' + kind
+            name = 'com/crystalist/models/' + kind
             companion = name + ('$Factory' if kind == 'Named' else '$Companion')
             arity = 2 if kind == 'Generic' else 0
             classes[name] = class_file(name, [('Factory' if kind == 'Named' else 'Companion', f'L{companion};', 25)])
@@ -63,14 +63,14 @@ class SerializationMetadataTest(unittest.TestCase):
             # Ignore unrelated overloads with the same name and wrong return/argument types.
             methods += [('serializer', '()Ljava/lang/String;', 1), ('serializer', '(I)' + SERIALIZER, 1)]
             classes[companion] = class_file(companion, methods=methods, annotations=[NAMED_COMPANION] if kind == 'Named' else [])
-        obj = 'com/metrolist/models/Object'
+        obj = 'com/crystalist/models/Object'
         classes[obj] = class_file(obj, [('INSTANCE', f'L{obj};', 25)], [('serializer', '()' + SERIALIZER, 17)])
-        old = 'com/metrolist/models/Old'
+        old = 'com/crystalist/models/Old'
         classes[old] = class_file(old)
         classes[old + '$$serializer'] = class_file(old + '$$serializer', [('INSTANCE', f'L{old}$$serializer;', 25)])
-        poly = 'com/metrolist/models/Polymorphic'
+        poly = 'com/crystalist/models/Polymorphic'
         classes[poly] = class_file(poly, annotations=[POLYMORPHIC])
-        classes['com/metrolist/models/Unrelated'] = class_file('com/metrolist/models/Unrelated')
+        classes['com/crystalist/models/Unrelated'] = class_file('com/crystalist/models/Unrelated')
         classes['other/Outside$$serializer'] = b'not a class file'
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -82,24 +82,24 @@ class SerializationMetadataTest(unittest.TestCase):
             result = generate([jar], output)
             entries = {entry['type']: entry for entry in result['reflection']}
             self.assertEqual(len(entries), 14)
-            self.assertEqual(entries['com.metrolist.models.Request']['fields'], [{'name': 'Companion'}])
-            self.assertEqual(entries['com.metrolist.models.Generic$Companion']['methods'], [
+            self.assertEqual(entries['com.crystalist.models.Request']['fields'], [{'name': 'Companion'}])
+            self.assertEqual(entries['com.crystalist.models.Generic$Companion']['methods'], [
                 {'name': 'serializer', 'parameterTypes': ['kotlinx.serialization.KSerializer'] * 2},
                 {'name': 'serializer', 'parameterTypes': []},
             ])
-            self.assertTrue(entries['com.metrolist.models.Object']['allDeclaredFields'])
-            self.assertTrue(entries['com.metrolist.models.Object']['allPublicMethods'])
-            self.assertEqual(entries['com.metrolist.models.Object']['fields'], [{'name': 'INSTANCE'}])
-            self.assertEqual(entries['com.metrolist.models.Old$$serializer']['fields'], [{'name': 'INSTANCE'}])
-            self.assertTrue(entries['com.metrolist.models.Named']['allDeclaredFields'])
+            self.assertTrue(entries['com.crystalist.models.Object']['allDeclaredFields'])
+            self.assertTrue(entries['com.crystalist.models.Object']['allPublicMethods'])
+            self.assertEqual(entries['com.crystalist.models.Object']['fields'], [{'name': 'INSTANCE'}])
+            self.assertEqual(entries['com.crystalist.models.Old$$serializer']['fields'], [{'name': 'INSTANCE'}])
+            self.assertTrue(entries['com.crystalist.models.Named']['allDeclaredFields'])
             manifest = (output / MANIFEST).read_text()
-            self.assertIn('com.metrolist.models.Generic\t2\n', manifest)
+            self.assertIn('com.crystalist.models.Generic\t2\n', manifest)
             self.assertEqual(len(manifest.splitlines()), 8)
             self.assertNotIn(directory, json.dumps(result))
             self.assertEqual(json.loads((output / 'reachability-metadata.json').read_text()), result)
 
     def test_protobuf_lite_messages_register_fields_and_allocation(self):
-        message = 'com/metrolist/music/listentogether/proto/Listentogether$Envelope'
+        message = 'com/crystalist/music/listentogether/proto/Listentogether$Envelope'
         builder = message + '$Builder'
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -114,7 +114,7 @@ class SerializationMetadataTest(unittest.TestCase):
     def test_class_directories_precedence_and_reproducible_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            name = 'com/metrolist/Request'
+            name = 'com/crystalist/Request'
             source = root / 'classes' / (name + '.class')
             source.parent.mkdir(parents=True)
             source.write_bytes(class_file(name, annotations=[POLYMORPHIC]))
@@ -124,7 +124,7 @@ class SerializationMetadataTest(unittest.TestCase):
             first = generate([root / 'classes', jar], root / 'config')
             second = generate([root / 'classes', jar], root / 'config')
             self.assertEqual(first, second)
-            self.assertEqual(first['reflection'][0]['type'], 'com.metrolist.Request')
+            self.assertEqual(first['reflection'][0]['type'], 'com.crystalist.Request')
             (root / 'classpath.txt').write_text(str(jar))
             args = native_image.arguments(root, root, root / 'image', 'linux-x64')
             config = next(arg for arg in args if arg.startswith('-H:ConfigurationFileDirectories='))
@@ -139,15 +139,15 @@ class SerializationMetadataTest(unittest.TestCase):
             jar = root / 'annotations.jar'
             with zipfile.ZipFile(jar, 'w') as archive:
                 for kind, serializer in [('Poly', 'PolymorphicSerializer'), ('Custom', 'CustomSerializer')]:
-                    name = 'com/metrolist/' + kind
+                    name = 'com/crystalist/' + kind
                     archive.writestr(name + '.class', class_file(name, annotations=[
                         (SERIALIZABLE, 'Lkotlinx/serialization/' + serializer + ';'),
                     ]))
             result = generate([jar], root / 'config')
-            self.assertEqual([entry['type'] for entry in result['reflection']], ['com.metrolist.Poly'])
+            self.assertEqual([entry['type'] for entry in result['reflection']], ['com.crystalist.Poly'])
 
     def test_malformed_classes_fail_instead_of_silently_omitting_models(self):
-        for data in (b'nope', b'\xca\xfe\xba\xbe', class_file('com/metrolist/Test')[:-1]):
+        for data in (b'nope', b'\xca\xfe\xba\xbe', class_file('com/crystalist/Test')[:-1]):
             with self.assertRaises(ValueError):
                 read_class(data)
 

@@ -1,7 +1,7 @@
 package meow.nyx.spotlib
 
-import com.metrolist.shared.network.TextResponse
-import com.metrolist.shared.network.bodyAsTextLimited
+import com.crystalist.shared.network.TextResponse
+import com.crystalist.shared.network.bodyAsTextLimited
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header

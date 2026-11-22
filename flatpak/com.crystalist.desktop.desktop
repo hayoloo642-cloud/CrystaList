@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=CrystaList
+Comment=Stream and manage your YouTube Music library
+Exec=com.crystalist.desktop %u
+Icon=com.crystalist.desktop
+Terminal=false
+Categories=AudioVideo;Player;Music;
+StartupWMClass=CrystaList
+Keywords=music;player;youtube;streaming;
+MimeType=x-scheme-handler/crystalist;x-scheme-handler/crystalist-auth;
