@@ -277,8 +277,8 @@ fun PlayerPrimaryControls(
                 Modifier
                     .height(buttonHeight)
                     .pointerHoverIcon(PointerIcon.Hand)
-                    .widthIn(min = minPlayWidth)
-                    .weight(playPauseWeight)
+                    // Icon-only mode is a fixed circle; only the labelled pill stretches.
+                    .then(if (showLabels) Modifier.widthIn(min = minPlayWidth).weight(playPauseWeight) else Modifier.width(buttonHeight))
                     .tvFocusHighlight(playShape, scale = 1f, color = centerButtonContentColor)
                     .then(
                         if (playPauseFocusRequester != null) {

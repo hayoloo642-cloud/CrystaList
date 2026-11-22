@@ -37,6 +37,7 @@ import com.crystalist.shared.ui.components.images.AsyncImage
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.utils.artistArtworkShape
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.foundation.shape.CircleShape
 
 @Composable
 fun GenreCard(
@@ -138,7 +139,8 @@ fun SectionTitle(
                 style = titleStyle,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.primary,
+                // Apple Music section headings are plain label colour, not brand red.
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
 
@@ -185,39 +187,19 @@ private fun SectionActionButton(
     onClick: (() -> Unit)? = null,
     isWide: Boolean = false,
 ) {
-    val boxSize = if (isWide) 56.dp else 48.dp
-    val surfaceSize = Modifier.size(40.dp, 32.dp)
-    val iconSize = 20.dp
+    val boxSize = if (isWide) 40.dp else 36.dp
+    val iconSize = 18.dp
 
     Box(
-        modifier = Modifier.size(boxSize),
+        modifier = Modifier.size(boxSize).clip(CircleShape).clickable(enabled = onClick != null) { onClick?.invoke() },
         contentAlignment = Alignment.Center,
     ) {
-        val content: @Composable () -> Unit = {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = contentDescription,
-                    tint = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.size(iconSize),
-                )
-            }
-        }
-        if (onClick != null) {
-            Surface(
-                modifier = surfaceSize,
-                shape = RoundedCornerShape(100.dp),
-                color = MaterialTheme.colorScheme.primary,
-                onClick = onClick,
-                content = content,
-            )
-        } else {
-            Surface(
-                modifier = surfaceSize,
-                shape = RoundedCornerShape(100.dp),
-                color = MaterialTheme.colorScheme.primary,
-                content = content,
-            )
-        }
+        Icon(
+            imageVector = icon,
+            contentDescription = contentDescription,
+            // Apple Music uses a quiet chevron, not a filled brand-red bubble.
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(iconSize),
+        )
     }
 }
