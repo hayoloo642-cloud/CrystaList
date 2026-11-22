@@ -257,9 +257,10 @@ fun AlbumScreen(
             trackTrailingContent = { song, _ ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     // Apple Music prints the duration right-aligned before the row menu.
-                    if (song.duration > 0) {
+                    val seconds = song.duration ?: 0L
+                    if (seconds > 0) {
                         Text(
-                            text = formatDuration(song.duration * 1000L),
+                            text = formatDuration(seconds * 1000L),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(end = 8.dp),
