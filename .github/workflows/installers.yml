@@ -32,8 +32,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libfuse2
           chmod +x ./gradlew
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
       - name: Generate installer icons
-        run: ./scripts/gen_icons.sh
+        run: python scripts/gen_icons.py
       - name: Build AppImage
         env:
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
@@ -65,8 +70,13 @@ jobs:
           distribution: temurin
           java-version: "25"
       - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
       - name: Generate installer icons
-        run: ./scripts/gen_icons.sh
+        run: python scripts/gen_icons.py
       - name: Build DMG
         env:
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
@@ -116,9 +126,15 @@ jobs:
             --output desktopApp/src/desktopMain/resources/windows `
             -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true `
             -p:DebugType=None -p:DebugSymbols=false -p:PublishReadyToRun=true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow
+        shell: bash
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
       - name: Generate installer icons
         shell: bash
-        run: ./scripts/gen_icons.sh
+        run: python scripts/gen_icons.py
       - name: Build Windows ZIP
         shell: bash
         env:
