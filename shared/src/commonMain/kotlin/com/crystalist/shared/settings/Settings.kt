@@ -128,6 +128,8 @@ import com.crystalist.shared.constants.LyricsActiveByRealTimingKey
 import com.crystalist.shared.constants.LyricsNeutralColorKey
 import com.crystalist.shared.constants.LyricsOpenRouterOAuthKey
 import com.crystalist.shared.constants.LyricsOpenRouterOAuthSessionKey
+import com.crystalist.shared.constants.LyricsAmbientBackgroundKey
+import com.crystalist.shared.constants.LyricsKaraokeModeKey
 import com.crystalist.shared.constants.LyricsPlusLighterKey
 import com.crystalist.shared.constants.LyricsProgressiveBlurKey
 import com.crystalist.shared.constants.LyricsShareImageStyleKey
@@ -476,6 +478,12 @@ class Settings(
     var lyricsTextSize by preference(36f)
     var lyricsLineSpacing by preference(1.3f)
     var lyricsPlusLighter by preference(LyricsPlusLighterKey, true)
+
+    /** Apple Music style album-art ambience behind full-screen lyrics. */
+    var lyricsAmbientBackground by preference(LyricsAmbientBackgroundKey, true)
+
+    /** Karaoke presentation: larger active line, quieter guide vocal. */
+    var lyricsKaraokeMode by preference(LyricsKaraokeModeKey, false)
     var lyricsNeutralColor by preference(LyricsNeutralColorKey, false)
     var subtitleTextSize by preference(16f)
     var lyricsClickToSeek by preference(true)

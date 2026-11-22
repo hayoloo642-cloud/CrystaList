@@ -78,6 +78,8 @@ val LyricsOpenRouterOAuthKey = "lyricsOpenRouterOAuthKey"
 val LyricsOpenRouterOAuthSessionKey = "lyricsOpenRouterOAuthSession"
 val LyricsShareImageStyleKey = "lyricsShareImageStyle"
 val LyricsPlusLighterKey = "lyricsPlusLighter"
+val LyricsAmbientBackgroundKey = "lyricsAmbientBackground"
+val LyricsKaraokeModeKey = "lyricsKaraokeMode"
 val LyricsNeutralColorKey = "lyricsNeutralColor"
 val LyricsShowOriginalLyricsKey = "lyricsShowOriginalLyrics"
 

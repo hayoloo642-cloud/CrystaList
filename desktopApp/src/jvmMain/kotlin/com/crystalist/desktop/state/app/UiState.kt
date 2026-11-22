@@ -74,6 +74,12 @@ object UiState {
         set(value) {
             playerPanels.showLyrics = value
         }
+
+    /** Immersive full-window lyrics, the Apple Music "full screen lyrics" surface. */
+    var showFullscreenLyrics by mutableStateOf(false)
+
+    /** Karaoke mode inside the full-screen lyrics: dims the guide vocal and enlarges the active line. */
+    var karaokeMode by mutableStateOf(false)
     var showDeviceConnectPanel by mutableStateOf(false)
     var isDeviceConnectPanelModal by mutableStateOf(false)
     var showVideoViewer by mutableStateOf(false)

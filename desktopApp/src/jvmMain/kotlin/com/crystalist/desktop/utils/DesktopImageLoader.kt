@@ -85,6 +85,9 @@ object DesktopImageLoader {
                     ResizableImageDiskCache(cacheDir.absolutePath.toPath(), Settings.shared.maxImageCacheSize * 1024L * 1024L)
                 }.memoryCachePolicy(CachePolicy.ENABLED)
                 .diskCachePolicy(CachePolicy.ENABLED)
+                // Decode on a bounded dispatcher: unbounded IO saturates the pool during fast
+                // scrolling and starves playback/network work.
+                .decoderCoroutineContext(Dispatchers.IO.limitedParallelism(4))
                 .build()
         return loader
     }

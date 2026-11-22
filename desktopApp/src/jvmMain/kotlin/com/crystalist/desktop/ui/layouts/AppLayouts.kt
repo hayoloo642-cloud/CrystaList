@@ -84,6 +84,7 @@ import com.crystalist.desktop.ui.components.DesktopPlayerVisibility
 import com.crystalist.desktop.ui.components.DesktopQueueContent
 import com.crystalist.desktop.ui.components.DeviceConnectModalSideSheet
 import com.crystalist.desktop.ui.components.DeviceConnectSideSheet
+import com.crystalist.desktop.ui.components.FullscreenLyricsOverlay
 import com.crystalist.desktop.ui.components.LyricsDrawer
 import com.crystalist.desktop.ui.components.PersistentPlayerDrawer
 import com.crystalist.desktop.ui.components.StandardBottomPlayer
@@ -451,6 +452,8 @@ private fun WindowScope.AdaptiveDesktopLayout(
                 AddToPlaylistDialog()
             }
         }
+
+        FullscreenLyricsOverlay(colorScheme)
 
         if (!playerInTopBar && PlayerState.currentTrack != null) {
             DesktopPlayerVisibility(visible = !PlayerState.isExpanded) {

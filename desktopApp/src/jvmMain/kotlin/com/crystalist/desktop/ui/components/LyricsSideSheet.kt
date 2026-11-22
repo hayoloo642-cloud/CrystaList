@@ -222,6 +222,22 @@ internal fun DesktopLyricsContent(
                                 onClick = {
                                     showLyricsMenu = false
                                     LyricsState.showLyricsOffsetEditor = false
+                                    UiState.showFullscreenLyrics = true
+                                },
+                                modifier = Modifier.size(36.dp),
+                                shapes = IconButtonDefaults.shapes(shape = RoundedCornerShape(8.dp)),
+                            ) {
+                                Icon(
+                                    CrystaListIcons.Outlined.Fullscreen,
+                                    contentDescription = stringResource(Res.string.fullscreen),
+                                    modifier = Modifier.size(20.dp),
+                                    tint = headerIconTint,
+                                )
+                            }
+                            IconButton(
+                                onClick = {
+                                    showLyricsMenu = false
+                                    LyricsState.showLyricsOffsetEditor = false
                                     onClose()
                                 },
                                 modifier = Modifier.size(36.dp),
