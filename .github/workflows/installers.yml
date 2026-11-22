@@ -47,7 +47,10 @@ jobs:
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
         run: |
           sudo apt-get install -y rpm
-          ./gradlew :desktopApp:packageReleaseRpm :desktopApp:packageReleaseAppImage \
+          ./gradlew :desktopApp:packageReleaseRpm \
+            -Pcrystalist.debug=false -Pcrystalist.verifyPackaging=false \
+            --no-daemon --no-configuration-cache
+          ./gradlew :desktopApp:packageReleaseAppImage \
             -Pcrystalist.debug=false -Pcrystalist.verifyPackaging=false \
             --no-daemon --no-configuration-cache
       - name: Collect artifact
