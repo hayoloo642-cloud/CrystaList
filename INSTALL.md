@@ -7,7 +7,6 @@ Download the file for your system from the
 | --- | --- | --- |
 | Windows 10/11 | `CrystaList-windows-x64-<version>.exe` | Installer wizard |
 | Linux (x86_64) | `CrystaList-linux-x64-<version>.rpm` | RPM package |
-| Linux (any distro) | `CrystaList-linux-x64-<version>.AppImage` | Portable AppImage |
 | macOS 15+ | `CrystaList-macos-arm64-<version>.dmg` | Apple silicon |
 | macOS 15+ | `CrystaList-macos-x64-<version>.dmg` | Intel |
 
@@ -28,13 +27,9 @@ sudo rpm -i CrystaList-linux-x64-<version>.rpm
 sudo dnf install ./CrystaList-linux-x64-<version>.rpm
 ```
 
-Debian/Ubuntu users: use the AppImage instead, or convert with `alien`.
 
-## Linux (AppImage)
 
 ```bash
-chmod +x CrystaList-linux-x64-<version>.AppImage
-./CrystaList-linux-x64-<version>.AppImage
 ```
 
 If FUSE is missing, run `--appimage-extract-and-run`

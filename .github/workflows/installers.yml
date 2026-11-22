@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   linux:
-    name: Linux AppImage
+    name: Linux RPM
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -39,7 +39,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==13.0.0
       - name: Generate installer icons
         run: python scripts/gen_icons.py
-      - name: Build RPM and AppImage
+      - name: Build RPM
         env:
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
           LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
@@ -50,17 +50,13 @@ jobs:
           ./gradlew :desktopApp:packageReleaseRpm \
             -Pcrystalist.debug=false -Pcrystalist.verifyPackaging=false \
             --no-daemon --no-configuration-cache
-          ./gradlew :desktopApp:packageReleaseAppImage \
-            -Pcrystalist.debug=false -Pcrystalist.verifyPackaging=false \
-            --no-daemon --no-configuration-cache
       - name: Collect artifact
         run: |
           mkdir -p out
           version="$(sed -n 's/^appVersion=//p' gradle.properties)"
           rpm="$(find desktopApp/build/compose/binaries/main-release -name '*.rpm' | head -1)"
-          appimage="$(find desktopApp/build/compose/binaries/main-release -name '*.AppImage' | head -1)"
-          test -n "$rpm" && cp "$rpm" "out/CrystaList-linux-x64-${version}.rpm"
-          test -n "$appimage" && cp "$appimage" "out/CrystaList-linux-x64-${version}.AppImage"
+          test -n "$rpm" || { echo "RPM was not produced" >&2; exit 1; }
+          cp "$rpm" "out/CrystaList-linux-x64-${version}.rpm"
           ls -l out
       - uses: actions/upload-artifact@v4
         with:
