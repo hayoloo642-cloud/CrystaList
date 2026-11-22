@@ -575,6 +575,9 @@ private fun WindowScope.AppContent(
                                     ),
                         ) {
                             key(UiState.appRefreshKey) {
+                                // Apple Music puts the transport in the top bar, so the default
+                                // layout now opens with the player there. Users can still pick the
+                                // bottom bar in Settings > Appearance.
                                 when (Settings.shared.appLayout) {
                                     AppLayout.COMFORTABLE,
                                     AppLayout.EXPRESS,

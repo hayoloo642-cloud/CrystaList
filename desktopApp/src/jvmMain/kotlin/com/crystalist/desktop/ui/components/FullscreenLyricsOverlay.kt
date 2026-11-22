@@ -48,6 +48,8 @@ import com.crystalist.shared.settings.Settings
 import com.crystalist.shared.ui.icons.CrystaListIcons
 import com.crystalist.shared.ui.theme.AppleMusic
 import com.crystalist.shared.ui.theme.getGradientColors
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.ui.draw.shadow
 
 /**
  * Apple Music style full-screen lyrics.
@@ -107,32 +109,113 @@ fun FullscreenLyricsOverlay(colorScheme: androidx.compose.material3.ColorScheme)
             )
         }
 
-        Column(modifier = Modifier.fillMaxSize().padding(horizontal = 48.dp, vertical = 28.dp)) {
-            FullscreenLyricsHeader(
-                title = track.title,
-                artists = track.artists.joinToString { it.name },
-                karaoke = karaoke,
-                onToggleKaraoke = {
-                    Settings.shared.lyricsKaraokeMode = !Settings.shared.lyricsKaraokeMode
-                },
-                onClose = {
-                    Settings.shared.lyricsKaraokeMode = false
-                    UiState.showFullscreenLyrics = false
-                },
-            )
+        Row(
+            modifier = Modifier.fillMaxSize().padding(horizontal = 56.dp, vertical = 32.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            // Left column: artwork with the transport controls beneath, as in Apple Music's
+            // full-screen Now Playing.
+            Column(
+                modifier = Modifier.widthIn(max = 460.dp).weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Box(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f)
+                            .clip(RoundedCornerShape(12.dp))
+                            .shadow(28.dp, RoundedCornerShape(12.dp)),
+                ) {
+                    com.crystalist.shared.ui.components.images.AsyncImage(
+                        url = artworkUrl,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop,
+                    )
+                }
 
-            Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(20.dp))
 
-            Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
-                DesktopLyricsContent(
-                    textColor = Color.White,
-                    // Karaoke enlarges the active line, like Apple Music Sing.
-                    textSizeMultiplier = if (karaoke) 1.65f else 1.35f,
-                    isVisible = true,
-                )
+                FullscreenTransport()
             }
 
-            FullscreenLyricsFooter(karaoke = karaoke)
+            Spacer(Modifier.width(56.dp))
+
+            Column(modifier = Modifier.weight(1.35f)) {
+                FullscreenLyricsHeader(
+                    title = track.title,
+                    artists = track.artists.joinToString { it.name },
+                    karaoke = karaoke,
+                    onToggleKaraoke = {
+                        Settings.shared.lyricsKaraokeMode = !Settings.shared.lyricsKaraokeMode
+                    },
+                    onClose = {
+                        Settings.shared.lyricsKaraokeMode = false
+                        UiState.showFullscreenLyrics = false
+                    },
+                )
+
+                Spacer(Modifier.height(8.dp))
+
+                Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
+                    DesktopLyricsContent(
+                        textColor = Color.White,
+                        // Karaoke enlarges the active line, like Apple Music Sing.
+                        textSizeMultiplier = if (karaoke) 1.6f else 1.3f,
+                        isVisible = true,
+                    )
+                }
+            }
+        }
+    }
+}
+
+/** Minimal transport row shown under the artwork. */
+@Composable
+private fun FullscreenTransport() {
+    val playing = PlayerState.isPlaying
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        IconButton(
+            onClick = { PlayerState.skipPrevious() },
+            modifier = Modifier.size(44.dp),
+            shapes = androidx.compose.material3.IconButtonDefaults.shapes(shape = CircleShape),
+        ) {
+            Icon(
+                CrystaListIcons.Rounded.SkipPrevious,
+                contentDescription = "Previous",
+                tint = Color.White.copy(alpha = 0.9f),
+                modifier = Modifier.size(24.dp),
+            )
+        }
+        Spacer(Modifier.width(20.dp))
+        IconButton(
+            onClick = { PlayerState.togglePlay() },
+            modifier = Modifier.size(60.dp),
+            shapes = androidx.compose.material3.IconButtonDefaults.shapes(shape = CircleShape),
+        ) {
+            Icon(
+                if (playing) CrystaListIcons.Rounded.Pause else CrystaListIcons.Rounded.PlayArrow,
+                contentDescription = if (playing) "Pause" else "Play",
+                tint = Color.White,
+                modifier = Modifier.size(40.dp),
+            )
+        }
+        Spacer(Modifier.width(20.dp))
+        IconButton(
+            onClick = { PlayerState.skipNext() },
+            modifier = Modifier.size(44.dp),
+            shapes = androidx.compose.material3.IconButtonDefaults.shapes(shape = CircleShape),
+        ) {
+            Icon(
+                CrystaListIcons.Rounded.SkipNext,
+                contentDescription = "Next",
+                tint = Color.White.copy(alpha = 0.9f),
+                modifier = Modifier.size(24.dp),
+            )
         }
     }
 }

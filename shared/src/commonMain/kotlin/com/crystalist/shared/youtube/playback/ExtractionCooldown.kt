@@ -41,16 +41,14 @@ internal class ExtractionCooldown(
         resetOnSuccess: Boolean = true,
         block: suspend () -> T,
     ): T {
-        var startedRevision = 0L
         try {
-            startedRevision =
-                mutex.withLock {
-                    checkAllowed()
-                    revision
-                }
+            mutex.withLock { checkAllowed() }
             return withContext(ExtractionAttempt(this)) { block() }.also {
                 mutex.withLock {
-                    if (resetOnSuccess && revision == startedRevision) {
+                    // A successful resolve proves YouTube is reachable, so clear any cooldown.
+                    // Requiring an unchanged revision meant a concurrent attempt that tripped
+                    // the cooldown left playback waiting out the full backoff.
+                    if (resetOnSuccess) {
                         untilMs = 0L
                         backoffMs = 5_000L
                         resolveFailures = 0
@@ -121,7 +119,7 @@ internal class ExtractionCooldown(
         val now = elapsedMs()
         val delay = maxOf(backoffMs, retryAfterMs ?: 0L)
         untilMs = maxOf(untilMs, now + delay.coerceAtMost(Long.MAX_VALUE - now))
-        backoffMs = (backoffMs * 2).coerceAtMost(60_000L)
+        backoffMs = (backoffMs * 2).coerceAtMost(20_000L)
         resolveFailures = 0
         failedClients.clear()
         revision++
