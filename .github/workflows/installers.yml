@@ -30,7 +30,7 @@ jobs:
       - name: Install packaging dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libfuse2
+          sudo apt-get install -y libfuse2t64 || sudo apt-get install -y libfuse2
           chmod +x ./gradlew
       - uses: actions/setup-python@v5
         with:
@@ -39,18 +39,26 @@ jobs:
         run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==13.0.0
       - name: Generate installer icons
         run: python scripts/gen_icons.py
-      - name: Build AppImage
+      - name: Build RPM and AppImage
         env:
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
           LYPRIO_HMAC_KEY: ${{ secrets.LYPRIO_HMAC_KEY }}
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
-        run: ./scripts/build_appimage.sh -Pcrystalist.verifyPackaging=false
+        run: |
+          sudo apt-get install -y rpm
+          ./gradlew :desktopApp:packageReleaseRpm :desktopApp:packageReleaseAppImage \
+            -Pcrystalist.debug=false -Pcrystalist.verifyPackaging=false \
+            --no-daemon --no-configuration-cache
       - name: Collect artifact
         run: |
           mkdir -p out
           version="$(sed -n 's/^appVersion=//p' gradle.properties)"
-          cp dist/CrystaList.AppImage "out/CrystaList-linux-x64-${version}.AppImage"
+          rpm="$(find desktopApp/build/compose/binaries/main-release -name '*.rpm' | head -1)"
+          appimage="$(find desktopApp/build/compose/binaries/main-release -name '*.AppImage' | head -1)"
+          test -n "$rpm" && cp "$rpm" "out/CrystaList-linux-x64-${version}.rpm"
+          test -n "$appimage" && cp "$appimage" "out/CrystaList-linux-x64-${version}.AppImage"
+          ls -l out
       - uses: actions/upload-artifact@v4
         with:
           name: CrystaList-linux-x64
@@ -95,7 +103,9 @@ jobs:
           version="$(sed -n 's/^appVersion=//p' gradle.properties)"
           arch="$(uname -m)"
           [[ "$arch" == "arm64" ]] && label=arm64 || label=x64
-          cp desktopApp/build/compose/binaries/main-release/dmg/*.dmg "out/CrystaList-macos-${label}-${version}.dmg"
+          dmg="$(find desktopApp/build/compose/binaries/main-release -name '*.dmg' | head -1)"
+          test -n "$dmg" && cp "$dmg" "out/CrystaList-macos-${label}-${version}.dmg"
+          ls -l out
       - uses: actions/upload-artifact@v4
         with:
           name: CrystaList-macos
@@ -118,6 +128,13 @@ jobs:
         with:
           dotnet-version: "10.0.x"
       - uses: gradle/actions/setup-gradle@v4
+      - name: Ensure WiX Toolset for the .exe installer
+        shell: pwsh
+        run: |
+          if (-not (Get-Command candle.exe -ErrorAction SilentlyContinue)) {
+            choco install wixtoolset --no-progress -y
+            echo "C:\Program Files (x86)\WiX Toolset v3.14\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          }
       - name: Build Windows login helper
         shell: pwsh
         run: |
@@ -135,7 +152,7 @@ jobs:
       - name: Generate installer icons
         shell: bash
         run: python scripts/gen_icons.py
-      - name: Build Windows ZIP
+      - name: Build Windows installer
         shell: bash
         env:
           LYPRIO_BASE_URL: ${{ secrets.LYPRIO_BASE_URL }}
@@ -143,7 +160,7 @@ jobs:
           LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
           LASTFM_SECRET: ${{ secrets.LASTFM_SECRET }}
         run: |
-          ./gradlew :desktopApp:assembleWindowsRelease \
+          ./gradlew :desktopApp:packageReleaseExe \
             -Pcrystalist.debug=false \
             -Pcrystalist.verifyPackaging=false \
             -Pcrystalist.desktop.arch=x86_64 \
@@ -153,7 +170,9 @@ jobs:
         run: |
           mkdir -p out
           version="$(sed -n 's/^appVersion=//p' gradle.properties)"
-          cp dist/CrystaList-Desktop-Windows.zip "out/CrystaList-windows-x64-${version}.zip"
+          exe="$(find desktopApp/build/compose/binaries/main-release -name '*.exe' | head -1)"
+          test -n "$exe" && cp "$exe" "out/CrystaList-windows-x64-${version}.exe"
+          ls -l out
       - uses: actions/upload-artifact@v4
         with:
           name: CrystaList-windows-x64
