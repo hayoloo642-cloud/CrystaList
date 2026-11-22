@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Pillow
-        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==13.0.0
       - name: Generate installer icons
         run: python scripts/gen_icons.py
       - name: Build AppImage
@@ -74,7 +74,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Pillow
-        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==13.0.0
       - name: Generate installer icons
         run: python scripts/gen_icons.py
       - name: Build DMG
@@ -131,7 +131,7 @@ jobs:
           python-version: "3.12"
       - name: Install Pillow
         shell: bash
-        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==11.3.0
+        run: python -m pip install --disable-pip-version-check --no-cache-dir Pillow==13.0.0
       - name: Generate installer icons
         shell: bash
         run: python scripts/gen_icons.py
