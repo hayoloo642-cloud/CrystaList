@@ -63,12 +63,10 @@ internal class ExtractionCooldown(
         } catch (error: Exception) {
             if (error.isTransientExtractionFailure()) {
                 mutex.withLock {
-                    if (revision == startedRevision) {
-                        val now = elapsedMs()
-                        if (now - lastResolveFailureMs >= 120_000L) resolveFailures = 0
-                        lastResolveFailureMs = now
-                        if (++resolveFailures >= 2) trip()
-                    }
+                    val now = elapsedMs()
+                    if (now - lastResolveFailureMs >= 120_000L) resolveFailures = 0
+                    lastResolveFailureMs = now
+                    if (++resolveFailures >= 2) trip()
                 }
             }
             throw error
